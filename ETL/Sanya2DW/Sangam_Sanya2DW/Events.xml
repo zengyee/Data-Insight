@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Events xmlns="http://schemas.microsoft.com/bing/spatialdata/activity">
+  <EventDefinition name="PipelineJobB_Done" jobEvent="OnSuccess" partitionBy="Minute" maxInstancesToKeep="900">
+    <Description>JobB_Done</Description>
+    <Publish cosmosUrl="/local/MDPEvents/Events/PipelineJobB_Done.tsv" />
+  </EventDefinition>
+  <EventDefinition name="PipelineJobC_Done" jobEvent="OnSuccess" partitionBy="Minute" maxInstancesToKeep="900">
+    <Description>JobC_Done</Description>
+    <Publish cosmosUrl="/local/MDPEvents/Events/PipelineJobC_Done.tsv" />
+  </EventDefinition>
+</Events>

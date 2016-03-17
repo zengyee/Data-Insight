@@ -1,0 +1,104 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "ETLPackages", "InterfaceDW21v\ETLPackages.dtproj", "{58AA4B85-BEA0-44C1-AD40-3D0B235A6A50}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "StagingDb", "StagingDb\StagingDb.sqlproj", "{E6386481-4F9E-41A4-BC8A-AC1D43BB92D8}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "IcMChina", "IcMChina\IcMChina.sqlproj", "{B98AA969-D388-47B3-99D6-68D94B64E420}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ccic", "ccic\ccic.sqlproj", "{A5F32978-97F2-47CC-9E5A-9DFC04F37291}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "AI", "AI\AI.sqlproj", "{407A3DA4-C542-4B08-962A-B55F32E7F643}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Velocity", "Velocity\Velocity.sqlproj", "{CB98DB86-F31A-49E9-AFAA-197530901A20}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Development|Any CPU = Development|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{58AA4B85-BEA0-44C1-AD40-3D0B235A6A50}.Debug|Any CPU.ActiveCfg = Development
+		{58AA4B85-BEA0-44C1-AD40-3D0B235A6A50}.Debug|Any CPU.Build.0 = Development
+		{58AA4B85-BEA0-44C1-AD40-3D0B235A6A50}.Development|Any CPU.ActiveCfg = Development
+		{58AA4B85-BEA0-44C1-AD40-3D0B235A6A50}.Development|Any CPU.Build.0 = Development
+		{58AA4B85-BEA0-44C1-AD40-3D0B235A6A50}.Release|Any CPU.ActiveCfg = Development
+		{58AA4B85-BEA0-44C1-AD40-3D0B235A6A50}.Release|Any CPU.Build.0 = Development
+		{E6386481-4F9E-41A4-BC8A-AC1D43BB92D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6386481-4F9E-41A4-BC8A-AC1D43BB92D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6386481-4F9E-41A4-BC8A-AC1D43BB92D8}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{E6386481-4F9E-41A4-BC8A-AC1D43BB92D8}.Development|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6386481-4F9E-41A4-BC8A-AC1D43BB92D8}.Development|Any CPU.Build.0 = Debug|Any CPU
+		{E6386481-4F9E-41A4-BC8A-AC1D43BB92D8}.Development|Any CPU.Deploy.0 = Debug|Any CPU
+		{E6386481-4F9E-41A4-BC8A-AC1D43BB92D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6386481-4F9E-41A4-BC8A-AC1D43BB92D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6386481-4F9E-41A4-BC8A-AC1D43BB92D8}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{B98AA969-D388-47B3-99D6-68D94B64E420}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B98AA969-D388-47B3-99D6-68D94B64E420}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B98AA969-D388-47B3-99D6-68D94B64E420}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{B98AA969-D388-47B3-99D6-68D94B64E420}.Development|Any CPU.ActiveCfg = Debug|Any CPU
+		{B98AA969-D388-47B3-99D6-68D94B64E420}.Development|Any CPU.Build.0 = Debug|Any CPU
+		{B98AA969-D388-47B3-99D6-68D94B64E420}.Development|Any CPU.Deploy.0 = Debug|Any CPU
+		{B98AA969-D388-47B3-99D6-68D94B64E420}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B98AA969-D388-47B3-99D6-68D94B64E420}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B98AA969-D388-47B3-99D6-68D94B64E420}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{A5F32978-97F2-47CC-9E5A-9DFC04F37291}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5F32978-97F2-47CC-9E5A-9DFC04F37291}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5F32978-97F2-47CC-9E5A-9DFC04F37291}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{A5F32978-97F2-47CC-9E5A-9DFC04F37291}.Development|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5F32978-97F2-47CC-9E5A-9DFC04F37291}.Development|Any CPU.Build.0 = Debug|Any CPU
+		{A5F32978-97F2-47CC-9E5A-9DFC04F37291}.Development|Any CPU.Deploy.0 = Debug|Any CPU
+		{A5F32978-97F2-47CC-9E5A-9DFC04F37291}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5F32978-97F2-47CC-9E5A-9DFC04F37291}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5F32978-97F2-47CC-9E5A-9DFC04F37291}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{407A3DA4-C542-4B08-962A-B55F32E7F643}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{407A3DA4-C542-4B08-962A-B55F32E7F643}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{407A3DA4-C542-4B08-962A-B55F32E7F643}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{407A3DA4-C542-4B08-962A-B55F32E7F643}.Development|Any CPU.ActiveCfg = Debug|Any CPU
+		{407A3DA4-C542-4B08-962A-B55F32E7F643}.Development|Any CPU.Build.0 = Debug|Any CPU
+		{407A3DA4-C542-4B08-962A-B55F32E7F643}.Development|Any CPU.Deploy.0 = Debug|Any CPU
+		{407A3DA4-C542-4B08-962A-B55F32E7F643}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{407A3DA4-C542-4B08-962A-B55F32E7F643}.Release|Any CPU.Build.0 = Release|Any CPU
+		{407A3DA4-C542-4B08-962A-B55F32E7F643}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{CB98DB86-F31A-49E9-AFAA-197530901A20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB98DB86-F31A-49E9-AFAA-197530901A20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB98DB86-F31A-49E9-AFAA-197530901A20}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{CB98DB86-F31A-49E9-AFAA-197530901A20}.Development|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB98DB86-F31A-49E9-AFAA-197530901A20}.Development|Any CPU.Build.0 = Debug|Any CPU
+		{CB98DB86-F31A-49E9-AFAA-197530901A20}.Development|Any CPU.Deploy.0 = Debug|Any CPU
+		{CB98DB86-F31A-49E9-AFAA-197530901A20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB98DB86-F31A-49E9-AFAA-197530901A20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB98DB86-F31A-49E9-AFAA-197530901A20}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://mcdi.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = StagingDb\\StagingDb.sqlproj
+		SccProjectName1 = StagingDb
+		SccLocalPath1 = StagingDb
+		SccProjectUniqueName2 = IcMChina\\IcMChina.sqlproj
+		SccProjectName2 = IcMChina
+		SccLocalPath2 = IcMChina
+		SccProjectUniqueName3 = ccic\\ccic.sqlproj
+		SccProjectName3 = ccic
+		SccLocalPath3 = ccic
+		SccProjectUniqueName4 = AI\\AI.sqlproj
+		SccProjectName4 = AI
+		SccLocalPath4 = AI
+		SccProjectUniqueName5 = InterfaceDW21v\\ETLPackages.dtproj
+		SccProjectName5 = InterfaceDW21v
+		SccLocalPath5 = InterfaceDW21v
+		SccProjectUniqueName6 = Velocity\\Velocity.sqlproj
+		SccProjectName6 = Velocity
+		SccLocalPath6 = Velocity
+	EndGlobalSection
+EndGlobal

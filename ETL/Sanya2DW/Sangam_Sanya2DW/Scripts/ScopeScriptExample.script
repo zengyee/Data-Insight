@@ -1,0 +1,11 @@
+﻿//Script GUID:4fc761ac-665e-4ad1-991c-f718b447123f
+//Used for tracking history
+
+// This script is a sample script to select some sample records generated in the last windows workflow activity
+
+e = EXTRACT source, title, link FROM @@INPUT_STREAM@@
+USING DefaultTextExtractor;
+
+s = SELECT source, title, link FROM e WHERE link.Contains("news");
+
+OUTPUT TO @@OUTPUT_STREAM@@;

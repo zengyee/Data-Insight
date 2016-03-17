@@ -1,0 +1,173 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="Microsoft.Bing.Sangam.ApplicationDesigner.MyApp" sap2010:WorkflowViewState.IdRef="Microsoft.Bing.Sangam.ApplicationDesigner.MyApp_1"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mbsae="clr-namespace:Microsoft.Bing.Sangam.ApplicationDesigner.Element;assembly=Microsoft.Bing.Sangam.SangamApplicationDesigner"
+ xmlns:mbsvc="clr-namespace:Microsoft.Bing.Sangam.VisualStudio.Common;assembly=Microsoft.Bing.Sangam.VisualStudio.Common"
+ xmlns:mbsvce="clr-namespace:Microsoft.Bing.Sangam.VisualStudio.Common.Element;assembly=Microsoft.Bing.Sangam.VisualStudio.Common"
+ xmlns:mbsvcf="clr-namespace:Microsoft.Bing.Sangam.VisualStudio.Common.FeedManager;assembly=Microsoft.Bing.Sangam.VisualStudio.Common"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <mbsae:SangamApplication AliasName="{x:Null}" sap2010:WorkflowViewState.IdRef="SangamApplication_1" ShowRelation="True" ShowToolBox="True">
+    <mbsae:SangamApplication.Activities>
+      <mbsae:SangamJobItem AliasName="{x:Null}" Asserts="{x:Null}" Counters="{x:Null}" Events="{x:Null}" Instrumentation="{x:Null}" Macros="{x:Null}" OnPostProcess="{x:Null}" OnPreProcess="{x:Null}" Parameters="{x:Null}" Variables="{x:Null}" debug="{x:Null}" description="{x:Null}" jobDirectoryName="{x:Null}" jobFileName="{x:Null}" maxCompletionTime="{x:Null}" maxCompletionTimeForAbort="{x:Null}" maxConsecutiveErrors="{x:Null}" onConstraintFailureAlertName="{x:Null}" onFailureAlertName="{x:Null}" onMaxCompletionTimeAlertName="{x:Null}" onStartAlertName="{x:Null}" onSuccessAlertName="{x:Null}" packageName="{x:Null}" packageVersion="{x:Null}" scopeArguments="{x:Null}" scopePriority="{x:Null}" scopeVersion="{x:Null}" sourceFile="{x:Null}" vcPercentAllocation="{x:Null}" DisplayName="SangamJob1" ExportFileName="SangamJob1.job.xml" sap2010:WorkflowViewState.IdRef="SangamJobItem_2" UseCustomExportFileName="False" compressFeeds="False" compressFeedsSpecified="False" disableEntityPooling="False" disableEntityPoolingSpecified="False" generateValidatorUserInfoFile="False" generateValidatorUserInfoFileSpecified="False" isSingleton="True" isSingletonSpecified="False" loggingMode="Information" loggingModeSpecified="False" maxJobInstances="0" maxJobInstancesSpecified="False" maxThreadsPerExtent="1" name="SangamJob1" sourceFileModifiedDate="0001-01-01" sourceFileModifiedDateSpecified="False" threadsPerExtent="1" useHint="False" useHintSpecified="False">
+        <mbsae:SangamJobItem.Activities>
+          <mbsae:SangamJobSegmentItem AliasName="{x:Null}" Body="{x:Null}" Condition="{x:Null}" ConditionExprStmt="{x:Null}" LinkedSegment="{x:Null}" description="{x:Null}" maxCompletionTimeForAbort="{x:Null}" DisplayName="SangamJobSegment" sap2010:WorkflowViewState.IdRef="SangamJobSegmentItem_2" mode="Scope" modeSpecified="False" segmentBreak="False" segmentBreakSpecified="False">
+            <mbsae:SangamJobSegmentItem.Activities>
+              <mbsvce:ScopeJobActivity AliasName="{x:Null}" CommandLineArgs="{x:Null}" Instrumentation="{x:Null}" MaxRetriesOnUserErrors="{x:Null}" OnPostProcess="{x:Null}" OnPreProcess="{x:Null}" PercentVCAllocation="{x:Null}" PrivateScopeSDKPath="{x:Null}" ScopeCustomProperties="{x:Null}" ScopeJobNamePrefix="{x:Null}" ScopeSDKVersion="{x:Null}" SourceRootFolder="{x:Null}" TokenAllocation="{x:Null}" VirtualCluster="{x:Null}" loggingMode="{x:Null}" CurrentProjectName="ScopeApplication1" FullJobName="ScopeScriptSample" sap2010:WorkflowViewState.IdRef="ScopeJobActivity_1" ScopeJobPriority="1000" ScriptFile="Scripts\ScopeScriptExample.script" ScriptRelativePath="Scope.script" loggingModeSpecified="False">
+                <mbsvce:ScopeJobActivity.ScriptParameters>
+                  <mbsvce:ScriptParameters>
+                    <mbsvce:ScriptParameters.ScriptParameter>
+                      <x:Array Type="mbsvce:ScriptParameter">
+                        <mbsvce:ScriptParameter key="INPUT_STREAM" kind="feed" type="string" value="sampleOutputFeed" />
+                        <mbsvce:ScriptParameter key="OUTPUT_STREAM" kind="feed" type="string" value="resultsFeed" />
+                      </x:Array>
+                    </mbsvce:ScriptParameters.ScriptParameter>
+                  </mbsvce:ScriptParameters>
+                </mbsvce:ScopeJobActivity.ScriptParameters>
+              </mbsvce:ScopeJobActivity>
+            </mbsae:SangamJobSegmentItem.Activities>
+            <mbsae:SangamJobSegmentItem.Input>
+              <x:Array Type="mbsvce:Feed">
+                <mbsvce:Feed AddProperty="{x:Null}" InputPartitionFunction="{x:Null}" OutputPartitionFunction="{x:Null}" PartitionedBy="{x:Null}" RuleSettings="{x:Null}" SeparatedValueSettings="{x:Null}" StructuredStream="{x:Null}" delimitedSchemaPath="{x:Null}" environmentCustomerID="{x:Null}" environmentName="{x:Null}" expiry="{x:Null}" feedRunSelector="{x:Null}" fileType="{x:Null}" hint="{x:Null}" kind="{x:Null}" partitionEnd="{x:Null}" partitionSelector="{x:Null}" partitionStart="{x:Null}" path="{x:Null}" xsdSchemaPath="{x:Null}" confidence="0" confidenceSpecified="False" feedEntryName="'SampleOutputFeed'" isOptional="False" isPrimary="False" isPrimaryCloned="False" isPrimaryClonedSpecified="False" isPrimarySpecified="False" kindSpecified="False" name="sampleOutputFeed" persist="False" persistSpecified="False" serialNumber="0" serialNumberEnd="0" serialNumberEndSpecified="False" serialNumberSpecified="False" serialNumberStart="0" serialNumberStartSpecified="False" skipEntityXmlForClonedInstance="False" skipEntityXmlForClonedInstanceSpecified="False" sparseStreamSet="False" />
+              </x:Array>
+            </mbsae:SangamJobSegmentItem.Input>
+            <mbsae:SangamJobSegmentItem.Output>
+              <x:Array Type="mbsvce:Feed">
+                <mbsvce:Feed AddProperty="{x:Null}" InputPartitionFunction="{x:Null}" OutputPartitionFunction="{x:Null}" PartitionedBy="{x:Null}" RuleSettings="{x:Null}" SeparatedValueSettings="{x:Null}" StructuredStream="{x:Null}" delimitedSchemaPath="{x:Null}" environmentCustomerID="{x:Null}" environmentName="{x:Null}" expiry="{x:Null}" feedRunSelector="{x:Null}" fileType="{x:Null}" hint="{x:Null}" kind="{x:Null}" partitionEnd="{x:Null}" partitionSelector="{x:Null}" partitionStart="{x:Null}" path="{x:Null}" xsdSchemaPath="{x:Null}" confidence="0" confidenceSpecified="False" feedEntryName="'ResultsFeed'" isOptional="False" isPrimary="False" isPrimaryCloned="False" isPrimaryClonedSpecified="False" isPrimarySpecified="False" kindSpecified="False" name="resultsFeed" persist="False" persistSpecified="False" serialNumber="0" serialNumberEnd="0" serialNumberEndSpecified="False" serialNumberSpecified="False" serialNumberStart="0" serialNumberStartSpecified="False" skipEntityXmlForClonedInstance="False" skipEntityXmlForClonedInstanceSpecified="False" sparseStreamSet="False" />
+              </x:Array>
+            </mbsae:SangamJobSegmentItem.Output>
+          </mbsae:SangamJobSegmentItem>
+        </mbsae:SangamJobItem.Activities>
+      </mbsae:SangamJobItem>
+      <mbsae:SangamJobItem AliasName="{x:Null}" Asserts="{x:Null}" Counters="{x:Null}" Events="{x:Null}" Instrumentation="{x:Null}" Macros="{x:Null}" OnPostProcess="{x:Null}" OnPreProcess="{x:Null}" Parameters="{x:Null}" Variables="{x:Null}" debug="{x:Null}" description="{x:Null}" jobDirectoryName="{x:Null}" jobFileName="{x:Null}" maxCompletionTime="{x:Null}" maxCompletionTimeForAbort="{x:Null}" maxConsecutiveErrors="{x:Null}" onConstraintFailureAlertName="{x:Null}" onFailureAlertName="{x:Null}" onMaxCompletionTimeAlertName="{x:Null}" onStartAlertName="{x:Null}" onSuccessAlertName="{x:Null}" packageName="{x:Null}" packageVersion="{x:Null}" scopeArguments="{x:Null}" scopePriority="{x:Null}" scopeVersion="{x:Null}" sourceFile="{x:Null}" vcPercentAllocation="{x:Null}" DisplayName="SangamJob2" ExportFileName="SangamJob2.job.xml" sap2010:WorkflowViewState.IdRef="SangamJobItem_4" UseCustomExportFileName="False" compressFeeds="False" compressFeedsSpecified="False" disableEntityPooling="False" disableEntityPoolingSpecified="False" generateValidatorUserInfoFile="False" generateValidatorUserInfoFileSpecified="False" isSingleton="True" isSingletonSpecified="False" loggingMode="Information" loggingModeSpecified="False" maxJobInstances="0" maxJobInstancesSpecified="False" maxThreadsPerExtent="1" name="SangamJob2" sourceFileModifiedDate="0001-01-01" sourceFileModifiedDateSpecified="False" threadsPerExtent="1" useHint="False" useHintSpecified="False">
+        <mbsae:SangamJobItem.Activities>
+          <mbsae:SangamJobSegmentItem AliasName="{x:Null}" Body="{x:Null}" Condition="{x:Null}" ConditionExprStmt="{x:Null}" Input="{x:Null}" LinkedSegment="{x:Null}" Output="{x:Null}" description="{x:Null}" maxCompletionTimeForAbort="{x:Null}" DisplayName="SangamJobSegment" sap2010:WorkflowViewState.IdRef="SangamJobSegmentItem_4" mode="WindowsWorkflow" modeSpecified="False" segmentBreak="False" segmentBreakSpecified="False">
+            <mbsae:SangamJobSegmentItem.Activities>
+              <mbsvce:WindowsWorkflow AliasName="{x:Null}" Instrumentation="{x:Null}" OnPostProcess="{x:Null}" OnPreProcess="{x:Null}" Parameter="{x:Null}" Variable="{x:Null}" assembly="{x:Null}" class="{x:Null}" loggingMode="{x:Null}" sap2010:WorkflowViewState.IdRef="WindowsWorkflow_2" loggingModeSpecified="False" xaml="Workflows\Example.xaml" />
+            </mbsae:SangamJobSegmentItem.Activities>
+          </mbsae:SangamJobSegmentItem>
+        </mbsae:SangamJobItem.Activities>
+      </mbsae:SangamJobItem>
+      <mbsae:SangamJobItem AliasName="{x:Null}" Asserts="{x:Null}" Counters="{x:Null}" Events="{x:Null}" Instrumentation="{x:Null}" Macros="{x:Null}" OnPostProcess="{x:Null}" OnPreProcess="{x:Null}" Parameters="{x:Null}" Variables="{x:Null}" debug="{x:Null}" description="{x:Null}" jobDirectoryName="{x:Null}" jobFileName="{x:Null}" maxCompletionTime="{x:Null}" maxCompletionTimeForAbort="{x:Null}" maxConsecutiveErrors="{x:Null}" onConstraintFailureAlertName="{x:Null}" onFailureAlertName="{x:Null}" onMaxCompletionTimeAlertName="{x:Null}" onStartAlertName="{x:Null}" onSuccessAlertName="{x:Null}" packageName="{x:Null}" packageVersion="{x:Null}" scopeArguments="{x:Null}" scopePriority="{x:Null}" scopeVersion="{x:Null}" sourceFile="{x:Null}" vcPercentAllocation="{x:Null}" DisplayName="SangamJob3" ExportFileName="SangamJob3.job.xml" sap2010:WorkflowViewState.IdRef="SangamJobItem_5" UseCustomExportFileName="False" compressFeeds="False" compressFeedsSpecified="False" disableEntityPooling="False" disableEntityPoolingSpecified="False" generateValidatorUserInfoFile="False" generateValidatorUserInfoFileSpecified="False" isSingleton="True" isSingletonSpecified="False" loggingMode="Information" loggingModeSpecified="False" maxJobInstances="0" maxJobInstancesSpecified="False" maxThreadsPerExtent="1" name="SangamJob3" sourceFileModifiedDate="0001-01-01" sourceFileModifiedDateSpecified="False" threadsPerExtent="1" useHint="False" useHintSpecified="False">
+        <mbsae:SangamJobItem.Activities>
+          <mbsae:SangamJobSegmentItem AliasName="{x:Null}" Body="{x:Null}" Condition="{x:Null}" ConditionExprStmt="{x:Null}" Input="{x:Null}" LinkedSegment="{x:Null}" Output="{x:Null}" description="{x:Null}" maxCompletionTimeForAbort="{x:Null}" DisplayName="SangamJobSegment" sap2010:WorkflowViewState.IdRef="SangamJobSegmentItem_5" mode="Scope" modeSpecified="False" segmentBreak="False" segmentBreakSpecified="False">
+            <mbsae:SangamJobSegmentItem.Activities>
+              <mbsvce:ScopeJobActivity AliasName="{x:Null}" CommandLineArgs="{x:Null}" FullJobName="{x:Null}" Instrumentation="{x:Null}" MaxRetriesOnUserErrors="{x:Null}" OnPostProcess="{x:Null}" OnPreProcess="{x:Null}" PercentVCAllocation="{x:Null}" PrivateScopeSDKPath="{x:Null}" ScopeCustomProperties="{x:Null}" ScopeJobNamePrefix="{x:Null}" ScopeJobPriority="{x:Null}" ScopeSDKVersion="{x:Null}" ScriptParameters="{x:Null}" SourceRootFolder="{x:Null}" TokenAllocation="{x:Null}" VirtualCluster="{x:Null}" loggingMode="{x:Null}" CurrentProjectName="ScopeApplication1" DisplayName="ScopeApplication1_Scope.script" sap2010:WorkflowViewState.IdRef="ScopeJobActivity_2" ScriptFile="Scripts\ScopeApplication1_Scope.script\Scope.script" ScriptRelativePath="Scope.script" loggingModeSpecified="False" />
+            </mbsae:SangamJobSegmentItem.Activities>
+          </mbsae:SangamJobSegmentItem>
+        </mbsae:SangamJobItem.Activities>
+      </mbsae:SangamJobItem>
+    </mbsae:SangamApplication.Activities>
+    <mbsae:SangamApplication.FeedEntries>
+      <mbsvcf:FeedEntries>
+        <mbsvcf:FeedEntries.FeedEntry>
+          <x:Array Type="mbsvcf:FeedEntry">
+            <mbsvcf:FeedEntry ConfidenceModifiers="{x:Null}" Counters="{x:Null}" DataSource="{x:Null}" FeedProfile="{x:Null}" Instances="{x:Null}" LastGoodInstance="{x:Null}" Partition="{x:Null}" TriggeredSchedules="{x:Null}" entityName="{x:Null}" environment="{x:Null}" expiry="{x:Null}" feedRunParams="{x:Null}" idPathExpr="{x:Null}" sourceFile="{x:Null}" updatedBy="{x:Null}" vcId="{x:Null}" Description="a sample file to demo counters" baseDirectory="/Feeds/Dev/Workflows" changeAllowed="0" changeAllowedSpecified="False" feedSource="0" feedSourceSpecified="False" id="0" idSpecified="False" invalidAllowed="0" invalidAllowedSpecified="False" isActive="True" isActiveSpecified="False" name="SampleOutputFeed" requireStats="True" requireStatsSpecified="False" sourceFileModifiedDate="0001-01-01" sourceFileModifiedDateSpecified="False" totalBytesChangeAllowed="0" totalBytesChangeAllowedSpecified="False" updatedDate="0001-01-01" updatedDateSpecified="False">
+              <mbsvcf:FeedEntry.ValidationConstraints>
+                <x:Array Type="mbsvce:PropertyConstraint">
+                  <mbsvce:PropertyConstraint constraintType="{x:Null}" constraintName="EightyPercentCheck" propertyPath="/FeedRun">
+                    <mbsvce:PropertyConstraint.Constraint>
+                      <x:Array Type="mbsvce:Constraint">
+                        <mbsvce:Expression value="../LastGoodInstance is null or ((../LastGoodInstance/FeedCounter[name=='SampleCounter1']/value * 8) &lt;= (./FeedCounter[name=='SampleCounter1']/value * 10))" />
+                      </x:Array>
+                    </mbsvce:PropertyConstraint.Constraint>
+                  </mbsvce:PropertyConstraint>
+                </x:Array>
+              </mbsvcf:FeedEntry.ValidationConstraints>
+            </mbsvcf:FeedEntry>
+            <mbsvcf:FeedEntry ConfidenceModifiers="{x:Null}" Counters="{x:Null}" DataSource="{x:Null}" FeedProfile="{x:Null}" Instances="{x:Null}" LastGoodInstance="{x:Null}" Partition="{x:Null}" TriggeredSchedules="{x:Null}" ValidationConstraints="{x:Null}" entityName="{x:Null}" environment="{x:Null}" expiry="{x:Null}" feedRunParams="{x:Null}" idPathExpr="{x:Null}" sourceFile="{x:Null}" updatedBy="{x:Null}" vcId="{x:Null}" Description="a sample feed for the filter scope script result" baseDirectory="/Feeds/Dev/Results" changeAllowed="0" changeAllowedSpecified="False" feedSource="0" feedSourceSpecified="False" id="0" idSpecified="False" invalidAllowed="0" invalidAllowedSpecified="False" isActive="True" isActiveSpecified="False" name="ResultsFeed" requireStats="False" requireStatsSpecified="False" sourceFileModifiedDate="0001-01-01" sourceFileModifiedDateSpecified="False" totalBytesChangeAllowed="0" totalBytesChangeAllowedSpecified="False" updatedDate="0001-01-01" updatedDateSpecified="False" />
+          </x:Array>
+        </mbsvcf:FeedEntries.FeedEntry>
+      </mbsvcf:FeedEntries>
+    </mbsae:SangamApplication.FeedEntries>
+    <mbsae:SangamApplication.SangamProjectItemList>
+      <scg:List x:TypeArguments="mbsvc:AssemblyItem" Capacity="0" />
+    </mbsae:SangamApplication.SangamProjectItemList>
+    <mbsae:SangamApplication.SangamProjectReferenceList>
+      <scg:List x:TypeArguments="mbsvc:AssemblyItem" Capacity="0" />
+    </mbsae:SangamApplication.SangamProjectReferenceList>
+    <mbsae:SangamApplication.SangamSystemReferenceList>
+      <scg:List x:TypeArguments="mbsvc:AssemblyItem" Capacity="4">
+        <mbsvc:AssemblyItem x:Name="__ReferenceID0" Category="From Sangam System References" DisplayName="Microsoft.Bing.Sangam.Framework" FullPath="C:\Sangam\SDK\app\bin\Microsoft.Bing.Sangam.Framework.dll" Name="Microsoft.Bing.Sangam.Framework" Path="Microsoft.Bing.Sangam.Framework">
+          <mbsvc:AssemblyItem.ClassNameList>
+            <scg:List x:TypeArguments="mbsvc:ClassItem" Capacity="8">
+              <mbsvc:ClassItem Assembly="{x:Reference __ReferenceID0}" ClassName="Microsoft.Bing.Sangam.Framework.ContainerOperation" />
+              <mbsvc:ClassItem Assembly="{x:Reference __ReferenceID0}" ClassName="Microsoft.Bing.Sangam.Framework.OperationWithMultipleChildren" />
+              <mbsvc:ClassItem Assembly="{x:Reference __ReferenceID0}" ClassName="Microsoft.Bing.Sangam.Framework.OperationWithOneChild" />
+              <mbsvc:ClassItem Assembly="{x:Reference __ReferenceID0}" ClassName="Microsoft.Bing.Sangam.Framework.Parallel" />
+              <mbsvc:ClassItem Assembly="{x:Reference __ReferenceID0}" ClassName="Microsoft.Bing.Sangam.Framework.Partition" />
+              <mbsvc:ClassItem Assembly="{x:Reference __ReferenceID0}" ClassName="Microsoft.Bing.Sangam.Framework.Sequence" />
+              <mbsvc:ClassItem Assembly="{x:Reference __ReferenceID0}" ClassName="Microsoft.Bing.Sangam.Framework.Streaming" />
+            </scg:List>
+          </mbsvc:AssemblyItem.ClassNameList>
+        </mbsvc:AssemblyItem>
+        <mbsvc:AssemblyItem x:Name="__ReferenceID1" Category="From Sangam System References" DisplayName="Microsoft.Bing.Sangam.Framework.Operations" FullPath="C:\Sangam\SDK\app\bin\Microsoft.Bing.Sangam.Framework.Operations.dll" Name="Microsoft.Bing.Sangam.Framework.Operations" Path="Microsoft.Bing.Sangam.Framework.Operations">
+          <mbsvc:AssemblyItem.ClassNameList>
+            <scg:List x:TypeArguments="mbsvc:ClassItem" Capacity="16">
+              <mbsvc:ClassItem Assembly="{x:Reference __ReferenceID1}" ClassName="Microsoft.Bing.Sangam.Framework.Operations.Activities.KonaJobOperation" />
+              <mbsvc:ClassItem Assembly="{x:Reference __ReferenceID1}" ClassName="Microsoft.Bing.Sangam.Framework.Operations.Azure.AzureQueuePartition" />
+              <mbsvc:ClassItem Assembly="{x:Reference __ReferenceID1}" ClassName="Microsoft.Bing.Sangam.Framework.Operations.Cosmos.CosmosStreamPartition" />
+              <mbsvc:ClassItem Assembly="{x:Reference __ReferenceID1}" ClassName="Microsoft.Bing.Sangam.Framework.Operations.Cosmos.CreateStream" />
+              <mbsvc:ClassItem Assembly="{x:Reference __ReferenceID1}" ClassName="Microsoft.Bing.Sangam.Framework.Operations.Cosmos.StreamSetPartition" />
+              <mbsvc:ClassItem Assembly="{x:Reference __ReferenceID1}" ClassName="Microsoft.Bing.Sangam.Framework.Operations.Cosmos.StructuredStreamPartition" />
+              <mbsvc:ClassItem Assembly="{x:Reference __ReferenceID1}" ClassName="Microsoft.Bing.Sangam.Framework.Operations.Reporting" />
+              <mbsvc:ClassItem Assembly="{x:Reference __ReferenceID1}" ClassName="Microsoft.Bing.Sangam.Framework.Operations.Runtime.EventOperation" />
+              <mbsvc:ClassItem Assembly="{x:Reference __ReferenceID1}" ClassName="Microsoft.Bing.Sangam.Framework.Operations.SubmitJob" />
+              <mbsvc:ClassItem Assembly="{x:Reference __ReferenceID1}" ClassName="Microsoft.Bing.Sangam.Framework.Operations.Cosmos.ScopeJobOperation" />
+            </scg:List>
+          </mbsvc:AssemblyItem.ClassNameList>
+        </mbsvc:AssemblyItem>
+      </scg:List>
+    </mbsae:SangamApplication.SangamSystemReferenceList>
+    <mbsae:SangamApplication.ScopeScriptList>
+      <scg:List x:TypeArguments="x:String" Capacity="4">
+        <x:String>Scope.script : ScopeApplication1</x:String>
+      </scg:List>
+    </mbsae:SangamApplication.ScopeScriptList>
+    <mbsae:SangamApplication.WorkFlowList>
+      <scg:List x:TypeArguments="x:String" Capacity="4">
+        <x:String>Workflows\Example.xaml</x:String>
+      </scg:List>
+    </mbsae:SangamApplication.WorkFlowList>
+    <sads:DebugSymbol.Symbol>d0xEOlxDb2Rlc1xtY2RpXERhdGEgSW5zaWdodFxFVExcU2FueWEyRFdcU2FuZ2FtX1NhbnlhMkRXXFNhbmdhbV9TYW55YTJEVy54YW1sCg0DiAEdAgEBDwcsHQIBCC0HNR0CAQU2Bz4dAgECEQsqKAIBCS8LMygCAQY4CzwoAgEDEw8eKQIBCjEPMd4CAgEHOg86oAYCAQQ=</sads:DebugSymbol.Symbol>
+  </mbsae:SangamApplication>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="ScopeJobActivity_1" sap:VirtualizedContainerService.HintSize="260,87" />
+      <sap2010:ViewStateData Id="SangamJobSegmentItem_2" sap:VirtualizedContainerService.HintSize="284,165" />
+      <sap2010:ViewStateData Id="SangamJobItem_2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Double x:Key="CanvasActivity.X">172</x:Double>
+            <x:Double x:Key="CanvasActivity.Y">230</x:Double>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WindowsWorkflow_2" sap:VirtualizedContainerService.HintSize="260,110" />
+      <sap2010:ViewStateData Id="SangamJobSegmentItem_4" sap:VirtualizedContainerService.HintSize="284,188" />
+      <sap2010:ViewStateData Id="SangamJobItem_4">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Double x:Key="CanvasActivity.X">198</x:Double>
+            <x:Double x:Key="CanvasActivity.Y">11</x:Double>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ScopeJobActivity_2" sap:VirtualizedContainerService.HintSize="260,87" />
+      <sap2010:ViewStateData Id="SangamJobSegmentItem_5" sap:VirtualizedContainerService.HintSize="284,165" />
+      <sap2010:ViewStateData Id="SangamJobItem_5">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Double x:Key="CanvasActivity.X">364</x:Double>
+            <x:Double x:Key="CanvasActivity.Y">328</x:Double>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="SangamApplication_1" sap:VirtualizedContainerService.HintSize="1021,794" />
+      <sap2010:ViewStateData Id="Microsoft.Bing.Sangam.ApplicationDesigner.MyApp_1" sap:VirtualizedContainerService.HintSize="1061,914" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

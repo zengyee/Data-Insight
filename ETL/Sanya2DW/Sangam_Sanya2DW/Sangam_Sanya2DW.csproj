@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="BeforeBuild;Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Condition="'$(EnvironmentConfig)' != ''" Project="$(EnvironmentConfig)" />
+  <PropertyGroup>
+    <!-- Sangam CUSTOMER & ENVIRONMENT settings -->
+    <ProjectTypeName>Sangam</ProjectTypeName>
+    <CustomerID>MCDIPartner</CustomerID>
+    <EnvironmentName>JeffDevEnv</EnvironmentName>
+    <!-- Sangam SDK RUNTIME settings            -->
+    <SangamSDK Condition=" '$(SangamSDK)' == '' ">$(PACKAGESROOT)\Sangam.SDK.Library\SangamSDK\</SangamSDK>
+    <SangamBin>$(SangamSDK)\app\bin</SangamBin>
+    <SangamRT>$(SangamSDK)\data\Sangam_Partners</SangamRT>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <SangamVsixAssemblyPath Condition=" '$(SangamVsixAssemblyPath)' == '' ">$(LOCALAPPDATA)\MICROSOFT\VISUALSTUDIO\$(VisualStudioVersion)\PROJECTASSEMBLIES</SangamVsixAssemblyPath>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CDD809E2-AB89-4628-B09D-539ABA068E76}</ProjectGuid>
+    <ProjectTypeGuids>{BF8DA43F-52A3-45D5-94CB-7810D9868D23};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>Sangam_Sanya2DW</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Bing.Sangam.WorkflowActivities, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Sangam\SDK\app\bin\Microsoft.Bing.Sangam.WorkflowActivities.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bing.Sangam.WorkflowActivities.Design, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Sangam\SDK\app\bin\Microsoft.Bing.Sangam.WorkflowActivities.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bing.Sangam, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Sangam\SDK\app\bin\Microsoft.Bing.Sangam.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bing.Sangam.Framework, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Sangam\SDK\app\bin\Microsoft.Bing.Sangam.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bing.Sangam.Framework.Operations, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Sangam\SDK\app\bin\Microsoft.Bing.Sangam.Framework.Operations.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bing.Sangam.SangamApplicationDesigner, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(SangamVsixAssemblyPath)\Microsoft.Bing.Sangam.SangamApplicationDesigner.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bing.Sangam.VisualStudio.Common, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(SangamVsixAssemblyPath)\Microsoft.Bing.Sangam.VisualStudio.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bing.Sangam.VisualStudio.CommonUI, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(SangamVsixAssemblyPath)\Microsoft.Bing.Sangam.VisualStudio.CommonUI.dll</HintPath>
+    </Reference>
+    <Reference Include="ScopeRuntime">
+      <HintPath>C:\Sangam\SDK\app\bin\ScopeRuntime.exe</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Activities" />
+    <Reference Include="System.Activities.Presentation" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Activities" />
+    <Reference Include="System.Workflow.Activities" />
+    <Reference Include="System.Workflow.ComponentModel" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Sangam_Sanya2DW.xaml" />
+    <Content Include="CounterTests.xml" />
+    <Content Include="Customer.xml" />
+    <Content Include="Jobs\Example.job.xml" />
+    <Content Include="Events.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Alias.xml" />
+    <Content Include="Schedule.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Alerts.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Workflows\bing_news.xslt" />
+    <Content Include="Feeds.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Environment.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Workflows\flatten_news.script" />
+    <None Include="Scripts\ScopeScriptExample.script" />
+    <None Include="Package.manifest">
+      <SubType>Designer</SubType>
+    </None>
+    <XamlAppDef Include="Workflows\Example.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </XamlAppDef>
+    <None Include="$(SangamBin)\SystemResources\ActivityBindings.xsd">
+      <Link>SystemResources\ActivityBindings.xsd</Link>
+    </None>
+    <None Include="$(SangamBin)\SystemResources\ActivitySchema.xsd">
+      <Link>SystemResources\ActivitySchema.xsd</Link>
+    </None>
+    <None Include="$(SangamBin)\SystemResources\FeedManager.xsd">
+      <Link>SystemResources\FeedManager.xsd</Link>
+    </None>
+    <None Include="$(SangamBin)\SystemResources\JobInfo.xsd">
+      <Link>SystemResources\JobInfo.xsd</Link>
+    </None>
+    <None Include="$(SangamBin)\SystemResources\Events.xsd">
+      <Link>SystemResources\Events.xsd</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assemblies\" />
+    <Folder Include="Secrets\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <StartAction>Program</StartAction>
+    <StartProgram>$(SangamBin)\Microsoft.Bing.Sangam.SingleBox.exe</StartProgram>
+    <StartWorkingDirectory>$(SangamBin)</StartWorkingDirectory>
+    <StartArguments>"$(SangamRT)"</StartArguments>
+  </PropertyGroup>
+  <!--please refer to the Sangam build system from: https://microsoft.sharepoint.com/teams/CoreDataPlatform/_layouts/15/start.aspx#/SitePages/Sangam%20Build%20System.aspx -->
+  <UsingTask TaskName="Microsoft.Bing.Sangam.Utility.BuildTask.Sangam" AssemblyFile="$(SangamBin)\Sangam.exe" />
+  <Target Name="AfterBuild">
+    <Sangam CommandName="gencounters" Parameters="-p;$(ProjectDir);-w;$(SangamBin)" />
+    <Sangam CommandName="xamlbeautify" Parameters="-i;$(ProjectDir);-s" />
+    <!-- 
+         Sangam use manifest file to authorize the package therefore to map the source folder structure to the runtime folder structure
+         you can edit it manually, if you keep the source structure the same as the runtime folder structure, and don't want to edit the
+         manifest file manually, then the genmanifest command can be used to generate a default manifest.
+    -->
+    <!--<Sangam CommandName="genmanifest" Parameters="-i;$(ProjectDir);-m;$(ProjectDir)\Packages\Package1.manifest" />-->
+    <!-- SANGAM CSPROJ BASED LOCAL DEPLOYMENT STEPS -->
+    <Sangam CommandName="genpackage" Parameters="-i;$(ProjectDir);-g;$(ProjectGuid);-m;$(ProjectDir)\Package.manifest;-p;$(ProjectDir)\Packages\$(ProjectName).package;-a;$(OutputPath)\$(TargetFileName)" ReferencePaths="@(ReferencePath)" />
+    <RemoveDir Directories="$(SangamRT)\$(CustomerID)\$(EnvironmentName)" ContinueOnError="true" />
+    <MakeDir Directories="$(SangamRT)\$(CustomerID)\$(EnvironmentName)" />
+    <Exec Command="Robocopy &quot;$(ProjectDir)\Secrets&quot; &quot;$(SangamRT)\$(CustomerID)\Secrets&quot; -e" IgnoreExitCode="true" />
+    <Copy SourceFiles="$(ProjectDir)\Customer.xml" DestinationFolder="$(SangamRT)\$(CustomerID)" />
+    <Copy SourceFiles="$(ProjectDir)\Environment.xml" DestinationFolder="$(SangamRT)\$(CustomerID)\$(EnvironmentName)" />
+    <Exec Command="$(SangamBin)\unzip.exe &quot;$(ProjectDir)\Packages\$(ProjectName).package&quot; -d &quot;$(SangamRT)\$(CustomerID)\$(EnvironmentName)\$(ProjectName)&quot;" />
+    <!-- 
+      validate command is used to validate the whole customer environment, please refer to Sangam Customer Environment Validation for more details:
+      https://microsoft.sharepoint.com/teams/CoreDataPlatform/_layouts/15/start.aspx#/SitePages/Sangam%20Application%20Validation.aspx
+    -->
+    <Sangam CommandName="validate" Parameters="-p;$(SangamRT)\$(CustomerID);-e;$(EnvironmentName)" />
+    <!--
+      valcounters command is used to validate the property contraints of feed definition. please refer to following document for more details:
+      https://microsoft.sharepoint.com/teams/CoreDataPlatform/_layouts/15/start.aspx#/SitePages/Gating.aspx
+    -->
+    <Sangam CommandName="valcounters" Parameters="-p;$(SangamRT)\$(CustomerID);-e;$(EnvironmentName);-t;$(ProjectDir)\CounterTests.xml" />
+  </Target>
+</Project>

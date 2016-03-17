@@ -1,0 +1,9 @@
+C:\Users\yizeng\Desktop\Codes\Data Insight\ETL\21vTicket\Velocity\bin\Debug\Velocity.dacpac
+C:\Users\yizeng\Desktop\Codes\Data Insight\ETL\21vTicket\Velocity\bin\Debug\Velocity.dll
+C:\Users\yizeng\Desktop\Codes\Data Insight\ETL\21vTicket\Velocity\bin\Debug\Velocity.pdb
+C:\Users\yizeng\Desktop\Codes\Data Insight\ETL\21vTicket\Velocity\obj\Debug\Model.xml
+C:\Users\yizeng\Desktop\Codes\Data Insight\ETL\21vTicket\Velocity\obj\Debug\refactor.xml
+C:\Users\yizeng\Desktop\Codes\Data Insight\ETL\21vTicket\Velocity\obj\Debug\postdeploy.sql
+C:\Users\yizeng\Desktop\Codes\Data Insight\ETL\21vTicket\Velocity\obj\Debug\predeploy.sql
+C:\Users\yizeng\Desktop\Codes\Data Insight\ETL\21vTicket\Velocity\obj\Debug\Velocity.dll
+C:\Users\yizeng\Desktop\Codes\Data Insight\ETL\21vTicket\Velocity\obj\Debug\Velocity.pdb

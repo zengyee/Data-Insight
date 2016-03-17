@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Aliases xmlns="http://schemas.microsoft.com/bing/spatialdata/activity">
+  <!-- 
+      Please see this page to get more usage of Alias feature.
+      https://microsoft.sharepoint.com/teams/CoreDataPlatform/_layouts/15/start.aspx#/SitePages/Alias.aspx
+  -->
+  
+  <!--<Alias name="BaseJob" target="Job">
+    <Attribute name="maxThreadsPerExtent">1</Attribute>
+    <Attribute name="threadsPerExtent">1</Attribute>
+    <Attribute name="isSingleton">true</Attribute>
+    <Attribute name="loggingMode">Information</Attribute>
+  </Alias>
+  <Alias name="OperationSegment" target="SimpleSegment">
+    <Attribute name="mode">Operation</Attribute>
+    <Attribute name="maxCompletionTimeForAbort">06:00:00</Attribute>
+  </Alias>
+  <Alias name="StreamExists" target="Operation">
+    <Attribute name="assembly">Bin\Operation.dll</Attribute>
+    <Attribute name="class">Operation.StreamExists</Attribute>
+  </Alias>
+  <Alias name="CreateStream" target="Operation">
+    <Attribute name="assembly">Bin\Operation.dll</Attribute>
+    <Attribute name="class">Operation.CreateStream</Attribute>
+  </Alias>
+  <Alias name="Throw" target="Operation">
+    <Attribute name="assembly">Bin\Operation.dll</Attribute>
+    <Attribute name="class">Operation.Throw</Attribute>
+  </Alias>
+  <Alias name="GenerateDictionary" target="Operation">
+    <Attribute name="assembly">Bin\Operation.dll</Attribute>
+    <Attribute name="class">Operation.GenerateDictionary</Attribute>
+  </Alias>
+  <Alias name="ReportDictionary" target="Operation">
+    <Attribute name="assembly">Bin\Operation.dll</Attribute>
+    <Attribute name="class">Operation.ReportDictionary</Attribute>
+  </Alias>-->
+</Aliases>

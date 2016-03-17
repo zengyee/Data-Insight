@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:complexType name="CerSettingConfigType">
+      <xs:sequence>  
+      <xs:element name="TenantName" type="xs:string" minOccurs="1" maxOccurs="1"/>         
+      <xs:element name="Enabled" type="xs:boolean" minOccurs="1" maxOccurs="1"/>    
+      <xs:element name="MultipleConcurrentRequests" type="xs:int" minOccurs="1" maxOccurs="1"/>    
+      <xs:element name="DumpType" type="xs:string" minOccurs="1" maxOccurs="1"/>    
+      <xs:element name="MdsEndPoint" type="xs:string" minOccurs="0" maxOccurs="1"/>   
+      </xs:sequence>  
+  </xs:complexType>
+
+  <xs:complexType name="CerSettingConfigsType">
+    <xs:sequence>
+      <xs:element name="CerSettingConfig" type="CerSettingConfigType" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+
+  </xs:complexType>
+
+  <xs:element name="CerSettingConfigs" type="CerSettingConfigsType"/>
+
+</xs:schema>
+

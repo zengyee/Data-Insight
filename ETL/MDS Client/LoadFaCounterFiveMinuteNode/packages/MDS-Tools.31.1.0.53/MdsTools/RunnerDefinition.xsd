@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:complexType name="RunnerInstanceType">
+      <xs:sequence>      
+        <xs:element name="LocalHealthDimension" type="LocalHealthDimensionType" minOccurs="0" maxOccurs="1" />
+	<xs:element name="LocalConfigurations" type="LocalConfigurationsType" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name="CommandExe" type="xs:string" />
+        <xs:element name="CommandLineParameters" type="xs:string" minOccurs="0"/>
+        <xs:element name="PreProcessingCommand" type="xs:string" minOccurs="0"/>
+        <xs:element name="RelativeWorkingDir" type="xs:string" minOccurs="0"/>
+      </xs:sequence>      
+      <xs:attribute name="RunnerInstanceName" type="xs:string" use="required"/>  
+      <xs:attribute name="Location" type="xs:string" />  
+    </xs:complexType>       
+
+    <xs:complexType name="HealthDimensionType">     
+     <xs:attribute name="Name" type="xs:string" use="required"/>  
+     <xs:attribute name="Value" type="xs:string" use="required"/>  
+    </xs:complexType>            	
+
+    <xs:complexType name="LocalHealthDimensionType">
+      <xs:sequence> 
+        <xs:element name="HealthDimension" type="HealthDimensionType" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>      
+    </xs:complexType>  
+
+    <xs:complexType name="EnvironmentHealthDimensionType">
+      <xs:sequence> 
+        <xs:element name="HealthDimension" type="HealthDimensionType" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+     <xs:attribute name="HealthEndpoint" type="xs:string" use="optional"/>        
+    </xs:complexType> 
+
+    <xs:complexType name="GlobalHealthDimensionType">
+      <xs:sequence> 
+        <xs:element name="HealthDimension" type="HealthDimensionType" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>      
+     <xs:attribute name="HealthAccountName" type="xs:string" use="required"/>  
+     <xs:attribute name="ResourceType" type="xs:string" use="required"/>  
+     <xs:attribute name="CertThumbprint" type="xs:string" use="optional"/>
+     <xs:attribute name="HealthEndpoint" type="xs:string" use="optional"/>  
+    </xs:complexType>            	           	
+
+    <xs:complexType name="LocalConfigurationsType">
+      <xs:sequence> 
+        <xs:element name="Configuration" type="ConfigurationElementType"  maxOccurs="unbounded"/>
+      </xs:sequence> 
+      <xs:attribute name="RunnerInstanceLogicalName" type="xs:string"/>      
+    </xs:complexType>       
+
+    <xs:complexType name="ConfigurationElementType">
+      <xs:sequence>
+        <xs:element name="ConfigValue" type="xs:string" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="Name" type="xs:string" use="required"/>  
+      <xs:attribute name="Value" type="xs:string"/>  
+    </xs:complexType>       
+
+    <xs:complexType name="ConfigurationType">
+      <xs:sequence> 
+        <xs:element name="Configuration" type="ConfigurationElementType"  maxOccurs="unbounded"/>
+      </xs:sequence>      
+    </xs:complexType>         
+
+    <xs:complexType name="EnvironmentType">
+      <xs:sequence>
+        <xs:element name="EnvironmentHealthDimension" type="EnvironmentHealthDimensionType" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="EnvironmentConfiguration" type="ConfigurationType" minOccurs="0" />
+        <xs:element name="RunnerInstance" type="RunnerInstanceType" maxOccurs="unbounded" />             
+      </xs:sequence> 
+      <xs:attribute name="EnvironmentName" type="xs:string" use="required"/>  
+    </xs:complexType>
+
+    <xs:complexType name="RunnerDefinitionType">
+      <xs:sequence>
+        <xs:element name="GlobalHealthDimension" type="GlobalHealthDimensionType" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="GlobalConfiguration" type="ConfigurationType" minOccurs="0"/>
+        <xs:element name="Environment" type="EnvironmentType"  maxOccurs="unbounded"/>      
+      </xs:sequence> 
+      <xs:attribute name="Component" type="xs:string"/>    
+      <xs:attribute name="Description" type="xs:string"/>    
+      <xs:attribute name="Owner" type="xs:string"/>    
+      <xs:attribute name="RunnerName" type="xs:string"/>
+    </xs:complexType>       
+
+    <xs:complexType name="RunnerType">    
+      <xs:sequence>      
+       <xs:element name="RunnerDefinition" type="RunnerDefinitionType" maxOccurs="unbounded"/>     
+      </xs:sequence> 
+    </xs:complexType>       
+     
+    <xs:element name="Runners" type="RunnerType"/>	
+</xs:schema>

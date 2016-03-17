@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Root" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+
+  <xs:include schemaLocation="shared.xsd"/>
+
+  <xs:simpleType name="AlertLevelType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Dead"/>
+      <xs:enumeration value="Degraded"/>
+      <xs:enumeration value="MostlyDead"/>
+      <xs:enumeration value="Unhealthy"/>
+      <xs:enumeration value="Healthy"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="TableVersionCountType">
+    <xs:restriction base="xs:integer">
+      <xs:minInclusive value="1" />
+      <xs:maxInclusive value="2" />
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:complexType name="AssertionType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="alertLevel" type="AlertLevelType" use="required" />
+        <xs:attribute name="message" type="xs:string" use="optional" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="CheckGroupType">
+    <xs:sequence>
+      <xs:element name="SelectColumns" type="SelectColumnsType" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="Where" type="xs:string" minOccurs="0" maxOccurs="1" />
+      <xs:element name="GroupBy" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="Assertion" type="AssertionType" minOccurs="1" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="DeviationCheckerType">
+    <xs:sequence>
+      <xs:element name="From" type="xs:string" minOccurs="0" maxOccurs="1" />
+      <!--If TableVersionCount is not specified, then From must contain the precise table
+          name. Otherwise, From contains the prefix such that prefixVerXvY would match some
+          existing tables. -->
+      <xs:element name="TableVersionCount" type="TableVersionCountType" minOccurs="0" maxOccurs="1" />
+      <!--Filter string accepted by the MDS front end-->
+      <xs:element name="Filter" type="xs:string" minOccurs="0" maxOccurs="1" />
+      <xs:element name="CheckGroup" type="CheckGroupType" minOccurs="1" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="duration" type="DurationType" use="required"/>
+    <xs:attribute name="queryDelay" type="xs:duration" use="optional"/>
+    <xs:attribute name="offset" type="xs:duration" use="optional"/>
+    <xs:attribute name="name" type="xs:ID" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="DeviationCheckersType">
+    <xs:sequence>
+      <xs:element name="DeviationChecker" type="DeviationCheckerType" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:element name="DeviationCheckers" type="DeviationCheckersType"/>
+
+</xs:schema>

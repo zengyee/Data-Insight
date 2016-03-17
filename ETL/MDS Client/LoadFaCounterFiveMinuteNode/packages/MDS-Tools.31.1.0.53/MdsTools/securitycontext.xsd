@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+
+<!-- This holds the schema for the XML that defines a command passed to monitoring agent -->
+
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:complexType name="SecurityContextConfigType">
+      <xs:sequence>  
+      <xs:element name="SecurityContext" type="xs:string" minOccurs="1" maxOccurs="1"/>    
+      <xs:element name="StsUrl" type="xs:string" minOccurs="1" maxOccurs="1"/>    
+      <xs:element name="MdsRealm" type="xs:string" minOccurs="1" maxOccurs="1"/>    
+      <xs:element name="TenantList" type="xs:string" minOccurs="1" maxOccurs="1"/>    
+      <xs:element name="StsActiveClientUrl" type="xs:string" minOccurs="1" maxOccurs="1"/>    
+      <xs:element name="AuthMode" type="xs:string" minOccurs="1" maxOccurs="1"/>    
+
+<!-- these are new elements for dSTS     -->  
+      <xs:element name="DstsRealm" type="xs:string" minOccurs="0" maxOccurs="1"/>    
+      <xs:element name="HomeDstsEndPoint" type="xs:string" minOccurs="0" maxOccurs="1"/>    
+      <xs:element name="DstsCertificates" type="xs:string" minOccurs="0" maxOccurs="1"/> 
+      <xs:element name="MdsRealmFordSTS" type="xs:string" minOccurs="0" maxOccurs="1"/> 
+      <xs:element name="HomeDstsEndPointForPassiveClient" type="xs:string" minOccurs="0" maxOccurs="1"/> 
+<!-- MDS will trust token issued for new monitorin UI realm -->
+      <xs:element name="OtherTrustedRealms" type="xs:string" minOccurs="0" maxOccurs="1"/> 
+      </xs:sequence>  
+  </xs:complexType>
+
+  <xs:complexType name="SecurityContextConfigsType">
+    <xs:sequence>
+      <xs:element name="SecurityContextConfig" type="SecurityContextConfigType" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+
+  </xs:complexType>
+
+  <xs:element name="SecurityContextConfigs" type="SecurityContextConfigsType"/>
+
+</xs:schema>
+

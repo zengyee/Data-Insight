@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="http://microsoft.com/rd/xstream/AuthProxyService" 
+           xmlns="http://microsoft.com/rd/xstream/AuthProxyService" 
+           xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+           elementFormDefault="qualified">
+    <xs:complexType name="OwnerType">
+        <xs:sequence>
+            <xs:element name="Flags" type="xs:string" minOccurs="0" />
+            <xs:element name="IdentityString" type="xs:string" minOccurs="0"/>
+            <xs:element name="RoleName" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="UserType">
+        <xs:sequence>
+            <xs:element name="Flags" type="xs:string" minOccurs="0" />
+            <xs:element name="DomainSidString" type="xs:string" minOccurs="0"/>
+            <xs:element name="IdentityString" type="xs:string" minOccurs="0"/>
+            <xs:element name="RoleName" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="IdentityReferenceInfoType">
+        <xs:sequence>
+            <xs:element name="Flags" type="xs:string" minOccurs="0" />
+            <xs:element name="DomainSidString" type="xs:string" minOccurs="0"/>
+            <xs:element name="IdentityString" type="xs:string" minOccurs="0"/>
+            <xs:element name="RoleName" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="IdentityReferencesType">
+        <xs:sequence>
+            <xs:element name="IdentityReferenceInfo" type="IdentityReferenceInfoType" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="IdentityType">
+        <xs:sequence>
+            <xs:element name="AuthenticationType" type="xs:string" minOccurs="0"/>
+            <xs:element name="IsAuthenticated" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="IsSystem" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="ImpersonationLevel" type="xs:string" minOccurs="0"/>
+            <xs:element name="IdentityName" type="xs:string" minOccurs="0"/>
+            <xs:element name="Owner" type="OwnerType" minOccurs="0" />
+            <xs:element name="User" type="UserType" minOccurs="0" />
+            <xs:element name="IdentityReferences" type="IdentityReferencesType" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="HttpAuthenticateResponseValueType" >
+        <xs:sequence>
+            <xs:element name="HrStatus" type="xs:int" minOccurs="0" />
+            <xs:element name="Identity" type="IdentityType" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="HttpAuthenticateResponseValue" type="HttpAuthenticateResponseValueType" />
+</xs:schema>

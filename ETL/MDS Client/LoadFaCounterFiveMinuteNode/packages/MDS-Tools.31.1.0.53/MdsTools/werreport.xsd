@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   
+    <xs:complexType name="UserInfoType">
+      <xs:attribute name="username" type="xs:string" use="required" />
+    </xs:complexType>
+   
+    <xs:complexType name="MachineInfoType">
+      <xs:attribute name="machinename" type="xs:string" use="required" />
+      <xs:attribute name="os" type="xs:string" use="required" />
+      <xs:attribute name="lcid" type="xs:int" use="required" />
+      <xs:attribute name="oem" type="xs:string" use="optional" />
+    </xs:complexType>
+   
+   <xs:complexType name="ApplicationInfoType" >
+      <xs:attribute name="appname" type="xs:string" use="required" />
+      <xs:attribute name="apppath" type="xs:string" use="required" />
+      <xs:attribute name="appcompany" type="xs:string" use="optional" />
+    </xs:complexType>
+  
+    <xs:complexType name="EventInfoType">
+      <xs:attribute name="reporttype" type="xs:int" use="required" />
+      <xs:attribute name="eventtype" type="xs:string" use="required" />
+      <xs:attribute name="friendlyeventname" type="xs:string" use="optional" />
+      <xs:attribute name="eventdescription" type="xs:string" use="optional" />
+      <xs:attribute name="eventtime" type="xs:unsignedLong" use="required" />
+     </xs:complexType>
+     
+     <xs:complexType name="ParameterType">
+       <xs:attribute name="id" type="xs:int" use="required" />
+       <xs:attribute name="name" type="xs:string" use="optional" />
+       <xs:attribute name="value" type="xs:string" use="required" />
+     </xs:complexType>
+   
+     <xs:complexType name="SecondaryParameterType">
+       <xs:attribute name="name" type="xs:string" use="required" />
+       <xs:attribute name="value" type="xs:string" use="required" />
+     </xs:complexType>
+     
+     <xs:complexType name="FileType">
+       <xs:attribute name="filename" type="xs:string" use="required" />
+       <xs:attribute name="filetype" type="xs:int" use="required" />
+     </xs:complexType>
+      
+     <xs:complexType name="SignatureType">
+       <xs:sequence>
+         <xs:element name="PARAMETER" type="ParameterType" minOccurs="0" maxOccurs="10" />
+         <xs:element name="SECONDARYPARAMETER" type="SecondaryParameterType" minOccurs="0" maxOccurs="unbounded" />
+       </xs:sequence>
+     </xs:complexType>
+      
+     <xs:complexType name="FilesType">
+       <xs:sequence>
+        <xs:element name="FILE" type="FileType" minOccurs="0" maxOccurs="unbounded" />
+       </xs:sequence>
+     </xs:complexType>   
+
+  <xs:complexType name="WerReportType">
+    <xs:all>
+      <xs:element  type="UserInfoType" name="USERINFO" />
+      <xs:element type="MachineInfoType" name="MACHINEINFO" />
+      <xs:element type="ApplicationInfoType" name="APPLICATIONINFO"  minOccurs="0" maxOccurs="1"/>
+      <xs:element type="EventInfoType" name="EVENTINFO" />
+      <xs:element type="SignatureType" name="SIGNATURE" minOccurs="1" maxOccurs="1"/>
+      <xs:element type="FilesType" name="FILES" minOccurs="1" maxOccurs="1" />
+    </xs:all>
+  </xs:complexType>
+
+  <xs:element name="WERREPORT" type="WerReportType"/>
+</xs:schema>
+

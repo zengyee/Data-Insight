@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:complexType name="RunnerType">
+    <xs:attribute name="RunnerName" type="xs:string" use="required"/>
+    <xs:attribute name="RunnerInstance" type="xs:string" use="required"/>
+    <xs:attribute name="ExpectedIntervalInMinutes" type="xs:int" use="required"/>
+    <xs:attribute name="NumOfFailuresForAlert" type="xs:int" use="required"/>
+    <xs:attribute name="Owner" type="xs:string" use="required"/>
+    <xs:attribute name="Area" type="xs:string" use="required"/>
+    <xs:attribute name="Component" type="xs:string" use="required"/>
+    <xs:attribute name="SubComponent" type="xs:string" use="required"/>
+    <xs:attribute name="Description" type="xs:string" use="required"/>
+    <xs:attribute name="FailureMessage" type="xs:string" use="required"/>
+    <xs:attribute name="RecoveryMessage" type="xs:string" use="required"/>
+    <xs:attribute name="HelpLink" type="xs:string" use="required"/>
+    <xs:attribute name="UserTitle1" type="xs:string" use="required"/>
+    <xs:attribute name="UserTitle2" type="xs:string" use="required"/>
+    <xs:attribute name="UserTitle3" type="xs:string" use="required"/>
+    <xs:attribute name="AlarmLevel" type="xs:int" use="required"/>
+    <xs:attribute name="AlarmId" type="xs:string" use="required"/>
+    <xs:attribute name="Disabled" type="xs:boolean" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="RunnerDefinitionsType">
+    <xs:sequence>
+      <xs:element name="Runner" type="RunnerType" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="version" type="xs:string" use="optional"/>
+  </xs:complexType>
+
+  <xs:element name="RunnerDefinitions" type="RunnerDefinitionsType"/>
+
+</xs:schema>

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+  See here for an overview:
+  https://microsoft.sharepoint.com/teams/CoreDataPlatform/_layouts/15/start.aspx#/SitePages/Singlebox%20setup.aspx
+
+  Configuring your VS Project for Customer & Environment
+  
+  1. This project is setup to contain a single customer environment.
+  2. Customer ID and Environment name are specified in the CSPROJ file
+  
+  Changing Environment name
+  1. Update the value for EnvironmentName in your CSPROJ
+  2. Update the relative path below
+  3. Update the "name" attribute in Environment XML
+  
+  How this Project Deploys & runs locally
+  The CSPROJ has post build steps to create the runtime folder structure
+  1. Target Folder is created for this environment in SangamRT
+  2. Config files (customer, environment, feeds, schedule and alerts) are copied to the target 
+  3. The package containing jobs, workflows etc. is extracted at the target
+  4. Sangam Single Box is launched with this folder as the root
+  
+  What happened to workflow manifest, params ini etc?
+  https://microsoft.sharepoint.com/teams/CoreDataPlatform/_layouts/15/start.aspx#/SitePages/Sangam%20Artifacts%20Migration.aspx
+  
+-->
+<Customer xmlns="http://schemas.microsoft.com/bing/spatialdata/activity"
+          xmlns:sdx="http://schemas.microsoft.com/bing/schema/spatial/2009/schema-extensions">
+  <CustomerEnvironments xmlns="">
+    <CustomerEnvironment sdx:refPath="JeffDevEnv\Environment.xml" />
+  </CustomerEnvironments>
+</Customer>

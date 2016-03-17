@@ -1,0 +1,9 @@
+C:\Users\yizeng\Desktop\Codes\Data Insight\ETL\21vTicket\IcMChina\bin\Debug\IcMChina.dacpac
+C:\Users\yizeng\Desktop\Codes\Data Insight\ETL\21vTicket\IcMChina\bin\Debug\IcMChina.dll
+C:\Users\yizeng\Desktop\Codes\Data Insight\ETL\21vTicket\IcMChina\bin\Debug\IcMChina.pdb
+C:\Users\yizeng\Desktop\Codes\Data Insight\ETL\21vTicket\IcMChina\obj\Debug\Model.xml
+C:\Users\yizeng\Desktop\Codes\Data Insight\ETL\21vTicket\IcMChina\obj\Debug\refactor.xml
+C:\Users\yizeng\Desktop\Codes\Data Insight\ETL\21vTicket\IcMChina\obj\Debug\postdeploy.sql
+C:\Users\yizeng\Desktop\Codes\Data Insight\ETL\21vTicket\IcMChina\obj\Debug\predeploy.sql
+C:\Users\yizeng\Desktop\Codes\Data Insight\ETL\21vTicket\IcMChina\obj\Debug\IcMChina.dll
+C:\Users\yizeng\Desktop\Codes\Data Insight\ETL\21vTicket\IcMChina\obj\Debug\IcMChina.pdb

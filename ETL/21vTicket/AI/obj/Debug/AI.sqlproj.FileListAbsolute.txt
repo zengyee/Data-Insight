@@ -1,0 +1,9 @@
+C:\Users\yizeng\Desktop\Codes\Data Insight\ETL\21vTicket\AI\bin\Debug\AI.dacpac
+C:\Users\yizeng\Desktop\Codes\Data Insight\ETL\21vTicket\AI\bin\Debug\AI.dll
+C:\Users\yizeng\Desktop\Codes\Data Insight\ETL\21vTicket\AI\bin\Debug\AI.pdb
+C:\Users\yizeng\Desktop\Codes\Data Insight\ETL\21vTicket\AI\obj\Debug\Model.xml
+C:\Users\yizeng\Desktop\Codes\Data Insight\ETL\21vTicket\AI\obj\Debug\refactor.xml
+C:\Users\yizeng\Desktop\Codes\Data Insight\ETL\21vTicket\AI\obj\Debug\postdeploy.sql
+C:\Users\yizeng\Desktop\Codes\Data Insight\ETL\21vTicket\AI\obj\Debug\predeploy.sql
+C:\Users\yizeng\Desktop\Codes\Data Insight\ETL\21vTicket\AI\obj\Debug\AI.dll
+C:\Users\yizeng\Desktop\Codes\Data Insight\ETL\21vTicket\AI\obj\Debug\AI.pdb

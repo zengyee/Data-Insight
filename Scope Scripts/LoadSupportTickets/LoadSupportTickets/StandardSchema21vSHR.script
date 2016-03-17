@@ -1,0 +1,45 @@
+﻿//Script GUID:f45b16eb-1c0e-4764-b580-973e35e9f923
+//Used for tracking history
+MODULE @"/shares/AzureAnalytics.Prod/Sdk/AzureAnalytics1.3.module" AS AzureAnalytics;             
+             
+ AzureAnalytics.Initialize(             
+	entity = "Microsoft.Cloud.incident21vmooncakesupporttickets");             
+             
+ rs = AzureAnalytics.LoadSnapshot(             
+	entity = "Microsoft.Cloud.incident21vmooncakesupporttickets",             
+	snapshotDateTime = "2016-02-03");             
+             
+ stream = SELECT             
+	Case_ID AS IncidentId,
+	SourceName,
+	LastUpdatedTime,
+	Title,
+	CreatedTime,
+	CreatedBy,
+	ExternalStatus,
+	Stage,
+    ProductType AS ProductArea,
+	ProductName,
+	Description,
+	PlanId,
+	InitialTopic,
+	CurrentTopic,
+	RootCause,
+	Symptom,
+	ResourceId,
+	InitialResponseTime,
+	ScopeDeliveredTime,
+	SolutionDeliveredTime,
+	ClosedTime,
+	ReactivationCount,
+	OwnershipChanges,
+	OutageRelated,
+	TotalLaborMinutes,
+	CustomerLocation,
+	Severity,
+	AssignedTo,
+	AssignedTeam,
+	IncidentType
+ FROM rs;             
+             
+ OUTPUT stream TO SSTREAM "/my/Microsoft.Cloud.incident21vmooncakesupporttickets-2016-02-13-2016-02-14.ss";

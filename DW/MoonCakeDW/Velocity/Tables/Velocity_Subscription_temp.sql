@@ -1,0 +1,28 @@
+﻿CREATE TABLE [dbo].[Velocity_Subscription_temp]
+(
+	[CreatedOn] [datetime2](7) NOT NULL,
+	[ModifiedBy] [int] NOT NULL,
+	[EDWSourceSystemID] [int] NULL,
+	[TransferState] [int] NOT NULL,
+	[EDWLastUpdated] [datetime] NULL,
+	[StartDate] [datetime2](7) NOT NULL,
+	[OfferName] [nvarchar](255) NULL,
+	[WindowsLiveId] [nvarchar](255) NULL,
+	[OMSSubscriptionGuid] [uniqueidentifier] NULL,
+	[BisLastUpdated] [datetime2](7) NULL,
+	[CreatedBy] [int] NOT NULL,
+	[EDWIsDeletedFlag] [bit] NULL,
+	[Id] [bigint] NOT NULL,
+	[EDWProcessID] [int] NULL,
+	[EndDate] [datetime2](7) NOT NULL,
+	[SubscriptionId] [bigint] NOT NULL,
+	[ModifiedOn] [datetime2](7) NOT NULL,
+	[StatusId] [int] NOT NULL,
+	[SuspensionReason] [nvarchar](255) NULL,
+	[EDWSourceExtractID] [varchar](40) NULL,
+	[EDWFirstInserted] [datetime] NULL,
+	[AccountId] [int] NOT NULL,
+	[EDWExtractGrouping] [int] NOT NULL,
+	[MOCPSubscriptionGuid] [uniqueidentifier] NULL,
+	[Name] [nvarchar](256) NOT NULL
+)

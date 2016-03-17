@@ -1,0 +1,1497 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/18/2016 11:21:10 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="JEFFREY9010"
+  DTS:CreatorName="FAREAST\yizeng"
+  DTS:DTSID="{790BCA68-A57F-47AD-B721-48B1DE18ACD6}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.700.219"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="LoadCCIC"
+  DTS:PackageType="5"
+  DTS:VersionBuild="19"
+  DTS:VersionGUID="{B15C56E2-72E4-4981-96F0-6D3C1DAEC2D3}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[mcdi01.CCIC]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{8740041A-78B9-4F76-BF9E-95831183A24D}"
+      DTS:ObjectName="mcdi01.CCIC">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=mcdi01;Initial Catalog=CCIC;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ziz-report01]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{11BE11C4-0CE0-49D2-B727-112FCA2AA12A}"
+      DTS:ObjectName="ziz-report01">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=ziz-report01;Initial Catalog=MCUsageReport;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B3A7D6E4-FD94-415B-9BAA-456F116F062C}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ETLId">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Done"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{2970D70E-50A6-4ADF-BD87-06640DCACDE4}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Done"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016 CTP3.2; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8740041A-78B9-4F76-BF9E-95831183A24D}"
+          SQLTask:SqlStatementSource="EXEC [ETL_Update_Log] ?, 'Completed'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::ETLId"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Initial ETL Log"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{EEDAB8F5-710F-4EF2-A960-1F34BB7F10E6}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Initial ETL Log"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8740041A-78B9-4F76-BF9E-95831183A24D}"
+          SQLTask:SqlStatementSource="EXEC [dbo].[ETL_Initial_Log] "
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::ETLId" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{2D546428-FE9B-460E-AAB7-35323E033745}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Data Flow Task"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{07FF2C77-86D1-4C24-B177-4B2EF4159B87}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Data Flow Task"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Sequence Container\Data Flow Task\Customer Temp Table"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Customer Temp Table"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[CCIC_Customer_Temp]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">true</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[mcdi01.CCIC]"
+                      connectionManagerRefId="Package.ConnectionManagers[mcdi01.CCIC]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].Columns[Id]"
+                          cachedDataType="i4"
+                          cachedName="Id"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[Id]"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[Id]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].Columns[EnglishName]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="EnglishName"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[EnglishName]"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[EnglishName]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].Columns[Name]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="Name"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[Name]"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[Name]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].Columns[HMC]"
+                          cachedDataType="bool"
+                          cachedName="HMC"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[HMC]"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[HMC]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].Columns[CAT]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="CAT"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[CAT]"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[CAT]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].Columns[Scenario]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="Scenario"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[Scenario]"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[Scenario]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].Columns[CreatedBy]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="CreatedBy"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[CreatedBy]"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[CreatedBy]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].Columns[CreatedDate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="CreatedDate"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[CreatedDate]"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[CreatedDate]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].Columns[UpdatedBy]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="UpdatedBy"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[UpdatedBy]"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[UpdatedBy]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].Columns[UpdatedDate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="UpdatedDate"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[UpdatedDate]"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[UpdatedDate]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].Columns[HiPo]"
+                          cachedDataType="bool"
+                          cachedName="HiPo"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[HiPo]"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[HiPo]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].Columns[PSS]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="PSS"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[PSS]"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[PSS]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].Columns[CSA]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="CSA"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[CSA]"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[CSA]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[Id]"
+                          dataType="i4"
+                          name="Id" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[EnglishName]"
+                          dataType="wstr"
+                          length="100"
+                          name="EnglishName" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[Name]"
+                          dataType="wstr"
+                          length="100"
+                          name="Name" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[HMC]"
+                          dataType="bool"
+                          name="HMC" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[CAT]"
+                          dataType="wstr"
+                          length="100"
+                          name="CAT" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[Scenario]"
+                          dataType="wstr"
+                          length="100"
+                          name="Scenario" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[CreatedBy]"
+                          dataType="wstr"
+                          length="100"
+                          name="CreatedBy" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[CreatedDate]"
+                          dataType="dbTimeStamp"
+                          name="CreatedDate" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[UpdatedBy]"
+                          dataType="wstr"
+                          length="100"
+                          name="UpdatedBy" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[UpdatedDate]"
+                          dataType="dbTimeStamp"
+                          name="UpdatedDate" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[HiPo]"
+                          dataType="bool"
+                          name="HiPo" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[PSS]"
+                          dataType="wstr"
+                          length="100"
+                          name="PSS" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[CSA]"
+                          dataType="wstr"
+                          length="100"
+                          name="CSA" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\Data Flow Task\Load from CCIC"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Load from CCIC"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[ccic].[Customer]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT        IncidentId, SourceName, SourceType, SourceIncidentId, SourceCreateDate, SourceOrigin, SourceCreatedBy, SourceModifiedDate, CreateDate, ModifiedDate, RoutingId, CorrelationId, OccurringEnvironment, 
+                         OccurringDatacenter, OccurringDeviceGroup, OccurringDeviceName, OccurringServiceInstanceId, RaisingEnvironment, RaisingDatacenter, RaisingDeviceGroup, RaisingDeviceName, RaisingServiceInstanceId, 
+                         OwningTenantName, OwningTeamName, OwningContactAlias, ParentIncidentId, Severity, Status, IsNoise, IsSecurityRisk, IsCustomerImpacting, Component, Revision, TsgId, Title, ReproSteps, CustomerName, 
+                         CommitDate, ResolveDate, ResolvedBy, RootCauseId, RootCauseLinkDate, Mitigation, KBArticleId, PIRReportId, PIRLinkDate, ImpactedScenarios, HitCount, LastCorrelationDate, Keywords, MitigateDate, 
+                         ImpactStartDate, MitigatedBy, CommsMgrEngagementMode, CommsMgrEngagementAdditionalDetails, IncidentType, ChildCount, RelatedLinksCount, ExternalLinksCount, HowFixed, IncidentSubType, TsgOutput, 
+                         MonitorId, ResponsibleTenantName, SupportTicketId, SubscriptionId, WarehouseModifiedDate, PublicPirId, OriginatingTenantName
+FROM            WarehouseIncidents
+WHERE        (ModifiedDate &gt;= ?) AND (ModifiedDate &lt;= ?)</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping">"0:Input",{7DF23EFA-6FBB-4FEC-97C7-BC46750D5F3E};"1:Input",{63A5723C-96D6-467D-AC68-34FF4415104E};</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[ziz-report01]"
+                      connectionManagerRefId="Package.ConnectionManagers[ziz-report01]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[Id]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].ExternalColumns[Id]"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[Id]"
+                          name="Id"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[EnglishName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].ExternalColumns[EnglishName]"
+                          length="100"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[EnglishName]"
+                          name="EnglishName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[Name]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].ExternalColumns[Name]"
+                          length="100"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[Name]"
+                          name="Name"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[HMC]"
+                          dataType="bool"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].ExternalColumns[HMC]"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[HMC]"
+                          name="HMC"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[CAT]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].ExternalColumns[CAT]"
+                          length="100"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[CAT]"
+                          name="CAT"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[Scenario]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].ExternalColumns[Scenario]"
+                          length="100"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[Scenario]"
+                          name="Scenario"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[CreatedBy]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].ExternalColumns[CreatedBy]"
+                          length="100"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[CreatedBy]"
+                          name="CreatedBy"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[CreatedDate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].ExternalColumns[CreatedDate]"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[CreatedDate]"
+                          name="CreatedDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[UpdatedBy]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].ExternalColumns[UpdatedBy]"
+                          length="100"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[UpdatedBy]"
+                          name="UpdatedBy"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[UpdatedDate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].ExternalColumns[UpdatedDate]"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[UpdatedDate]"
+                          name="UpdatedDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[HiPo]"
+                          dataType="bool"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].ExternalColumns[HiPo]"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[HiPo]"
+                          name="HiPo"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[PSS]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].ExternalColumns[PSS]"
+                          length="100"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[PSS]"
+                          name="PSS"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[CSA]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].ExternalColumns[CSA]"
+                          length="100"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].Columns[CSA]"
+                          name="CSA"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].ExternalColumns[Id]"
+                          dataType="i4"
+                          name="Id" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].ExternalColumns[EnglishName]"
+                          dataType="wstr"
+                          length="100"
+                          name="EnglishName" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].ExternalColumns[Name]"
+                          dataType="wstr"
+                          length="100"
+                          name="Name" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].ExternalColumns[HMC]"
+                          dataType="bool"
+                          name="HMC" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].ExternalColumns[CAT]"
+                          dataType="wstr"
+                          length="100"
+                          name="CAT" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].ExternalColumns[Scenario]"
+                          dataType="wstr"
+                          length="100"
+                          name="Scenario" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].ExternalColumns[CreatedBy]"
+                          dataType="wstr"
+                          length="100"
+                          name="CreatedBy" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].ExternalColumns[CreatedDate]"
+                          dataType="dbTimeStamp"
+                          name="CreatedDate" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].ExternalColumns[UpdatedBy]"
+                          dataType="wstr"
+                          length="100"
+                          name="UpdatedBy" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].ExternalColumns[UpdatedDate]"
+                          dataType="dbTimeStamp"
+                          name="UpdatedDate" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].ExternalColumns[HiPo]"
+                          dataType="bool"
+                          name="HiPo" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].ExternalColumns[PSS]"
+                          dataType="wstr"
+                          length="100"
+                          name="PSS" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output].ExternalColumns[CSA]"
+                          dataType="wstr"
+                          length="100"
+                          name="CSA" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[Id]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[Id]"
+                          name="Id" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[EnglishName]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[EnglishName]"
+                          name="EnglishName" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[Name]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[Name]"
+                          name="Name" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[HMC]"
+                          dataType="bool"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[HMC]"
+                          name="HMC" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[CAT]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[CAT]"
+                          name="CAT" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[Scenario]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[Scenario]"
+                          name="Scenario" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[CreatedBy]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[CreatedBy]"
+                          name="CreatedBy" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[CreatedDate]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[CreatedDate]"
+                          name="CreatedDate" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[UpdatedBy]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[UpdatedBy]"
+                          name="UpdatedBy" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[UpdatedDate]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[UpdatedDate]"
+                          name="UpdatedDate" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[HiPo]"
+                          dataType="bool"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[HiPo]"
+                          name="HiPo" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[PSS]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[PSS]"
+                          name="PSS" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[CSA]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[CSA]"
+                          name="CSA" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Sequence Container\Data Flow Task.Paths[OLE DB Source Output]"
+                  endId="Package\Sequence Container\Data Flow Task\Customer Temp Table.Inputs[OLE DB Destination Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Sequence Container\Data Flow Task\Load from CCIC.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Data Flow Task HMC"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{ad049e6d-75b6-439a-b59c-8cd07e640891}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Data Flow Task HMC"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Sequence Container\Data Flow Task HMC\Customer Temp Table"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Customer Temp Table"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[HMC_Subscription_Temp]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">true</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\Data Flow Task HMC\Customer Temp Table.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[mcdi01.CCIC]"
+                      connectionManagerRefId="Package.ConnectionManagers[mcdi01.CCIC]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\Data Flow Task HMC\Customer Temp Table.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\Data Flow Task HMC\Customer Temp Table.Inputs[OLE DB Destination Input].Columns[ENGLISHNAME]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="ENGLISHNAME"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task HMC\Customer Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[EnglishName]"
+                          lineageId="Package\Sequence Container\Data Flow Task HMC\Load from CCIC.Outputs[OLE DB Source Output].Columns[ENGLISHNAME]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Data Flow Task HMC\Customer Temp Table.Inputs[OLE DB Destination Input].Columns[SUBSCRIPTIONID]"
+                          cachedDataType="guid"
+                          cachedName="SUBSCRIPTIONID"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task HMC\Customer Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[SubscriptionId]"
+                          lineageId="Package\Sequence Container\Data Flow Task HMC\Load from CCIC.Outputs[OLE DB Source Output].Columns[SUBSCRIPTIONID]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Data Flow Task HMC\Customer Temp Table.Inputs[OLE DB Destination Input].Columns[ENDCUSTOMERNAME]"
+                          cachedDataType="wstr"
+                          cachedLength="150"
+                          cachedName="ENDCUSTOMERNAME"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task HMC\Customer Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[EndCustomerName]"
+                          lineageId="Package\Sequence Container\Data Flow Task HMC\Load from CCIC.Outputs[OLE DB Source Output].Columns[ENDCUSTOMERNAME]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task HMC\Customer Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[EnglishName]"
+                          dataType="wstr"
+                          length="100"
+                          name="EnglishName" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task HMC\Customer Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[SubscriptionId]"
+                          dataType="guid"
+                          name="SubscriptionId" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task HMC\Customer Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[EndCustomerName]"
+                          dataType="wstr"
+                          length="150"
+                          name="EndCustomerName" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Data Flow Task HMC\Customer Temp Table.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Sequence Container\Data Flow Task HMC\Customer Temp Table.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task HMC\Customer Temp Table.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Data Flow Task HMC\Customer Temp Table.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task HMC\Customer Temp Table.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Data Flow Task HMC\Customer Temp Table.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\Data Flow Task HMC\Load from CCIC"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Load from CCIC"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[ea].[V_SubscriptionHMC]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT ENGLISHNAME, ENDCUSTOMERNAME, SUBSCRIPTIONID FROM EA.V_SUBSCRIPTIONHMC</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\Data Flow Task HMC\Load from CCIC.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[ziz-report01]"
+                      connectionManagerRefId="Package.ConnectionManagers[ziz-report01]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Data Flow Task HMC\Load from CCIC.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task HMC\Load from CCIC.Outputs[OLE DB Source Output].Columns[ENGLISHNAME]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task HMC\Load from CCIC.Outputs[OLE DB Source Output].ExternalColumns[ENGLISHNAME]"
+                          length="100"
+                          lineageId="Package\Sequence Container\Data Flow Task HMC\Load from CCIC.Outputs[OLE DB Source Output].Columns[ENGLISHNAME]"
+                          name="ENGLISHNAME"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task HMC\Load from CCIC.Outputs[OLE DB Source Output].Columns[ENDCUSTOMERNAME]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task HMC\Load from CCIC.Outputs[OLE DB Source Output].ExternalColumns[ENDCUSTOMERNAME]"
+                          length="150"
+                          lineageId="Package\Sequence Container\Data Flow Task HMC\Load from CCIC.Outputs[OLE DB Source Output].Columns[ENDCUSTOMERNAME]"
+                          name="ENDCUSTOMERNAME"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task HMC\Load from CCIC.Outputs[OLE DB Source Output].Columns[SUBSCRIPTIONID]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task HMC\Load from CCIC.Outputs[OLE DB Source Output].ExternalColumns[SUBSCRIPTIONID]"
+                          lineageId="Package\Sequence Container\Data Flow Task HMC\Load from CCIC.Outputs[OLE DB Source Output].Columns[SUBSCRIPTIONID]"
+                          name="SUBSCRIPTIONID"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task HMC\Load from CCIC.Outputs[OLE DB Source Output].ExternalColumns[ENGLISHNAME]"
+                          dataType="wstr"
+                          length="100"
+                          name="ENGLISHNAME" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task HMC\Load from CCIC.Outputs[OLE DB Source Output].ExternalColumns[ENDCUSTOMERNAME]"
+                          dataType="wstr"
+                          length="150"
+                          name="ENDCUSTOMERNAME" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task HMC\Load from CCIC.Outputs[OLE DB Source Output].ExternalColumns[SUBSCRIPTIONID]"
+                          dataType="guid"
+                          name="SUBSCRIPTIONID" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\Data Flow Task HMC\Load from CCIC.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task HMC\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[ENGLISHNAME]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\Sequence Container\Data Flow Task HMC\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[ENGLISHNAME]"
+                          name="ENGLISHNAME" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task HMC\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[ENDCUSTOMERNAME]"
+                          dataType="wstr"
+                          length="150"
+                          lineageId="Package\Sequence Container\Data Flow Task HMC\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[ENDCUSTOMERNAME]"
+                          name="ENDCUSTOMERNAME" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task HMC\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[SUBSCRIPTIONID]"
+                          dataType="guid"
+                          lineageId="Package\Sequence Container\Data Flow Task HMC\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[SUBSCRIPTIONID]"
+                          name="SUBSCRIPTIONID" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task HMC\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Data Flow Task HMC\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task HMC\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Data Flow Task HMC\Load from CCIC.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Sequence Container\Data Flow Task HMC.Paths[OLE DB Source Output]"
+                  endId="Package\Sequence Container\Data Flow Task HMC\Customer Temp Table.Inputs[OLE DB Destination Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Sequence Container\Data Flow Task HMC\Load from CCIC.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Merge"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{BF0D2F03-914E-44EC-8D5A-F60D3F2E28A1}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Merge"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016 CTP3.2; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{8740041A-78B9-4F76-BF9E-95831183A24D}"
+              SQLTask:SqlStatementSource="EXEC [ETL_sp_Customer_MergeFromTemp] ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::ETLId"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Merge HMC"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{f6e8cd29-cb99-4bdb-9726-24e4bfaaf35f}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Merge HMC"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016 CTP3.2; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{8740041A-78B9-4F76-BF9E-95831183A24D}"
+              SQLTask:SqlStatementSource="EXEC [ETL_sp_HMC_MergeFromTemp]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::ETLId"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Truncate Temp Customer"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{831BE7DE-4FFF-4174-9854-5D3602371118}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Truncate Temp Customer"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016 CTP3.2; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{8740041A-78B9-4F76-BF9E-95831183A24D}"
+              SQLTask:SqlStatementSource="TRUNCATE TABLE [dbo].[CCIC_Customer_Temp]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Truncate Temp HMC"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{739e30f7-86d1-4564-bef5-9c46af1f68c7}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Truncate Temp HMC"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016 CTP3.2; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{8740041A-78B9-4F76-BF9E-95831183A24D}"
+              SQLTask:SqlStatementSource="TRUNCATE TABLE [dbo].[HMC_Subscription_Temp]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{AD6C4E12-7756-42FF-BBE5-A347BA89CEA3}"
+          DTS:From="Package\Sequence Container\Truncate Temp HMC"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Sequence Container\Data Flow Task HMC" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{ABD25455-18ED-4E86-84FC-EB8053FCD0AD}"
+          DTS:From="Package\Sequence Container\Truncate Temp Customer"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Sequence Container\Data Flow Task" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{9EE98CB5-C491-42EF-B4B5-E5C70D648BFA}"
+          DTS:From="Package\Sequence Container\Data Flow Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Sequence Container\Merge" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{8AAE1CC1-92A8-4AF0-BFAE-553B38541675}"
+          DTS:From="Package\Sequence Container\Data Flow Task HMC"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\Sequence Container\Merge HMC" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{65FDED71-B0DB-4063-BC9E-3E231A44C589}"
+      DTS:From="Package\Initial ETL Log"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Sequence Container" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{70EEE6FE-2DA6-4BBA-B413-0AEDD30F57C0}"
+      DTS:From="Package\Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Done" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="104,42"
+          Id="Package\Done"
+          TopLeft="177,517.5" />
+        <NodeLayout
+          Size="147,42"
+          Id="Package\Initial ETL Log"
+          TopLeft="155.5,5.5" />
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Sequence Container\Data Flow Task"
+          TopLeft="29.5,107.5" />
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 1]"
+          TopLeft="105,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 2]"
+          TopLeft="105,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="108,42"
+          Id="Package\Sequence Container\Merge"
+          TopLeft="51.0000000000001,209.5" />
+        <NodeLayout
+          Size="199,42"
+          Id="Package\Sequence Container\Truncate Temp Customer"
+          TopLeft="5.50000000000003,5.5" />
+        <NodeLayout
+          Size="176,42"
+          Id="Package\Sequence Container\Truncate Temp HMC"
+          TopLeft="265,5.5" />
+        <NodeLayout
+          Size="176,42"
+          Id="Package\Sequence Container\Data Flow Task HMC"
+          TopLeft="265,107.5" />
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          TopLeft="353,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="133,42"
+          Id="Package\Sequence Container\Merge HMC"
+          TopLeft="286.5,209.5" />
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 3]"
+          TopLeft="353,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="447,306"
+          Size="447,350"
+          Id="Package\Sequence Container"
+          TopLeft="5.50000000000009,107.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="229,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="229,457.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Sequence Container\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="153,42"
+          Id="Package\Sequence Container\Data Flow Task\Load from CCIC"
+          TopLeft="237,52" />
+        <NodeLayout
+          Size="183,42"
+          Id="Package\Sequence Container\Data Flow Task\Customer Temp Table"
+          TopLeft="217,230" />
+        <EdgeLayout
+          Id="Package\Sequence Container\Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="311,94">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,136"
+              Start="0,0"
+              End="0,128.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,128.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\Data Flow Task\Customer Temp Table">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\Data Flow Task\Load from CCIC">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Sequence Container\Data Flow Task HMC">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="183,42"
+          Id="Package\Sequence Container\Data Flow Task HMC\Customer Temp Table"
+          TopLeft="217,230" />
+        <NodeLayout
+          Size="153,42"
+          Id="Package\Sequence Container\Data Flow Task HMC\Load from CCIC"
+          TopLeft="237,52" />
+        <EdgeLayout
+          Id="Package\Sequence Container\Data Flow Task HMC.Paths[OLE DB Source Output]"
+          TopLeft="311,94">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,136"
+              Start="0,0"
+              End="0,128.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,128.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\Data Flow Task HMC\Customer Temp Table">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\Data Flow Task HMC\Load from CCIC">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">View</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,84 @@
+﻿//Script GUID:c93a8f9e-0079-488b-ae12-14883b4e9cfa
+//Used for tracking history
+MODULE @"/shares/AzureAnalytics.Prod/Sdk/AzureAnalytics1.3.module" AS AzureAnalytics;             
+             
+ AzureAnalytics.Initialize(             
+	entity = "Microsoft.Cloud.incident21vmooncakesupporttickets");             
+             
+ rs = AzureAnalytics.LoadSnapshot(             
+	entity = "Microsoft.Cloud.incident21vmooncakesupporttickets",             
+	snapshotDateTime = "2016-01-24");             
+             
+ stream = SELECT             
+	TOP 1000             
+	AssignedTeam,
+	AssignedTo,
+	BBCount,
+	Case_ID,
+	CaseSource,
+	CaseStatus,
+	ClosedCount,
+	ClosedTime,
+	CPERank,
+	CreatedBy,
+	CreatedTime,
+	CurrentTopic,
+	CustomerLocation,
+	CustomerType,
+	DateOfClosed,
+	DateOfCreate,
+	Description,
+	DTC,
+	DTS,
+	EscalatetoMS,
+	EscalationCount,
+	ExternalStatus,
+	FeedBack,
+	FirstDayResolution,
+	FromQueue,
+	id,
+	IncidentType,
+	InitialResponseTime,
+	InitialTopic,
+	InquiryType,
+	InsertDate,
+	IssueCode,
+	LastUpdatedTime,
+	MonthofClose,
+	MonthofCreate,
+	MSLed,
+	OpenClose,
+	OpeningCount,
+	OpenningDays,
+	OpenningMoreThan7Days,
+	OrgID,
+	OutageRelated,
+	OwnershipChanges,
+	ParentIssueCode,
+	PlanId,
+	ProductName,
+	ProductType,
+	ReactivationCount,
+	Resolution,
+	ResourceId,
+	RootCause,
+	ROWNUMBER,
+	ScopeDeliveredTime,
+	Severity,
+	SolutionDeliveredTime,
+	SourceName,
+	Stage,
+	SubscriptionID,
+	SurveyResponseCount,
+	Symptom,
+	TBCount,
+	Title,
+	TMPI,
+	TotalLaborMinutes,
+	YearMonthofClose,
+	YearMonthofCreate,
+	YearofClose,
+	YearofCreate             
+ FROM rs;             
+             
+ OUTPUT stream TO SSTREAM "/my/Microsoft.Cloud.incident21vmooncakesupporttickets-2016-01-24-2016-01-25.ss";

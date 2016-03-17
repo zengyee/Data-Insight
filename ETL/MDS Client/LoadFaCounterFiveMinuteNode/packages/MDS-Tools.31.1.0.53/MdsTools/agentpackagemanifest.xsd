@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+ <!-- Version will  be XX.YY.ZZ  -->
+  <xs:simpleType name="VersionType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="([0-9]{2}\.[0-9]{2}\.[0-9]{2,4})" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="PackageTypeType">
+    <xs:restriction base="xs:string">
+       <xs:pattern value="AgentCore|Extension|Configuration"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="AgentPackageManifestConfigType">
+    <xs:sequence>
+        <xs:element name="PackageType" type="PackageTypeType" minOccurs="1" maxOccurs="1"/>
+        <xs:element name="Version" type="VersionType" minOccurs="1" maxOccurs="1"/>
+        <xs:element name="ExtensionName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="AgentCompatibility" type="VersionType" minOccurs="0" maxOccurs="1"/>   
+    </xs:sequence>
+    <!-- I want to keep it optional for now atleast until we have demos done -->
+    <xs:attribute name="ManifestVersion" type="xs:string" use="optional"></xs:attribute>
+  </xs:complexType>
+
+  <xs:element name="AgentPackageManifestConfig" type="AgentPackageManifestConfigType" />
+
+</xs:schema>
+

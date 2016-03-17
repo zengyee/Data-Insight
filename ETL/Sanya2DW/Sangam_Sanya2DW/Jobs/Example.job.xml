@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+    please refer to following document for how to set up alerts in a job: https://microsoft.sharepoint.com/teams/CoreDataPlatform/_layouts/15/start.aspx#/SitePages/Alerts.aspx
+
+    some of the properties of job are parameterized, for those properties, you can expression language to evaluate the value.
+    but if you want to specify literal values for those properties you need to surround it with single quotes.
+    you can find a list of properties that are parameterized here : https://microsoft.sharepoint.com/teams/CoreDataPlatform/_layouts/15/start.aspx#/SitePages/Sangam%20Application%20Validation.aspx
+-->
+<b:Job xmlns:b="http://schemas.microsoft.com/bing/spatialdata/activity"
+       name="BasicExample" maxThreadsPerExtent="1" threadsPerExtent="1" isSingleton="true" loggingMode="Information"
+       onFailureAlertName="'JobFailure'" onMaxCompletionTimeAlertName="'JobTooLong'" onSuccessAlertName="'JobSuccess'">
+  <b:Parameters>
+    <b:JobParameter name="ArgMessage" type="string" default="Hello" kind="Value" />
+    <b:JobParameter name="ArgUrl" type="string" default="http://api.bing.net/xml.aspx?AppId=D6DAECA722A290728DD5AA1B277A9E1C20EB83CB&amp;Sources=News&amp;Market=en-US&amp;Version=2.0&amp;Query=" kind="Value">
+      <DefaultOverride default="http://api.bing.net/xml.aspx?AppId=D6DAECA722A290728DD5AA1B277A9E1C20EB83CB&amp;Sources=News&amp;Market=en-US&amp;Version=2.0&amp;Query=" logicalEnvironment="DevMachine" />
+      <DefaultOverride default="http://api.bing.net/xml.aspx?AppId=D6DAECA722A290728DD5AA1B277A9E1C20EB83CB&amp;Sources=News&amp;Market=en-GB&amp;Version=2.0&amp;Query=" logicalEnvironment="Prod1" />
+      <DefaultOverride default="http://api.bing.net/xml.aspx?AppId=D6DAECA722A290728DD5AA1B277A9E1C20EB83CB&amp;Sources=News&amp;Market=en-AU&amp;Version=2.0&amp;Query=" logicalEnvironment="Prod2" />
+    </b:JobParameter>
+  </b:Parameters>
+  <b:Counters>
+    <b:Counter name="SampleCounter1" kind="Sum" includeRows="Success">
+      <b:Feed>sampleOutputFeed</b:Feed>
+    </b:Counter>
+  </b:Counters>
+  <b:Sequence>
+    <b:SimpleSegment mode="WindowsWorkflow">
+      <b:Output>
+        <!-- Note the single quote on feed entry name - this is to specify it as a string literal. Without the single quote it is treated as a parameter -->
+        <b:Feed name="sampleOutputFeed" feedEntryName="'SampleOutputFeed'" />
+      </b:Output>
+      <b:WindowsWorkflow xaml="Workflows\Example.xaml"/>
+    </b:SimpleSegment>
+    <b:SimpleSegment mode="Scope">
+      <b:Input>
+        <b:Feed name="sampleOutputFeed" feedEntryName="'SampleOutputFeed'"/>
+      </b:Input>
+      <b:Output>
+        <Feed name="resultsFeed" feedEntryName="'ResultsFeed'" />
+      </b:Output>
+      <b:ScopeJobActivity ScriptFile="Scripts\ScopeScriptExample.script"
+                        FullJobName="ScopeScriptSample"
+                        ScopeJobPriority="1000">
+        <b:ScriptParameters>
+          <b:ScriptParameter key="INPUT_STREAM" value="sampleOutputFeed" type="string" kind="feed"/>
+          <b:ScriptParameter key="OUTPUT_STREAM" value="resultsFeed" type="string" kind="feed"/>
+        </b:ScriptParameters>
+      </b:ScopeJobActivity>
+    </b:SimpleSegment>
+
+  </b:Sequence>
+</b:Job>

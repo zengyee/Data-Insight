@@ -1,0 +1,7 @@
+C:\Users\yizeng\Desktop\Codes\Data Insight\DW\MoonCakeDW\Velocity\bin\Debug\Velocity.dacpac
+C:\Users\yizeng\Desktop\Codes\Data Insight\DW\MoonCakeDW\Velocity\obj\Debug\Model.xml
+C:\Users\yizeng\Desktop\Codes\Data Insight\DW\MoonCakeDW\Velocity\obj\Debug\refactor.xml
+C:\Users\yizeng\Desktop\Codes\Data Insight\DW\MoonCakeDW\Velocity\obj\Debug\postdeploy.sql
+C:\Users\yizeng\Desktop\Codes\Data Insight\DW\MoonCakeDW\Velocity\obj\Debug\predeploy.sql
+C:\Users\yizeng\Desktop\Codes\Data Insight\DW\MoonCakeDW\Velocity\obj\Debug\Velocity.dll
+C:\Users\yizeng\Desktop\Codes\Data Insight\DW\MoonCakeDW\Velocity\obj\Debug\Velocity.pdb

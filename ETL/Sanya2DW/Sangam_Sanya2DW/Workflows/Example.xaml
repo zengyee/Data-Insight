@@ -1,0 +1,90 @@
+﻿<Activity
+  mc:Ignorable="sap sap2010 sads"
+  x:Class="SangamApplication.MCDIPartner.Example"
+  xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+  xmlns:mbs="clr-namespace:Microsoft.Bing.Sangam;assembly=Microsoft.Bing.Sangam"
+  xmlns:mbsa="clr-namespace:Microsoft.Bing.Sangam.AcquisitionActivities;assembly=Microsoft.Bing.Sangam.WorkflowActivities"
+  xmlns:mbsw="clr-namespace:Microsoft.Bing.Sangam.WorkflowActivities;assembly=Microsoft.Bing.Sangam.WorkflowActivities"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities"
+  xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+  xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+  xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+  xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+  xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <x:Members>
+        <x:Property Name="ArgUrl" Type="InArgument(x:String)" />
+        <x:Property Name="ArgMessage" Type="InArgument(x:String)" />
+    </x:Members>
+    <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>C#</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
+    <TextExpression.NamespacesForImplementation>
+        <sco:Collection x:TypeArguments="x:String">
+            <x:String>System.Collections.Generic</x:String>
+        </sco:Collection>
+    </TextExpression.NamespacesForImplementation>
+    <TextExpression.ReferencesForImplementation>
+        <sco:Collection x:TypeArguments="AssemblyReference">
+            <AssemblyReference>Microsoft.Bing.Sangam.WorkflowActivities</AssemblyReference>
+            <AssemblyReference>Microsoft.Bing.Sangam.WorkflowActivities.Design</AssemblyReference>
+            <AssemblyReference>Microsoft.Bing.Sangam</AssemblyReference>
+            <AssemblyReference>Microsoft.Bing.Sangam.Framework</AssemblyReference>
+            <AssemblyReference>Microsoft.Bing.Sangam.Framework.Operations</AssemblyReference>
+        </sco:Collection>
+    </TextExpression.ReferencesForImplementation>
+    <Sequence>
+        <Sequence.Variables>
+            <Variable x:TypeArguments="mbs:FeedEntry" Name="outFeed" />
+            <Variable x:TypeArguments="scg:Dictionary(x:String, mbs:FeedEntry)" Name="feedEntries" />
+            <Variable x:TypeArguments="x:Boolean" Name="gatingPassed" />
+            <Variable x:TypeArguments="mbsw:PropertyBag" Name="WorkflowVariables" />
+        </Sequence.Variables>
+        <mbsw:ReportingActivity MessageType="Debug">
+            <mbsw:ReportingActivity.Message>
+                <InArgument x:TypeArguments="x:String">
+                    <mca:CSharpValue x:TypeArguments="x:String">ArgMessage</mca:CSharpValue>
+                </InArgument>
+            </mbsw:ReportingActivity.Message>
+        </mbsw:ReportingActivity>
+        <mbsw:GetJobSettingsFromContextActivity>
+            <mbsw:GetJobSettingsFromContextActivity.FeedEntries>
+                <OutArgument x:TypeArguments="scg:Dictionary(x:String, mbs:FeedEntry)">
+                    <mca:CSharpReference x:TypeArguments="scg:Dictionary(x:String, mbs:FeedEntry)">feedEntries</mca:CSharpReference>
+                </OutArgument>
+            </mbsw:GetJobSettingsFromContextActivity.FeedEntries>
+        </mbsw:GetJobSettingsFromContextActivity>
+        <Assign>
+            <Assign.To>
+                <OutArgument x:TypeArguments="mbs:FeedEntry">
+                    <mca:CSharpReference x:TypeArguments="mbs:FeedEntry">outFeed</mca:CSharpReference>
+                </OutArgument>
+            </Assign.To>
+            <Assign.Value>
+                <InArgument x:TypeArguments="mbs:FeedEntry">
+                    <mca:CSharpValue x:TypeArguments="mbs:FeedEntry">feedEntries["sampleOutputFeed"]</mca:CSharpValue>
+                </InArgument>
+            </Assign.Value>
+        </Assign>
+        <mbsa:PullActivity ArchiveType="None" ChecksumType="None" ContentType="Xml" DisableOptimizations="False" DisplayName="Pull News from Bing" Encoding="Auto" OutputDataStream="topnews.xml" RecordDelimiter="NewsResult" RecordNamespace="http://schemas.microsoft.com/LiveSearch/2008/04/XML/news" StripNonXmlCharacters="False" UpfrontBasicAuthorization="False">
+            <mbsa:PullActivity.Url>
+                <InArgument x:TypeArguments="x:String">
+                    <mca:CSharpValue x:TypeArguments="x:String">ArgUrl</mca:CSharpValue>
+                </InArgument>
+            </mbsa:PullActivity.Url>
+        </mbsa:PullActivity>
+        <mbsw:ScopeJobActivity DisplayName="Flatten News " JobPriority="25" PercentVCAllocation="2" ScopeScript="Workflows\flatten_news.script">
+            <mbsw:ScopeJobActivity.Streams>
+                <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)">
+                    <mca:CSharpValue x:TypeArguments="scg:Dictionary(x:String, x:String)">new Dictionary&lt;string, string&gt; { { "INPUT_STREAM", "topnews.xml" }, { "OUTPUT_STREAM", outFeed.CurrentInstance.Data.VcRelativePath }, { "STATS_STREAM", outFeed.CurrentInstance.Stats.VcRelativePath } }</mca:CSharpValue>
+                </InArgument>
+            </mbsw:ScopeJobActivity.Streams>
+        </mbsw:ScopeJobActivity>
+        <mbsw:EvaluateFeedAssertionsActivity>
+            <mbsw:EvaluateFeedAssertionsActivity.FeedEntry>
+                <InArgument x:TypeArguments="mbs:FeedEntry">
+                    <mca:CSharpValue x:TypeArguments="mbs:FeedEntry">outFeed</mca:CSharpValue>
+                </InArgument>
+            </mbsw:EvaluateFeedAssertionsActivity.FeedEntry>
+        </mbsw:EvaluateFeedAssertionsActivity>
+    </Sequence>
+</Activity>

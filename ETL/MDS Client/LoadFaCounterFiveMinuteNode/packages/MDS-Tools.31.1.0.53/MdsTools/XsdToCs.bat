@@ -1,0 +1,1 @@
+xsd.exe /classes /language:CS ./schema/Aims.xsd /namespace:Microsoft.Cis.Monitoring.Mds.HealthModel.Aims.CodeDom

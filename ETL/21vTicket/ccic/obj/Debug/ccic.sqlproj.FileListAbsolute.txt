@@ -1,0 +1,9 @@
+C:\Users\yizeng\Desktop\Codes\Data Insight\ETL\21vTicket\ccic\bin\Debug\ccic.dacpac
+C:\Users\yizeng\Desktop\Codes\Data Insight\ETL\21vTicket\ccic\bin\Debug\ccic.dll
+C:\Users\yizeng\Desktop\Codes\Data Insight\ETL\21vTicket\ccic\bin\Debug\ccic.pdb
+C:\Users\yizeng\Desktop\Codes\Data Insight\ETL\21vTicket\ccic\obj\Debug\Model.xml
+C:\Users\yizeng\Desktop\Codes\Data Insight\ETL\21vTicket\ccic\obj\Debug\refactor.xml
+C:\Users\yizeng\Desktop\Codes\Data Insight\ETL\21vTicket\ccic\obj\Debug\postdeploy.sql
+C:\Users\yizeng\Desktop\Codes\Data Insight\ETL\21vTicket\ccic\obj\Debug\predeploy.sql
+C:\Users\yizeng\Desktop\Codes\Data Insight\ETL\21vTicket\ccic\obj\Debug\ccic.dll
+C:\Users\yizeng\Desktop\Codes\Data Insight\ETL\21vTicket\ccic\obj\Debug\ccic.pdb
