@@ -1,0 +1,32 @@
+﻿CREATE TABLE [dbo].[Departments_temp]
+(
+		CreatedOn		datetime2,
+	SpendingQuota		bigint,
+	ModifiedBy		int	,
+	CostCenter		nvarchar(128),
+	EDWSourceExtractID		varchar(40),
+	EDWFirstInserted		datetime,
+	Id		int NOT NULL	,
+	EDWExtractGrouping		int	,
+	IsGovernment		bit	,
+	ChargeCode		nvarchar(16	),
+	EffectiveStartDate		date,
+	ParentId		int	,
+	CreatedBy		int	,
+	EDWLastUpdated		datetime,
+	Name		nvarchar(255),
+	ContractId		nvarchar(16),
+	EDWSourceSystemID		int,
+	PrimaryContactId		int	,
+	EffectiveEndDate		date,
+	BillingNotificationPct		int	,
+		EDWProcessID		int	,
+	ModifiedOn		datetime2	,
+	Description		nvarchar	,
+	TechnicalContactId		int	,
+	EDWIsDeletedFlag		bit,
+	CompanyName		nvarchar(255),
+	IsMsp		bit, 
+    CONSTRAINT [PK_Departments_temp] PRIMARY KEY ([Id])	
+
+)

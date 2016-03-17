@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:simpleType name="LabelType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[a-zA-Z0-9]+" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="UpperBoundType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9]+" />
+      <xs:pattern value="INFINITE" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="BooleanType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="true" />
+      <xs:pattern value="false" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="IntervalTypeType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="Integer" />
+      <xs:pattern value="Bucket" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="StatisticType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="InstanceCount" />
+      <xs:pattern value="Total" />
+      <xs:pattern value="Average" />
+      <xs:pattern value="StdDev" />
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:complexType name="FormattingType">
+    <xs:all>
+      <xs:element name="Label" type="LabelType" minOccurs="1" maxOccurs="1" />
+    </xs:all>
+  </xs:complexType>
+
+  <xs:complexType name="CounterType">
+    <xs:attribute name="Statistic" type="StatisticType" use="required" />
+  </xs:complexType>
+
+  <xs:complexType name="ValueMappingType">
+    <xs:attribute name="Value" type="xs:string" use="required" />
+    <xs:attribute name="Description" type="xs:string" use="required" />
+    <xs:attribute name="Outlier" type="BooleanType" use="optional" />
+  </xs:complexType>
+
+  <xs:complexType name="BucketType">
+    <xs:sequence>
+      <xs:element name="Interval" type="QosIntervalType" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+    <xs:attribute name="Lower" type="xs:integer" use="required" />
+    <xs:attribute name="LowerInclusive" type="BooleanType" use="required" />
+    <xs:attribute name="Upper" type="UpperBoundType" use="required" />
+    <xs:attribute name="UpperInclusive" type="BooleanType" use="optional" />
+    <xs:attribute name="Outlier" type="BooleanType" use="optional" />
+  </xs:complexType>
+
+  <xs:complexType name="QosIntervalType">
+    <xs:sequence>
+      <xs:element name="Counter" type="CounterType" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="ValueMapping" type="ValueMappingType" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="Interval" type="QosIntervalType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="Formatting" type="FormattingType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="Bucket" type="BucketType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="Name" type="xs:string" use="required" />
+    <xs:attribute name="Type" type="IntervalTypeType" use="required" />
+    <xs:attribute name="DistinctValues" type="BooleanType" use="optional" />
+  
+</xs:complexType>
+
+  <xs:complexType name="QosStatisticsType">
+    <xs:all>
+      <xs:element name="Interval" type="QosIntervalType" minOccurs="1" maxOccurs="1" />
+    </xs:all>
+  </xs:complexType>
+
+  <xs:complexType name="ActionType">
+    <xs:all>
+      <xs:element name="QosStatistics" type="QosStatisticsType" minOccurs="1" maxOccurs="1" />
+    </xs:all>
+    <xs:attribute name="Id" type="xs:string" use="required"/>
+    <xs:attribute name="Name" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="OutliersType">
+    <xs:attribute name="Enabled" type="xs:string" use="required" />
+  </xs:complexType>
+
+  <xs:complexType name="FlushType">
+    <xs:attribute name="Type" type="xs:string" use="required" />
+    <xs:attribute name="Rate" type="xs:integer" use="required" />
+  </xs:complexType>
+
+  <xs:complexType name="LocalPolicyType">
+    <xs:sequence>
+      <xs:element name="Flush" type="FlushType" maxOccurs="unbounded"/>
+      <xs:element name="Outliers" type="OutliersType" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- The TableQueryType is used for standalone queries sent to MA. -->
+  <xs:complexType name="QuantilesType">
+    <xs:sequence>
+      <xs:element name="LocalPolicy" type="LocalPolicyType" maxOccurs="1" />
+      <xs:element name="Action"      type="ActionType"      maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="Namespace" type="xs:string" use="required"/>
+    <xs:attribute name="Version" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:element name="Quantiles" type="QuantilesType"/>
+
+</xs:schema>
+

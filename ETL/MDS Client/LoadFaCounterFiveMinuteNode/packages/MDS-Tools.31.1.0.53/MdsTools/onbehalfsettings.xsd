@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+ <!-- These are standard region names the Portal and RDFE use to identify what region a storage account is in.
+      Earth is used if the account is multi-region -->
+  <xs:simpleType name="RegionType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="eastasia"/>
+      <xs:enumeration value="southeastasia"/>
+      <xs:enumeration value="eastus"/>
+      <xs:enumeration value="eastus2"/>
+      <xs:enumeration value="westus"/>
+      <xs:enumeration value="northcentralus"/>
+      <xs:enumeration value="southcentralus"/>
+      <xs:enumeration value="centralus"/>
+      <xs:enumeration value="northeurope"/>
+      <xs:enumeration value="westeurope"/>
+      <xs:enumeration value="japaneast"/>
+      <xs:enumeration value="japanwest"/>
+      <xs:enumeration value="brazilsouth"/>
+      <xs:enumeration value="australiaeast"/>
+      <xs:enumeration value="australiasoutheast"/>
+      <xs:enumeration value="earth"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="RegionAffinityListType">
+    <xs:sequence>
+     <xs:element name="Region" type="RegionType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="StateType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Active"/>
+      <xs:enumeration value="Inactive"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="AccountType">
+    <xs:sequence>
+      <xs:element name="RegionAffinityList" type="RegionAffinityListType" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute name="moniker" type="xs:string" use="required" />
+ <xs:attribute name="region" type="RegionType" use="optional" />
+    <xs:attribute name="state" type="StateType" use="required" />
+  </xs:complexType>
+
+  <xs:complexType name="ServiceIdentityType">
+    <xs:attribute name="name" type="xs:string" use="required" />
+    <xs:attribute name="filter" type="xs:string" use="optional" />
+  </xs:complexType>
+
+
+  <xs:complexType name="AccountSettingsType">
+    <xs:sequence>
+      <xs:element name="Account" type="AccountType" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="OnboardedServicesType">
+    <xs:sequence>
+      <xs:element name="ServiceIdentity" type="ServiceIdentityType" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="OnBehalfSettingsType">
+    <xs:sequence>
+      <xs:element name="AccountSettings" type="AccountSettingsType" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="OnboardedServices" type="OnboardedServicesType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="OnBehalfServiceBase64PublicKeyCert" type="xs:string" minOccurs="1" maxOccurs="1"/>
+      <!-- Queue will be created on each of the mds onbehalf metadata accounts -->
+      <xs:element name="OnBehalfServiceMdsCommunicationQueueName" type="xs:string" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+
+  </xs:complexType>
+
+  <xs:element name="OnBehalfSettings" type="OnBehalfSettingsType"/>
+
+</xs:schema>
+

@@ -1,0 +1,59 @@
+<MdsConfig version="1.0">
+
+  <Schemas>
+    <Schema name="[StateMapName]Schema">
+      [StateMapSchemaColumns]
+      <Column name="LastUpdated" type="mt:utc" />
+      <Column name="LastDiscovered" type="mt:utc" />
+    </Schema>
+    <Schema name="[StateMapName]XtableSchema">
+      <Column name="PartitionKey" type="mt:wstr" />
+      <Column name="RowKey" type="mt:wstr" />
+      [StateMapSchemaColumns]
+      <Column name="LastUpdated" type="mt:utc" />
+      <Column name="LastDiscovered" type="mt:utc" />
+    </Schema>
+    <Schema name="[StateMapName]ChangesSchema">
+      [StateChangesSchemaColumns]
+    </Schema>
+    <Schema name="[StateMapName]ChangesXtableSchema">
+      <Column name="PartitionKey" type="mt:wstr" />
+      <Column name="RowKey" type="mt:wstr" />
+      [StateChangesSchemaColumns]
+    </Schema>
+  </Schemas>
+
+  <Tables>
+    <XstoreTable name="[StateMapName]Table" schema="[StateMapName]Schema" dontUsePerNDayTable="true" priority="Normal" >
+      <XTableSetting schema="[StateMapName]XtableSchema" xstoreAccountInfoName="[AccountMoniker]"[StateMapTablePartitionLoadSpreadIndexMax]>
+        <ToXTableMapping>
+          <Column>[StateMapToPartitionKeyColumn]</Column>
+          <Column>Concat("___", [KeyColumnNames])</Column>
+          [StateMapTableColumns]
+          <Column>LastUpdated</Column>
+          <Column>LastDiscovered</Column>
+        </ToXTableMapping>
+        <FromXTableMapping>
+          <Column>[StateMapFromPartitionKeyColumn]</Column>
+          [StateMapTableColumns]
+          <Column>LastUpdated</Column>
+          <Column>LastDiscovered</Column>
+        </FromXTableMapping>
+      </XTableSetting>
+    </XstoreTable>
+    <XstoreTable name="[StateMapName]ChangesTable" schema="[StateMapName]ChangesSchema" dontUsePerNDayTable="true" priority="Normal" retentionInSeconds="[ChangesTableRetentionInSeconds]">
+      <XTableSetting schema="[StateMapName]ChangesXtableSchema" xstoreAccountInfoName="[AccountMoniker]"[StateChangesTablePartitionLoadSpreadIndexMax]>
+        <ToXTableMapping>
+          <Column>[StateChangesToPartitionKeyColumn]</Column>
+          <Column>Concat("___", [KeyColumnNames])</Column>
+          [StateChangesTableColumns]
+        </ToXTableMapping>
+        <FromXTableMapping>
+          <Column>[StateChangesFromPartitionKeyColumn]</Column>
+          [StateChangesTableColumns]
+        </FromXTableMapping>
+      </XTableSetting>
+    </XstoreTable>
+  </Tables>
+
+</MdsConfig>

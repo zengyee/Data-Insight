@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Schedule xmlns="http://schemas.microsoft.com/bing/spatialdata/activity">
+  <!-- EXAMPLES -->
+  <!-- 1.  DAILY SCHEDULE (triggered every 24hrs) -->
+  <!--<RecurringJob Name="TestRecurringJob1"        
+  JobName="TestJob1"  
+  Frequency="RRULE:FREQ=HOURLY;INTERVAL=24;BYHOUR=1"/>-->
+
+  <!-- 2. FEED TRIGGERED JOB (triggered on creation of a new feed run) -->
+  <!--<RecurringJob Name="TestRecurringJob2"        
+  JobName="TestJob2"  
+  Frequency="RRULE:FREQ=HOURLY;INTERVAL=24;BYHOUR=1">
+    <FeedEntryTriggers>
+      <FeedEntryTrigger Name="SampleOutputFeed"/>
+    </FeedEntryTriggers>
+  </RecurringJob>-->
+
+  <!--
+      TIME BASED EXAMPLES 
+      
+      1.	Every 1 week at 12:00PM on Tuesdays without DTSTART
+      RRULE:FREQ=WEEKLY;INTERVAL=1;BYWEEKDAY=TU;BYHOUR=12
+      
+      2.	Every 1 week at 12:00PM on Tuesdays with DTSTART (note: 04/17/2012 is a Tuesday)
+      DTSTART:20120417T120000,RRULE:FREQ=WEEKLY;INTERVAL=1
+      
+      3.	Every Day at 2:00PM without DTSTART
+      RRULE:FREQ=DAILY;INTERVAL=1;BYHOUR=14
+      
+      4.	Everyday at 2:00PM with DTSTART
+      DTSTART:20120417T140000,RRULE:FREQ=DAILY;INTERVAL=1;BYHOUR=14
+      
+      5.	Every 2 hours on even hours ex: 2am, 4am, 6am, …
+      DTSTART:20120417T000000,RRULE:FREQ=HOURLY;INTERVAL=2
+  -->
+  
+  <!-- Please place your JOB SCHEDULES here -->
+  <RecurringJob Name="testJobSchedule" JobName="BasicExample" Frequency="DTSTART:20080101T010000,RRULE:FREQ=DAILY;INTERVAL=1;BYHOUR=8" />
+</Schedule>

@@ -1,0 +1,30 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MdsDataAccessClientLib.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="MaxRetry" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="MdsEndPoint" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://monitoring.core.chinacloudapi.cn</Value>
+    </Setting>
+    <Setting Name="DestConnectionString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Data Source=mcdi01;Initial Catalog=MdsTables;Integrated Security=True</Value>
+    </Setting>
+    <Setting Name="IntervalInMinutes" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">60</Value>
+    </Setting>
+    <Setting Name="TableNameRegExpr" Type="System.String" Scope="User">
+      <Value Profile="(Default)">FaCounterFiveMinuteNodeTable.*Ver2.*</Value>
+    </Setting>
+    <Setting Name="StartTime" Type="System.String" Scope="User">
+      <Value Profile="(Default)">10/01/2015 00:00:00 AM +00:00</Value>
+    </Setting>
+    <Setting Name="DestTableName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">[dbo].[FaCounterFiveMinuteNodeTable_Staging]</Value>
+    </Setting>
+    <Setting Name="EndTime" Type="System.String" Scope="User">
+      <Value Profile="(Default)">10/16/2015 00:00:00 AM +00:00</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

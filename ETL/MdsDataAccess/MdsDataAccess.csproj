@@ -1,0 +1,491 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\Bond.CSharp.3.0.7\build\Bond.CSharp.props" Condition="Exists('packages\Bond.CSharp.3.0.7\build\Bond.CSharp.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FAB1159B-8893-4810-9346-AEBB7911AF00}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MdsDataAccessClientLib</RootNamespace>
+    <AssemblyName>MdsDataAccessClient</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">.\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <NuGetPackageImportStamp>d7832559</NuGetPackageImportStamp>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <OutputPath>bin\Debug\</OutputPath>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Bond">
+      <HintPath>packages\Bond.Runtime.CSharp.3.0.7\lib\net45\Bond.dll</HintPath>
+    </Reference>
+    <Reference Include="Bond.Attributes">
+      <HintPath>packages\Bond.Runtime.CSharp.3.0.7\lib\net45\Bond.Attributes.dll</HintPath>
+    </Reference>
+    <Reference Include="Bond.IO, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\Bond.Runtime.CSharp.3.0.7\lib\net45\Bond.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="Bond.JSON">
+      <HintPath>packages\Bond.Runtime.CSharp.3.0.7\lib\net45\Bond.JSON.dll</HintPath>
+    </Reference>
+    <Reference Include="MdsActiveClient">
+      <HintPath>packages\MDS-DataAccessClient.31.0.0\lib\net40\MdsActiveClient.dll</HintPath>
+    </Reference>
+    <Reference Include="MdsCommon, Version=31.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\MDS-DataAccessClient.31.0.0\lib\net40\MdsCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="MdsDataAccessClient, Version=31.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\MDS-DataAccessClient.31.0.0\lib\net40\MdsDataAccessClient.dll</HintPath>
+    </Reference>
+    <Reference Include="MdsStorageClient">
+      <HintPath>packages\MDS-DataAccessClient.31.0.0\lib\net40\MdsStorageClient.dll</HintPath>
+    </Reference>
+    <Reference Include="MdsSubscriptionClient">
+      <HintPath>packages\MDS-DataAccessClient.31.0.0\lib\net40\MdsSubscriptionClient.dll</HintPath>
+    </Reference>
+    <Reference Include="MdsSubscriptionServer.contract, Version=31.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\MDS-DataAccessClient.31.0.0\lib\net40\MdsSubscriptionServer.contract.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Edm, Version=5.6.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\Microsoft.Data.Edm.5.6.2\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.OData, Version=5.6.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\Microsoft.Data.OData.5.6.2\lib\net40\Microsoft.Data.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Services.Client, Version=5.6.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\Microsoft.Data.Services.Client.5.6.2\lib\net40\Microsoft.Data.Services.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Configuration">
+      <HintPath>packages\Microsoft.WindowsAzure.ConfigurationManager.2.0.3\lib\net40\Microsoft.WindowsAzure.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Storage, Version=4.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\WindowsAzure.Storage.4.3.0\lib\net40\Microsoft.WindowsAzure.Storage.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Spatial, Version=5.6.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\System.Spatial.5.6.2\lib\net45\System.Spatial.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MdsDataAccess.cs" />
+    <Compile Include="MdsQueryTableRegExpr.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="packages\Bond.CSharp.3.0.7\Bond.CSharp.3.0.7.nupkg" />
+    <None Include="packages\Bond.CSharp.3.0.7\build\Bond.CSharp.props" />
+    <None Include="packages\Bond.CSharp.3.0.7\build\Bond.CSharp.targets" />
+    <None Include="packages\Bond.CSharp.3.0.7\inc\bond\core\bond.bond" />
+    <None Include="packages\Bond.CSharp.3.0.7\inc\bond\core\bond_const.bond" />
+    <None Include="packages\Bond.Runtime.CSharp.3.0.7\Bond.Runtime.CSharp.3.0.7.nupkg" />
+    <None Include="packages\MDS-DataAccessClient.31.0.0\build\MDS-DataAccessClient.targets" />
+    <None Include="packages\MDS-DataAccessClient.31.0.0\MDS-DataAccessClient.31.0.0.nupkg" />
+    <None Include="packages\Microsoft.Azure.Monitoring.DataPipe.Blob.IO.2.0.2\build\Microsoft.Azure.Monitoring.DataPipe.Blob.IO.targets" />
+    <None Include="packages\Microsoft.Azure.Monitoring.DataPipe.Blob.IO.2.0.2\Microsoft.Azure.Monitoring.DataPipe.Blob.IO.2.0.2.nupkg" />
+    <None Include="packages\Microsoft.Data.Edm.5.6.2\Microsoft.Data.Edm.5.6.2.nupkg" />
+    <None Include="packages\Microsoft.Data.OData.5.6.2\Microsoft.Data.OData.5.6.2.nupkg" />
+    <None Include="packages\Microsoft.Data.Services.Client.5.6.2\Microsoft.Data.Services.Client.5.6.2.nupkg" />
+    <None Include="packages\Microsoft.WindowsAzure.ConfigurationManager.2.0.3\Microsoft.WindowsAzure.ConfigurationManager.2.0.3.nupkg" />
+    <None Include="packages\Newtonsoft.Json.6.0.8\Newtonsoft.Json.6.0.8.nupkg" />
+    <None Include="packages\Newtonsoft.Json.6.0.8\tools\install.ps1" />
+    <None Include="packages\repositories.config" />
+    <None Include="packages\System.Spatial.5.6.2\System.Spatial.5.6.2.nupkg" />
+    <None Include="packages\WindowsAzure.Storage.4.3.0\WindowsAzure.Storage.4.3.0.nupkg" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages\Bond.CSharp.3.0.7\bin\gbc.exe" />
+    <Content Include="packages\Bond.CSharp.3.0.7\readme.txt" />
+    <Content Include="packages\Bond.Runtime.CSharp.3.0.7\lib\net40\Bond.Attributes.dll" />
+    <Content Include="packages\Bond.Runtime.CSharp.3.0.7\lib\net40\Bond.Attributes.xml" />
+    <Content Include="packages\Bond.Runtime.CSharp.3.0.7\lib\net40\Bond.dll" />
+    <Content Include="packages\Bond.Runtime.CSharp.3.0.7\lib\net40\Bond.IO.dll" />
+    <Content Include="packages\Bond.Runtime.CSharp.3.0.7\lib\net40\Bond.IO.xml" />
+    <Content Include="packages\Bond.Runtime.CSharp.3.0.7\lib\net40\Bond.JSON.dll" />
+    <Content Include="packages\Bond.Runtime.CSharp.3.0.7\lib\net40\Bond.JSON.xml" />
+    <Content Include="packages\Bond.Runtime.CSharp.3.0.7\lib\net40\Bond.xml" />
+    <Content Include="packages\Bond.Runtime.CSharp.3.0.7\lib\net45\Bond.Attributes.dll" />
+    <Content Include="packages\Bond.Runtime.CSharp.3.0.7\lib\net45\Bond.Attributes.xml" />
+    <Content Include="packages\Bond.Runtime.CSharp.3.0.7\lib\net45\Bond.dll" />
+    <Content Include="packages\Bond.Runtime.CSharp.3.0.7\lib\net45\Bond.IO.dll" />
+    <Content Include="packages\Bond.Runtime.CSharp.3.0.7\lib\net45\Bond.IO.xml" />
+    <Content Include="packages\Bond.Runtime.CSharp.3.0.7\lib\net45\Bond.JSON.dll" />
+    <Content Include="packages\Bond.Runtime.CSharp.3.0.7\lib\net45\Bond.JSON.xml" />
+    <Content Include="packages\Bond.Runtime.CSharp.3.0.7\lib\net45\Bond.xml" />
+    <Content Include="packages\Bond.Runtime.CSharp.3.0.7\lib\portable-net45+wp80+win8+wpa81\Bond.Attributes.dll" />
+    <Content Include="packages\Bond.Runtime.CSharp.3.0.7\lib\portable-net45+wp80+win8+wpa81\Bond.Attributes.xml" />
+    <Content Include="packages\Bond.Runtime.CSharp.3.0.7\lib\portable-net45+wp80+win8+wpa81\Bond.dll" />
+    <Content Include="packages\Bond.Runtime.CSharp.3.0.7\lib\portable-net45+wp80+win8+wpa81\Bond.JSON.dll" />
+    <Content Include="packages\Bond.Runtime.CSharp.3.0.7\lib\portable-net45+wp80+win8+wpa81\Bond.JSON.xml" />
+    <Content Include="packages\Bond.Runtime.CSharp.3.0.7\lib\portable-net45+wp80+win8+wpa81\Bond.xml" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\AuthorizationPolicyDataAccessContract.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\AuthPolicyEvaluator.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\CallHomeClient.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\CallHomeContract.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\CentralStoreClient.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\CertUtils.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\Cluster.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\ConfigSchemaGeneratedLib.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\DynamicLinq.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\DynamicLinqToSql.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\HttpCfg.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\LocalTableDataAccess.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\MAAccountManagement.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\MANotificationServer.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\MdsAccountService.contract.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\MdsAccountService.lib.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\MdsActiveClient.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\MdsAuthorizationPolicyDataAccess.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\MdsCommon.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\MdsCommonContract.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\mdsconfigparser.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\MdsConfigServer.contract.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\MdsConfigServer.lib.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\MdsCrashDump.Common.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\MdsDataAccessClient.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\MdsDiagServer.contract.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\MdsDiagServer.lib.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\MdsStorageClient.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\MdsSubscriptionClient.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\MdsSubscriptionServer.contract.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\MdsSubscriptionServer.utils.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\MdsSuggestionServer.contract.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\MdsSuggestionServer.lib.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\Microsoft.Cis.Monitoring.Events.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\Microsoft.Cis.Monitoring.Query.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\Microsoft.Cis.Monitoring.SecUtil.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\Microsoft.IdentityModel.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\Microsoft.Performance.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\Microsoft.ServiceHosting.ServiceRuntime.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\Microsoft.TeamFoundation.Client.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\Microsoft.TeamFoundation.Common.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\Microsoft.TeamFoundation.WorkItemTracking.Client.DataStoreLoader.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\Microsoft.TeamFoundation.WorkItemTracking.Client.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\Microsoft.TeamFoundation.WorkItemTracking.Client.QueryLanguage.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\Microsoft.TeamFoundation.WorkItemTracking.Common.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\Microsoft.TeamFoundation.WorkItemTracking.Proxy.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\Microsoft.WindowsAzure.Security.Authentication.Contracts.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\Microsoft.WindowsAzure.Security.Authentication.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\Microsoft.WindowsAzure.Security.Authentication.Logging.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\Microsoft.WindowsAzure.ServiceRuntime.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\Microsoft.WITDataStore.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\MonAgentListener.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\MonBond.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\MonCompress.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\MonDataAccessClientContract.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\MonDataAccessContract.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\MonEvents.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\MonQuery.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\MonSecurity.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\MonTables.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\MonWebServerClient.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\NodeDiagClient.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\QuickGraph.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\QuickGraph.xml" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\RDManagedAPI.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\RunnerDefinitionParser.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\secutil.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\ServiceContract.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\SharedContract.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\storageclient.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\StorageClientLib.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\StorageClientWrapper.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\TableDataAccess.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\TableModelUpdater.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\Utilities.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\WebServicesCommon.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\WindowsAzureEventSource.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\WindowsAzureTelemetryEvents.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\Wintellect.Threading.dll" />
+    <Content Include="packages\MDS-DataAccessClient.31.0.0\lib\net40\Wintellect.Threading.xml" />
+    <Content Include="packages\Microsoft.Azure.Monitoring.DataPipe.Blob.IO.2.0.2\build\native\lib\lz4X64.dll" />
+    <Content Include="packages\Microsoft.Azure.Monitoring.DataPipe.Blob.IO.2.0.2\build\native\lib\lz4X86.dll" />
+    <Content Include="packages\Microsoft.Azure.Monitoring.DataPipe.Blob.IO.2.0.2\lib\net45\Microsoft.Azure.Monitoring.DataPipe.Blob.IO.dll" />
+    <Content Include="packages\Microsoft.Azure.Monitoring.DataPipe.Blob.IO.2.0.2\lib\net45\Microsoft.Azure.Monitoring.DataPipe.Compression.dll" />
+    <Content Include="packages\Microsoft.Data.Edm.5.6.2\lib\net40\de\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Edm.5.6.2\lib\net40\es\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Edm.5.6.2\lib\net40\fr\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Edm.5.6.2\lib\net40\it\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Edm.5.6.2\lib\net40\ja\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Edm.5.6.2\lib\net40\ko\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Edm.5.6.2\lib\net40\Microsoft.Data.Edm.dll" />
+    <Content Include="packages\Microsoft.Data.Edm.5.6.2\lib\net40\Microsoft.Data.Edm.xml" />
+    <Content Include="packages\Microsoft.Data.Edm.5.6.2\lib\net40\ru\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Edm.5.6.2\lib\net40\zh-Hans\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Edm.5.6.2\lib\net40\zh-Hant\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Edm.5.6.2\lib\portable-net40+sl5+wp8+win8+wpa\de\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Edm.5.6.2\lib\portable-net40+sl5+wp8+win8+wpa\es\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Edm.5.6.2\lib\portable-net40+sl5+wp8+win8+wpa\fr\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Edm.5.6.2\lib\portable-net40+sl5+wp8+win8+wpa\it\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Edm.5.6.2\lib\portable-net40+sl5+wp8+win8+wpa\ja\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Edm.5.6.2\lib\portable-net40+sl5+wp8+win8+wpa\ko\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Edm.5.6.2\lib\portable-net40+sl5+wp8+win8+wpa\Microsoft.Data.Edm.dll" />
+    <Content Include="packages\Microsoft.Data.Edm.5.6.2\lib\portable-net40+sl5+wp8+win8+wpa\Microsoft.Data.Edm.xml" />
+    <Content Include="packages\Microsoft.Data.Edm.5.6.2\lib\portable-net40+sl5+wp8+win8+wpa\ru\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Edm.5.6.2\lib\portable-net40+sl5+wp8+win8+wpa\zh-Hans\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Edm.5.6.2\lib\portable-net40+sl5+wp8+win8+wpa\zh-Hant\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Edm.5.6.2\lib\sl4\de\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Edm.5.6.2\lib\sl4\es\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Edm.5.6.2\lib\sl4\fr\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Edm.5.6.2\lib\sl4\it\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Edm.5.6.2\lib\sl4\ja\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Edm.5.6.2\lib\sl4\ko\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Edm.5.6.2\lib\sl4\Microsoft.Data.Edm.dll" />
+    <Content Include="packages\Microsoft.Data.Edm.5.6.2\lib\sl4\Microsoft.Data.Edm.xml" />
+    <Content Include="packages\Microsoft.Data.Edm.5.6.2\lib\sl4\ru\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Edm.5.6.2\lib\sl4\zh-Hans\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Edm.5.6.2\lib\sl4\zh-Hant\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="packages\Microsoft.Data.OData.5.6.2\lib\net40\de\Microsoft.Data.OData.resources.dll" />
+    <Content Include="packages\Microsoft.Data.OData.5.6.2\lib\net40\es\Microsoft.Data.OData.resources.dll" />
+    <Content Include="packages\Microsoft.Data.OData.5.6.2\lib\net40\fr\Microsoft.Data.OData.resources.dll" />
+    <Content Include="packages\Microsoft.Data.OData.5.6.2\lib\net40\it\Microsoft.Data.OData.resources.dll" />
+    <Content Include="packages\Microsoft.Data.OData.5.6.2\lib\net40\ja\Microsoft.Data.OData.resources.dll" />
+    <Content Include="packages\Microsoft.Data.OData.5.6.2\lib\net40\ko\Microsoft.Data.OData.resources.dll" />
+    <Content Include="packages\Microsoft.Data.OData.5.6.2\lib\net40\Microsoft.Data.OData.dll" />
+    <Content Include="packages\Microsoft.Data.OData.5.6.2\lib\net40\Microsoft.Data.OData.xml" />
+    <Content Include="packages\Microsoft.Data.OData.5.6.2\lib\net40\ru\Microsoft.Data.OData.resources.dll" />
+    <Content Include="packages\Microsoft.Data.OData.5.6.2\lib\net40\zh-Hans\Microsoft.Data.OData.resources.dll" />
+    <Content Include="packages\Microsoft.Data.OData.5.6.2\lib\net40\zh-Hant\Microsoft.Data.OData.resources.dll" />
+    <Content Include="packages\Microsoft.Data.OData.5.6.2\lib\portable-net40+sl5+wp8+win8+wpa\de\Microsoft.Data.OData.resources.dll" />
+    <Content Include="packages\Microsoft.Data.OData.5.6.2\lib\portable-net40+sl5+wp8+win8+wpa\es\Microsoft.Data.OData.resources.dll" />
+    <Content Include="packages\Microsoft.Data.OData.5.6.2\lib\portable-net40+sl5+wp8+win8+wpa\fr\Microsoft.Data.OData.resources.dll" />
+    <Content Include="packages\Microsoft.Data.OData.5.6.2\lib\portable-net40+sl5+wp8+win8+wpa\it\Microsoft.Data.OData.resources.dll" />
+    <Content Include="packages\Microsoft.Data.OData.5.6.2\lib\portable-net40+sl5+wp8+win8+wpa\ja\Microsoft.Data.OData.resources.dll" />
+    <Content Include="packages\Microsoft.Data.OData.5.6.2\lib\portable-net40+sl5+wp8+win8+wpa\ko\Microsoft.Data.OData.resources.dll" />
+    <Content Include="packages\Microsoft.Data.OData.5.6.2\lib\portable-net40+sl5+wp8+win8+wpa\Microsoft.Data.OData.dll" />
+    <Content Include="packages\Microsoft.Data.OData.5.6.2\lib\portable-net40+sl5+wp8+win8+wpa\Microsoft.Data.OData.xml" />
+    <Content Include="packages\Microsoft.Data.OData.5.6.2\lib\portable-net40+sl5+wp8+win8+wpa\ru\Microsoft.Data.OData.resources.dll" />
+    <Content Include="packages\Microsoft.Data.OData.5.6.2\lib\portable-net40+sl5+wp8+win8+wpa\zh-Hans\Microsoft.Data.OData.resources.dll" />
+    <Content Include="packages\Microsoft.Data.OData.5.6.2\lib\portable-net40+sl5+wp8+win8+wpa\zh-Hant\Microsoft.Data.OData.resources.dll" />
+    <Content Include="packages\Microsoft.Data.OData.5.6.2\lib\sl4\de\Microsoft.Data.OData.resources.dll" />
+    <Content Include="packages\Microsoft.Data.OData.5.6.2\lib\sl4\es\Microsoft.Data.OData.resources.dll" />
+    <Content Include="packages\Microsoft.Data.OData.5.6.2\lib\sl4\fr\Microsoft.Data.OData.resources.dll" />
+    <Content Include="packages\Microsoft.Data.OData.5.6.2\lib\sl4\it\Microsoft.Data.OData.resources.dll" />
+    <Content Include="packages\Microsoft.Data.OData.5.6.2\lib\sl4\ja\Microsoft.Data.OData.resources.dll" />
+    <Content Include="packages\Microsoft.Data.OData.5.6.2\lib\sl4\ko\Microsoft.Data.OData.resources.dll" />
+    <Content Include="packages\Microsoft.Data.OData.5.6.2\lib\sl4\Microsoft.Data.OData.dll" />
+    <Content Include="packages\Microsoft.Data.OData.5.6.2\lib\sl4\Microsoft.Data.OData.xml" />
+    <Content Include="packages\Microsoft.Data.OData.5.6.2\lib\sl4\ru\Microsoft.Data.OData.resources.dll" />
+    <Content Include="packages\Microsoft.Data.OData.5.6.2\lib\sl4\zh-Hans\Microsoft.Data.OData.resources.dll" />
+    <Content Include="packages\Microsoft.Data.OData.5.6.2\lib\sl4\zh-Hant\Microsoft.Data.OData.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Services.Client.5.6.2\lib\net40\de\Microsoft.Data.Services.Client.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Services.Client.5.6.2\lib\net40\es\Microsoft.Data.Services.Client.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Services.Client.5.6.2\lib\net40\fr\Microsoft.Data.Services.Client.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Services.Client.5.6.2\lib\net40\it\Microsoft.Data.Services.Client.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Services.Client.5.6.2\lib\net40\ja\Microsoft.Data.Services.Client.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Services.Client.5.6.2\lib\net40\ko\Microsoft.Data.Services.Client.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Services.Client.5.6.2\lib\net40\Microsoft.Data.Services.Client.dll" />
+    <Content Include="packages\Microsoft.Data.Services.Client.5.6.2\lib\net40\Microsoft.Data.Services.Client.xml" />
+    <Content Include="packages\Microsoft.Data.Services.Client.5.6.2\lib\net40\ru\Microsoft.Data.Services.Client.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Services.Client.5.6.2\lib\net40\zh-Hans\Microsoft.Data.Services.Client.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Services.Client.5.6.2\lib\net40\zh-Hant\Microsoft.Data.Services.Client.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Services.Client.5.6.2\lib\portable-net45+wp8+win8+wpa\de\Microsoft.Data.Services.Client.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Services.Client.5.6.2\lib\portable-net45+wp8+win8+wpa\es\Microsoft.Data.Services.Client.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Services.Client.5.6.2\lib\portable-net45+wp8+win8+wpa\fr\Microsoft.Data.Services.Client.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Services.Client.5.6.2\lib\portable-net45+wp8+win8+wpa\it\Microsoft.Data.Services.Client.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Services.Client.5.6.2\lib\portable-net45+wp8+win8+wpa\ja\Microsoft.Data.Services.Client.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Services.Client.5.6.2\lib\portable-net45+wp8+win8+wpa\ko\Microsoft.Data.Services.Client.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Services.Client.5.6.2\lib\portable-net45+wp8+win8+wpa\Microsoft.Data.Services.Client.dll" />
+    <Content Include="packages\Microsoft.Data.Services.Client.5.6.2\lib\portable-net45+wp8+win8+wpa\Microsoft.Data.Services.Client.xml" />
+    <Content Include="packages\Microsoft.Data.Services.Client.5.6.2\lib\portable-net45+wp8+win8+wpa\ru\Microsoft.Data.Services.Client.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Services.Client.5.6.2\lib\portable-net45+wp8+win8+wpa\zh-Hans\Microsoft.Data.Services.Client.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Services.Client.5.6.2\lib\portable-net45+wp8+win8+wpa\zh-Hant\Microsoft.Data.Services.Client.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Services.Client.5.6.2\lib\sl4\de\Microsoft.Data.Services.Client.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Services.Client.5.6.2\lib\sl4\es\Microsoft.Data.Services.Client.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Services.Client.5.6.2\lib\sl4\fr\Microsoft.Data.Services.Client.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Services.Client.5.6.2\lib\sl4\it\Microsoft.Data.Services.Client.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Services.Client.5.6.2\lib\sl4\ja\Microsoft.Data.Services.Client.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Services.Client.5.6.2\lib\sl4\ko\Microsoft.Data.Services.Client.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Services.Client.5.6.2\lib\sl4\Microsoft.Data.Services.Client.dll" />
+    <Content Include="packages\Microsoft.Data.Services.Client.5.6.2\lib\sl4\Microsoft.Data.Services.Client.xml" />
+    <Content Include="packages\Microsoft.Data.Services.Client.5.6.2\lib\sl4\ru\Microsoft.Data.Services.Client.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Services.Client.5.6.2\lib\sl4\zh-Hans\Microsoft.Data.Services.Client.resources.dll" />
+    <Content Include="packages\Microsoft.Data.Services.Client.5.6.2\lib\sl4\zh-Hant\Microsoft.Data.Services.Client.resources.dll" />
+    <Content Include="packages\Microsoft.WindowsAzure.ConfigurationManager.2.0.3\lib\net40\Microsoft.WindowsAzure.Configuration.dll" />
+    <Content Include="packages\Microsoft.WindowsAzure.ConfigurationManager.2.0.3\lib\net40\Microsoft.WindowsAzure.Configuration.xml" />
+    <Content Include="packages\Newtonsoft.Json.6.0.8\lib\net20\Newtonsoft.Json.dll" />
+    <Content Include="packages\Newtonsoft.Json.6.0.8\lib\net20\Newtonsoft.Json.xml" />
+    <Content Include="packages\Newtonsoft.Json.6.0.8\lib\net35\Newtonsoft.Json.dll" />
+    <Content Include="packages\Newtonsoft.Json.6.0.8\lib\net35\Newtonsoft.Json.xml" />
+    <Content Include="packages\Newtonsoft.Json.6.0.8\lib\net40\Newtonsoft.Json.dll" />
+    <Content Include="packages\Newtonsoft.Json.6.0.8\lib\net40\Newtonsoft.Json.xml" />
+    <Content Include="packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll" />
+    <Content Include="packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.xml" />
+    <Content Include="packages\Newtonsoft.Json.6.0.8\lib\netcore45\Newtonsoft.Json.dll" />
+    <Content Include="packages\Newtonsoft.Json.6.0.8\lib\netcore45\Newtonsoft.Json.xml" />
+    <Content Include="packages\Newtonsoft.Json.6.0.8\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll" />
+    <Content Include="packages\Newtonsoft.Json.6.0.8\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.xml" />
+    <Content Include="packages\Newtonsoft.Json.6.0.8\lib\portable-net45+wp80+win8+wpa81+aspnetcore50\Newtonsoft.Json.dll" />
+    <Content Include="packages\Newtonsoft.Json.6.0.8\lib\portable-net45+wp80+win8+wpa81+aspnetcore50\Newtonsoft.Json.xml" />
+    <Content Include="packages\System.Spatial.5.6.2\lib\net40\de\System.Spatial.resources.dll" />
+    <Content Include="packages\System.Spatial.5.6.2\lib\net40\es\System.Spatial.resources.dll" />
+    <Content Include="packages\System.Spatial.5.6.2\lib\net40\fr\System.Spatial.resources.dll" />
+    <Content Include="packages\System.Spatial.5.6.2\lib\net40\it\System.Spatial.resources.dll" />
+    <Content Include="packages\System.Spatial.5.6.2\lib\net40\ja\System.Spatial.resources.dll" />
+    <Content Include="packages\System.Spatial.5.6.2\lib\net40\ko\System.Spatial.resources.dll" />
+    <Content Include="packages\System.Spatial.5.6.2\lib\net40\ru\System.Spatial.resources.dll" />
+    <Content Include="packages\System.Spatial.5.6.2\lib\net40\System.Spatial.dll" />
+    <Content Include="packages\System.Spatial.5.6.2\lib\net40\System.Spatial.xml" />
+    <Content Include="packages\System.Spatial.5.6.2\lib\net40\zh-Hans\System.Spatial.resources.dll" />
+    <Content Include="packages\System.Spatial.5.6.2\lib\net40\zh-Hant\System.Spatial.resources.dll" />
+    <Content Include="packages\System.Spatial.5.6.2\lib\portable-net40+sl5+wp8+win8+wpa\de\System.Spatial.resources.dll" />
+    <Content Include="packages\System.Spatial.5.6.2\lib\portable-net40+sl5+wp8+win8+wpa\es\System.Spatial.resources.dll" />
+    <Content Include="packages\System.Spatial.5.6.2\lib\portable-net40+sl5+wp8+win8+wpa\fr\System.Spatial.resources.dll" />
+    <Content Include="packages\System.Spatial.5.6.2\lib\portable-net40+sl5+wp8+win8+wpa\it\System.Spatial.resources.dll" />
+    <Content Include="packages\System.Spatial.5.6.2\lib\portable-net40+sl5+wp8+win8+wpa\ja\System.Spatial.resources.dll" />
+    <Content Include="packages\System.Spatial.5.6.2\lib\portable-net40+sl5+wp8+win8+wpa\ko\System.Spatial.resources.dll" />
+    <Content Include="packages\System.Spatial.5.6.2\lib\portable-net40+sl5+wp8+win8+wpa\ru\System.Spatial.resources.dll" />
+    <Content Include="packages\System.Spatial.5.6.2\lib\portable-net40+sl5+wp8+win8+wpa\System.Spatial.dll" />
+    <Content Include="packages\System.Spatial.5.6.2\lib\portable-net40+sl5+wp8+win8+wpa\System.Spatial.xml" />
+    <Content Include="packages\System.Spatial.5.6.2\lib\portable-net40+sl5+wp8+win8+wpa\zh-Hans\System.Spatial.resources.dll" />
+    <Content Include="packages\System.Spatial.5.6.2\lib\portable-net40+sl5+wp8+win8+wpa\zh-Hant\System.Spatial.resources.dll" />
+    <Content Include="packages\System.Spatial.5.6.2\lib\sl4\de\System.Spatial.resources.dll" />
+    <Content Include="packages\System.Spatial.5.6.2\lib\sl4\es\System.Spatial.resources.dll" />
+    <Content Include="packages\System.Spatial.5.6.2\lib\sl4\fr\System.Spatial.resources.dll" />
+    <Content Include="packages\System.Spatial.5.6.2\lib\sl4\it\System.Spatial.resources.dll" />
+    <Content Include="packages\System.Spatial.5.6.2\lib\sl4\ja\System.Spatial.resources.dll" />
+    <Content Include="packages\System.Spatial.5.6.2\lib\sl4\ko\System.Spatial.resources.dll" />
+    <Content Include="packages\System.Spatial.5.6.2\lib\sl4\ru\System.Spatial.resources.dll" />
+    <Content Include="packages\System.Spatial.5.6.2\lib\sl4\System.Spatial.dll" />
+    <Content Include="packages\System.Spatial.5.6.2\lib\sl4\System.Spatial.xml" />
+    <Content Include="packages\System.Spatial.5.6.2\lib\sl4\zh-Hans\System.Spatial.resources.dll" />
+    <Content Include="packages\System.Spatial.5.6.2\lib\sl4\zh-Hant\System.Spatial.resources.dll" />
+    <Content Include="packages\WindowsAzure.Storage.4.3.0\lib\net40\Microsoft.WindowsAzure.Storage.dll" />
+    <Content Include="packages\WindowsAzure.Storage.4.3.0\lib\net40\Microsoft.WindowsAzure.Storage.xml" />
+    <Content Include="packages\WindowsAzure.Storage.4.3.0\lib\win8\Microsoft.WindowsAzure.Storage.dll" />
+    <Content Include="packages\WindowsAzure.Storage.4.3.0\lib\wp8\Microsoft.WindowsAzure.Storage.dll" />
+    <Content Include="packages\WindowsAzure.Storage.4.3.0\lib\wpa\Microsoft.WindowsAzure.Storage.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy /y "$(ProjectDir)packages\Microsoft.Azure.Monitoring.DataPipe.Blob.IO.2.0.2\lib\net45\*.*"   "$(ProjectDir)$(OutDir)"</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+    <Error Condition="!Exists('packages\Bond.CSharp.3.0.7\build\Bond.CSharp.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Bond.CSharp.3.0.7\build\Bond.CSharp.props'))" />
+    <Error Condition="!Exists('packages\Bond.CSharp.3.0.7\build\Bond.CSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Bond.CSharp.3.0.7\build\Bond.CSharp.targets'))" />
+    <Error Condition="!Exists('packages\Microsoft.Azure.Monitoring.DataPipe.Blob.IO.2.0.2\build\Microsoft.Azure.Monitoring.DataPipe.Blob.IO.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.Azure.Monitoring.DataPipe.Blob.IO.2.0.2\build\Microsoft.Azure.Monitoring.DataPipe.Blob.IO.targets'))" />
+    <Error Condition="!Exists('packages\MDS-DataAccessClient.31.0.0\build\MDS-DataAccessClient.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\MDS-DataAccessClient.31.0.0\build\MDS-DataAccessClient.targets'))" />
+  </Target>
+  <Import Project="packages\Bond.CSharp.3.0.7\build\Bond.CSharp.targets" Condition="Exists('packages\Bond.CSharp.3.0.7\build\Bond.CSharp.targets')" />
+  <Import Project="packages\Microsoft.Azure.Monitoring.DataPipe.Blob.IO.2.0.2\build\Microsoft.Azure.Monitoring.DataPipe.Blob.IO.targets" Condition="Exists('packages\Microsoft.Azure.Monitoring.DataPipe.Blob.IO.2.0.2\build\Microsoft.Azure.Monitoring.DataPipe.Blob.IO.targets')" />
+  <Import Project="packages\MDS-DataAccessClient.31.0.0\build\MDS-DataAccessClient.targets" Condition="Exists('packages\MDS-DataAccessClient.31.0.0\build\MDS-DataAccessClient.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

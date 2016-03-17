@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<!-- This holds the schema for the XML that defines MDS peer tenant topology -->
+
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:complexType name="MdsPeerTenantType">
+    <xs:attribute name="TenantName" type="xs:string" use="required"/>
+    <xs:attribute name="Vip" type="xs:string" use="required"/>
+    <xs:attribute name="IsPrimary" type="xs:boolean" use="optional" default="false" />
+    <xs:attribute name="IgnoreTenant" type="xs:boolean" use="optional" default="false" />
+    <xs:attribute name="Reserved1" type="xs:string" use="optional"  />
+    <xs:attribute name="Reserved2" type="xs:string" use="optional"  />
+  </xs:complexType>
+
+<!-- 
+	If Enabled = false, nodediag will not communicate with its peers and any nodediag command will only be executed within the tenant.
+        Behavior is same as MDS20 bits.
+-->
+  <xs:complexType name="MdsPeerTopologyConfigType">
+    <xs:sequence>
+      <xs:element name="MdsPeerTenant" type="MdsPeerTenantType" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+      <xs:attribute name="Enabled" type="xs:boolean" use="optional" default="true"/>
+  </xs:complexType>
+
+  <xs:element name="MdsPeerTopologyConfig" type="MdsPeerTopologyConfigType"/>
+
+</xs:schema>
+

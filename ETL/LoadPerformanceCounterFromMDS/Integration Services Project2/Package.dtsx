@@ -1,0 +1,157 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="9/25/2015 4:32:43 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="JEFFREY9010"
+  DTS:CreatorName="FAREAST\yizeng"
+  DTS:DTSID="{26BE10B4-0869-4DBF-8701-D7DF9F1691D1}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="12.0.2430.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{105AD7E2-2870-4BDB-BC67-21488BF51828}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OData Source]"
+      DTS:CreationName="ODATA"
+      DTS:DTSID="{D982047F-5410-4496-96F9-10E02B63E5EE}"
+      DTS:ObjectName="OData Source">
+      <DTS:ObjectData>
+        <ODataConnectionManager
+          UserName=""
+          Url="https://monitoring.core.chinacloudapi.cn/OData/https/%20/monitoring.core.chinacloudapi.cn:443/%20/FaCounterFiveMinuteNode/%20/False/%20/2015-10-08+07%3a00%3a00Z/%20/2015-10-08+08%3a00%3a00Z/%20/(CounterName.Equals(%22%5cHyper-V+Hypervisor+Logical+Processor(_Total)%5c%25+Total+Run+Time%22)+%7c%7c+CounterName.Equals(%22%5cMemory%5cAvailable+Mbytes%22)+%7c%7cCounterName.Equals(%22%5cPhysicalDisk(_Total)%5cAvg.+Disk+sec%2fWrite%22)+%7c%7cCounterName.Equals(%22%5cPhysicalDisk(_Total)%5cAvg.+Disk+sec%2fRead%22)+%7c%7c+CounterName.Equals(%22%5cLogicalDisk(*)%5cMIN+APP+%25+Free+Space%22))+%26%26+(DataCenter.Contains(%22SH%22)+%7c%7c+DataCenter.Contains(%22BJB%22)+%7c%7c+DataCenter.Contains(%22OS%22))+/%20/eHFuQLbKNuFZhcql3UdrG1rshgNvoIyJBJMjxCBizVMj1gkcgD9Q6fbhCRTl4zdQNcb7u+GKRr9+NQlGXAAnmIUrmCXPl0USs3tIVE3hHmDTg1/gU325HkM3brEP+RWcW6Q67CkVcI2bZXAh5m8UYISOApKmvLDI2lI1M+gH334="
+          ConnectionString="Service Document Url=&quot;https://monitoring.core.chinacloudapi.cn/OData/https/%20/monitoring.core.chinacloudapi.cn:443/%20/FaCounterFiveMinuteNode/%20/False/%20/2015-10-08+07%3a00%3a00Z/%20/2015-10-08+08%3a00%3a00Z/%20/(CounterName.Equals(%22%5cHyper-V+Hypervisor+Logical+Processor(_Total)%5c%25+Total+Run+Time%22)+%7c%7c+CounterName.Equals(%22%5cMemory%5cAvailable+Mbytes%22)+%7c%7cCounterName.Equals(%22%5cPhysicalDisk(_Total)%5cAvg.+Disk+sec%2fWrite%22)+%7c%7cCounterName.Equals(%22%5cPhysicalDisk(_Total)%5cAvg.+Disk+sec%2fRead%22)+%7c%7c+CounterName.Equals(%22%5cLogicalDisk(*)%5cMIN+APP+%25+Free+Space%22))+%26%26+(DataCenter.Contains(%22SH%22)+%7c%7c+DataCenter.Contains(%22BJB%22)+%7c%7c+DataCenter.Contains(%22OS%22))+/%20/eHFuQLbKNuFZhcql3UdrG1rshgNvoIyJBJMjxCBizVMj1gkcgD9Q6fbhCRTl4zdQNcb7u+GKRr9+NQlGXAAnmIUrmCXPl0USs3tIVE3hHmDTg1/gU325HkM3brEP+RWcW6Q67CkVcI2bZXAh5m8UYISOApKmvLDI2lI1M+gH334=&quot;;Include Atom Elements=Auto;Include Expanded Entities=False;Integrated Security=SSPI;Persist Security Info=False;Time Out=600;Schema Sample Size=25;Retry Count=5;Retry Sleep=100;Keep Alive=True;Max Received Message Size=4398046511104"
+          MicrosoftOnlineServicesAuth="False" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{D56B7038-06CC-43D2-A0E8-3F218EC1134D}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\OData Source"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="OData Source Component;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Read data from OData services"
+              name="OData Source"
+              usesDispositions="true">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Name of the collection to be retrieved from the service."
+                  expressionType="Notify"
+                  name="CollectionName"></property>
+                <property
+                  dataType="System.Int32"
+                  description="The default maximum length for a string that has no maxlength specified in the schema."
+                  name="DefaultStringLength">4000</property>
+                <property
+                  dataType="System.String"
+                  description="Query in the url. "
+                  expressionType="Notify"
+                  name="Query"></property>
+                <property
+                  dataType="System.String"
+                  description="Resource path of the collection to be retrieved from the service."
+                  expressionType="Notify"
+                  name="ResourcePath"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="When set to true, use the resource path as requested collection; otherwise, use the collection name."
+                  expressionType="Notify"
+                  name="UseResourcePath">false</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.OData</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\OData Source.Connections[Connection]"
+                  description="Connection to OData Service"
+                  name="Connection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\OData Source.Outputs[Output]"
+                  name="Output">
+                  <externalMetadataColumns
+                    isUsed="True" />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\OData Source.Outputs[Error output]"
+                  isErrorOut="true"
+                  name="Error output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\OData Source.Outputs[Error output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OData Source.Outputs[Error output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OData Source.Outputs[Error output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OData Source.Outputs[Error output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="150.4,41.6"
+          Id="Package\Data Flow Task"
+          TopLeft="178.285717321902,126.635295893659" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="144,41.6"
+          Id="Package\Data Flow Task\OData Source"
+          TopLeft="149.142859682745,137.647060753977" />
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

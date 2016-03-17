@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  manifest file is used to authorize a package, therefore mapping from source folder structure to runtime folder structure.
+  please refer to Sangam build system for details: https://microsoft.sharepoint.com/teams/CoreDataPlatform/_layouts/15/start.aspx#/SitePages/Sangam%20Build%20System.aspx
+-->
+<Manifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" FormatVersion="1.0" xmlns="http://schemas.microsoft.com/bing/sangam/package/manifest">
+
+  <!--add all job xml files to the Jobs folder-->
+  <Folder Name="Jobs" IncludeFolder="Jobs" SearchOption="AllDirectories" SearchPattern="*.job.xml" Type="Jobs"/>
+
+  <!-- add all dependency assemblies needed to compile xaml files and to load the compiled CLR workflow types -->
+  <!-- also include the assembly built from the project and update job.xml files to point to the compiled workflow CLR types instead of direct xaml file references -->
+  <Folder Name="Workflows" IncludeFolder="Assemblies" SearchPattern="*.*" SearchOption="AllDirectories" IncludeMode="Flat">
+    <BuiltAssembly/>
+  </Folder>
+
+  <!--No xaml files are added to the package since their compiled types are already packaged as the built assembly -->
+  <Folder Name="Workflows">
+    <File Name="bing_news.xslt" Source="Workflows\bing_news.xslt" />
+    <File Name="flatten_news.script" Source="Workflows\flatten_news.script" />
+  </Folder>
+  
+  <!--add all sangam extensibility assemblies to the workflows folder-->
+  <!--once you add a new extensiblity project, and the assembly generated doesn't match this pattern, you will need to include that assembly manually here-->
+  <Folder Name="Workflows" IncludeFolder="bin\debug" SearchOption="AllDirectories" SearchPattern="*ext*.dll" />
+  <Folder Name="Scripts" IncludeFolder="Scripts" SearchOption="AllDirectories" SearchPattern="*.*" IncludeMode="KeepStructure"/>
+
+  <!--Config files-->
+  <File Name="Schedule.xml" Source="Schedule.xml" Type="Schedule"/>
+  <File Name="Alerts.xml" Source="Alerts.xml" Type="Alert"/>
+  <File Name="Feeds.xml" Source="Feeds.xml" Type="Feed"/>
+  <File Name="Events.xml" Source="Events.xml" Type="Event"/>
+  <File Name="Alias.xml" Source="Alias.xml"/>
+</Manifest>

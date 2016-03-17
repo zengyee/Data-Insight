@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="AggregationTypeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="MaLocal"/>
+      <xs:enumeration value="MaUpload"/>
+      <xs:enumeration value="MaUploadOnly"/>
+      <xs:enumeration value="Mds"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ColumnType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="name" type="xs:string" use="required" />
+        <xs:attribute name="type" type="xs:string" use="required" />
+        <xs:attribute name="alias" type="xs:string" use="optional" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="SourceTableNameColumnType">
+    <xs:attribute name="alias" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="SelectColumnsType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="Column" type="ColumnType"/>
+      <xs:element minOccurs="0" name="SourceTableNameColumn" type="SourceTableNameColumnType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ConcatAllSourceTableColumnsType">
+    <xs:attribute name="destinationColumnName" type="xs:string" use="required" />
+    <xs:attribute name="noHtml" type="xs:boolean" use="optional" default="false"/>
+  </xs:complexType>
+  <xs:complexType name="DeclareBlockType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="Declare" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SelectType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DeclareBlock" type="DeclareBlockType" />
+      <xs:element minOccurs="0" name="StatementBlock" type="xs:string" />
+      <xs:element minOccurs="0" name="Where" type="xs:string" />
+      <xs:element minOccurs="0" name="GroupBy" type="xs:string" />
+      <xs:element minOccurs="0" name="PartitionColumns" type="SelectColumnsType"/>
+      <xs:element minOccurs="0" name="IdentityColumns" type="SelectColumnsType"/>
+      <xs:element minOccurs="0" name="SelectColumns" type="SelectColumnsType"/>
+      <xs:element minOccurs="0" name="SelectAllSourceTableColumns" />
+      <xs:element minOccurs="0" name="ConcatAllSourceTableColumns" type="ConcatAllSourceTableColumnsType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PostTaskActionType">
+    <xs:sequence>
+      <xs:element name="Message" type="xs:string"/>
+      <xs:element name="QueueDataSite" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DestinationTablesType">
+    <xs:sequence>
+      <xs:element name="MaTableExpression" type="xs:string" minOccurs="0" maxOccurs="1" />
+      <xs:element name="TableName" type="xs:string" minOccurs="1" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="TaskType">
+    <xs:sequence>
+      <xs:element name="DestinationTables" type="DestinationTablesType" minOccurs="0"/>
+      <xs:element name="Select" type="SelectType"/>
+      <xs:element name="PostTaskAction" type="PostTaskActionType" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="sourceTableRegex" type="xs:string" use="optional" />
+    <xs:attribute name="sourceTableName" type="xs:string" use="optional" />
+    <xs:attribute name="aggregationType" type="AggregationTypeType" use="required" />
+    <xs:attribute name="duration" type="xs:duration" use="required" />
+    <xs:attribute name="offset" type="xs:duration" use="optional" />
+    <xs:attribute name="xstoreAccountInfoName" type="xs:string" use="optional" />
+    <xs:attribute name="priority" type="xs:string" use="optional" />
+    <xs:attribute name="queryDelay" type="xs:duration" use="optional" />
+    <xs:attribute name="destinationTablePrefix" type="xs:string" use="optional" />
+    <xs:attribute name="destinationTableSuffix" type="xs:string" use="optional" />
+    <xs:attribute name="destinationTableIgnoreString" type="xs:string" use="optional" />
+    <xs:attribute name="destinationTableName" type="xs:string" use="optional" />
+    <xs:attribute name="destinationXstoreTableName" type="xs:string" use="optional" />
+    <xs:attribute name="destinationXstoreTableIgnoreString" type="xs:string" use="optional" />
+    <xs:attribute name="timestampPolicy" type="xs:string" use="required" />
+    <xs:attribute name="retryTimeout" type="xs:duration" use="optional" />
+    <xs:attribute name="taskPercentDelayRange" type="xs:float" use="optional" />
+    <xs:attribute name="partitionKeyLoadSpreadIndexMax" type="xs:int" use="optional" />
+    <xs:attribute name="overwriteDestTable" type="xs:boolean" use="optional" />
+    <xs:attribute name="tableAccountMapping" type="xs:IDREF" use="optional" />
+    <xs:attribute name="noGc" type="xs:boolean" use="optional" default="false" />
+    <xs:attribute name="retentionInSeconds" type="xs:positiveInteger" use="optional" default="7776000" />
+    <xs:attribute name="dontUsePerNDayTable" type="xs:boolean" use="optional" default="false" />
+  </xs:complexType>
+
+  <xs:complexType name="AccountMappingsType">
+    <xs:sequence>
+      <xs:element name="Account" type="xs:string" minOccurs="1" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:ID" use="required" />
+    <xs:attribute name="accountPrefix" type="xs:string" use="optional" />
+  </xs:complexType>
+
+  <xs:element name="UploadAggregation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" minOccurs="0" name="AccountMappings" type="AccountMappingsType"/>
+        <xs:element maxOccurs="unbounded" name="Task" type="TaskType"/>
+      </xs:sequence>
+      <xs:attribute name="xstoreAccountInfoName" type="xs:string" use="required" />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

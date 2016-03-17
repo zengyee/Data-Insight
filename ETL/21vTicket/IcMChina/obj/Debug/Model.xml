@@ -1,0 +1,5632 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DataSchemaModel FileFormatVersion="1.2" SchemaVersion="2.4" DspName="Microsoft.Data.Tools.Schema.Sql.Sql120DatabaseSchemaProvider" CollationLcid="1033" CollationCaseSensitive="False" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+	<Header>
+		<CustomData Category="AnsiNulls">
+			<Metadata Name="AnsiNulls" Value="True" />
+		</CustomData>
+		<CustomData Category="QuotedIdentifier">
+			<Metadata Name="QuotedIdentifier" Value="True" />
+		</CustomData>
+		<CustomData Category="CompatibilityMode">
+			<Metadata Name="CompatibilityMode" Value="120" />
+		</CustomData>
+		<CustomData Category="Reference" Type="Assembly">
+			<Metadata Name="LogicalName" Value="IcMChina.dll" />
+			<Metadata Name="FileName" Value="C:\USERS\YIZENG\DESKTOP\CODES\DATA INSIGHT\ETL\21VTICKET\ICMCHINA\OBJ\DEBUG\ICMCHINA.DLL" />
+			<Metadata Name="AssemblyName" Value="IcMChina" />
+			<Metadata Name="PermissionSet" Value="SAFE" />
+			<Metadata Name="Owner" Value="" />
+			<Metadata Name="GenerateSqlClrDdl" Value="True" />
+			<Metadata Name="IsVisible" Value="True" />
+			<Metadata Name="IsModelAware" Value="True" />
+			<Metadata Name="SkipCreationIfEmpty" Value="True" />
+			<Metadata Name="AssemblySymbolsName" Value="C:\Users\yizeng\Desktop\Codes\Data Insight\ETL\21vTicket\IcMChina\obj\Debug\IcMChina.pdb" />
+		</CustomData>
+		<CustomData Category="SqlCmdVariables" Type="SqlCmdVariable" />
+	</Header>
+	<Model>
+		<Element Type="SqlDatabaseOptions">
+			<Property Name="Collation" Value="SQL_Latin1_General_CP1_CI_AS" />
+			<Property Name="IsAnsiNullDefaultOn" Value="True" />
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Property Name="IsAnsiWarningsOn" Value="True" />
+			<Property Name="IsArithAbortOn" Value="True" />
+			<Property Name="IsConcatNullYieldsNullOn" Value="True" />
+			<Property Name="IsTornPageProtectionOn" Value="False" />
+			<Property Name="IsFullTextEnabled" Value="True" />
+			<Property Name="PageVerifyMode" Value="3" />
+			<Property Name="DefaultLanguage" Value="" />
+			<Property Name="DefaultFullTextLanguage" Value="" />
+			<Relationship Name="DefaultFilegroup">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[PRIMARY]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="SqlPrimaryKeyConstraint">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[IridiasLSI].[IncidentId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[IridiasLSI]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="3" />
+		</Element>
+		<Element Type="SqlDefaultConstraint" Name="[dbo].[DF_ETL_Log_StartTime]">
+			<Property Name="DefaultExpressionScript">
+				<Value><![CDATA[(getdate())]]></Value>
+			</Property>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[ETL_Log]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForColumn">
+				<Entry>
+					<References Name="[dbo].[ETL_Log].[StartTime]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="4" />
+		</Element>
+		<Element Type="SqlProcedure" Name="[dbo].[ETL_Initial_Log]">
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	
+	DECLARE @LastModifiedDate datetime
+
+	IF EXISTS (SELECT * FROM [dbo].ETL_Log WHERE [Status]='Completed')
+		SELECT TOP 1  @LastModifiedDate = ISNULL([LastModifiedDate],'2000-01-01 00:00:00') FROM ETL_Log WHERE [Status]='Completed' ORDER BY ID DESC
+	ELSE
+		SELECT @LastModifiedDate = '2000-01-01 00:00:00'
+
+	INSERT INTO [dbo].[ETL_Log]([Status],[LastModifiedDate]) VALUES('Starting',@EndModifiedDate)
+
+	SELECT @@IDENTITY, @LastModifiedDate
+
+RETURN 0]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[datetime]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ETL_Log]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ETL_Log].[Status]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ETL_Log].[LastModifiedDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ETL_Log].[Status]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ETL_Log].[id]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ETL_Initial_Log].[@EndModifiedDate]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[ETL_Initial_Log].[@EndModifiedDate]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[datetime]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="535" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[ETL_Initial_Log]&#xD;&#xA;&#x9;@EndModifiedDate datetime&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="SqlTable" Name="[dbo].[ETL_Log]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="Columns">
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[ETL_Log].[id]">
+						<Property Name="IsNullable" Value="False" />
+						<Property Name="IsIdentity" Value="True" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[ETL_Log].[StartTime]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[datetime]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+						<AttachedAnnotation Disambiguator="4" />
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[ETL_Log].[EndTime]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[datetime]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[ETL_Log].[Status]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[ETL_Log].[Error Message]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="1024" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[ETL_Log].[LastModifiedDate]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[datetime]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[ETL_Log].[InsertedRows]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[ETL_Log].[UpdatedRows]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="5" />
+		</Element>
+		<Element Type="SqlProcedure" Name="[dbo].[ETL_sp_WareHouseIncidents_MergeFromTemp]">
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	
+	SET NOCOUNT ON;
+	-- Temp table to record changes
+	CREATE TABLE #MyTempTable
+	(  
+		[ActionTaken] nvarchar(10),
+		[IncidentId] bigint
+	)
+
+	-- Merge by Insert and Update
+    MERGE [dbo].[WarehouseIncidents] AS target
+    USING 
+	(SELECT * FROM [WarehouseIncidents_Temp]) 
+	AS source ([IncidentId]
+			  ,[SourceName]
+			  ,[SourceType]
+			  ,[SourceIncidentId]
+			  ,[SourceCreateDate]
+			  ,[SourceOrigin]
+			  ,[SourceCreatedBy]
+			  ,[SourceModifiedDate]
+			  ,[CreateDate]
+			  ,[ModifiedDate]
+			  ,[RoutingId]
+			  ,[CorrelationId]
+			  ,[OccurringEnvironment]
+			  ,[OccurringDatacenter]
+			  ,[OccurringDeviceGroup]
+			  ,[OccurringDeviceName]
+			  ,[OccurringServiceInstanceId]
+			  ,[RaisingEnvironment]
+			  ,[RaisingDatacenter]
+			  ,[RaisingDeviceGroup]
+			  ,[RaisingDeviceName]
+			  ,[RaisingServiceInstanceId]
+			  ,[OwningTenantName]
+			  ,[OwningTeamName]
+			  ,[OwningContactAlias]
+			  ,[ParentIncidentId]
+			  ,[Severity]
+			  ,[Status]
+			  ,[IsNoise]
+			  ,[IsSecurityRisk]
+			  ,[IsCustomerImpacting]
+			  ,[Component]
+			  ,[Revision]
+			  ,[TsgId]
+			  ,[Title]
+			  ,[ReproSteps]
+			  ,[CustomerName]
+			  ,[CommitDate]
+			  ,[ResolveDate]
+			  ,[ResolvedBy]
+			  ,[RootCauseId]
+			  ,[RootCauseLinkDate]
+			  ,[Mitigation]
+			  ,[KBArticleId]
+			  ,[PIRReportId]
+			  ,[PIRLinkDate]
+			  ,[ImpactedScenarios]
+			  ,[HitCount]
+			  ,[LastCorrelationDate]
+			  ,[Keywords]
+			  ,[MitigateDate]
+			  ,[ImpactStartDate]
+			  ,[MitigatedBy]
+			  ,[CommsMgrEngagementMode]
+			  ,[CommsMgrEngagementAdditionalDetails]
+			  ,[IncidentType]
+			  ,[ChildCount]
+			  ,[RelatedLinksCount]
+			  ,[ExternalLinksCount]
+			  ,[HowFixed]
+			  ,[IncidentSubType]
+			  ,[TsgOutput]
+			  ,[MonitorId]
+			  ,[ResponsibleTenantName]
+			  ,[SupportTicketId]
+			  ,[SubscriptionId]
+			  ,[WarehouseModifiedDate]
+			  ,[PublicPirId]
+			  ,[OriginatingTenantName])
+    ON (target.[IncidentId] = source.[IncidentId])
+    
+	-- MATCHED
+	WHEN MATCHED THEN 
+        UPDATE SET	[SourceName]=source.[SourceName]
+					,[SourceType]=source.[SourceType]
+					,[SourceIncidentId]=source.[SourceIncidentId]
+					,[SourceCreateDate]=source.[SourceCreateDate]
+					,[SourceOrigin]=source.[SourceOrigin]
+					,[SourceCreatedBy]=source.[SourceCreatedBy]
+					,[SourceModifiedDate]=source.[SourceModifiedDate]
+					,[CreateDate]=source.[CreateDate]
+					,[ModifiedDate]=source.[ModifiedDate]
+					,[RoutingId]=source.[RoutingId]
+					,[CorrelationId]=source.[CorrelationId]
+					,[OccurringEnvironment]=source.[OccurringEnvironment]
+					,[OccurringDatacenter]=source.[OccurringDatacenter]
+					,[OccurringDeviceGroup]=source.[OccurringDeviceGroup]
+					,[OccurringDeviceName]=source.[OccurringDeviceName]
+					,[OccurringServiceInstanceId]=source.[OccurringServiceInstanceId]
+					,[RaisingEnvironment]=source.[RaisingEnvironment]
+					,[RaisingDatacenter]=source.[RaisingDatacenter]
+					,[RaisingDeviceGroup]=source.[RaisingDeviceGroup]
+					,[RaisingDeviceName]=source.[RaisingDeviceName]
+					,[RaisingServiceInstanceId]=source.[RaisingServiceInstanceId]
+					,[OwningTenantName]=source.[OwningTenantName]
+					,[OwningTeamName]=source.[OwningTeamName]
+					,[OwningContactAlias]=source.[OwningContactAlias]
+					,[ParentIncidentId]=source.[ParentIncidentId]
+					,[Severity]=source.[Severity]
+					,[Status]=source.[Status]
+					,[IsNoise]=source.[IsNoise]
+					,[IsSecurityRisk]=source.[IsSecurityRisk]
+					,[IsCustomerImpacting]=source.[IsCustomerImpacting]
+					,[Component]=source.[Component]
+					,[Revision]=source.[Revision]
+					,[TsgId]=source.[TsgId]
+					,[Title]=source.[Title]
+					,[ReproSteps]=source.[ReproSteps]
+					,[CustomerName]=source.[CustomerName]
+					,[CommitDate]=source.[CommitDate]
+					,[ResolveDate]=source.[ResolveDate]
+					,[ResolvedBy]=source.[ResolvedBy]
+					,[RootCauseId]=source.[RootCauseId]
+					,[RootCauseLinkDate]=source.[RootCauseLinkDate]
+					,[Mitigation]=source.[Mitigation]
+					,[KBArticleId]=source.[KBArticleId]
+					,[PIRReportId]=source.[PIRReportId]
+					,[PIRLinkDate]=source.[PIRLinkDate]
+					,[ImpactedScenarios]=source.[ImpactedScenarios]
+					,[HitCount]=source.[HitCount]
+					,[LastCorrelationDate]=source.[LastCorrelationDate]
+					,[Keywords]=source.[Keywords]
+					,[MitigateDate]=source.[MitigateDate]
+					,[ImpactStartDate]=source.[ImpactStartDate]
+					,[MitigatedBy]=source.[MitigatedBy]
+					,[CommsMgrEngagementMode]=source.[CommsMgrEngagementMode]
+					,[CommsMgrEngagementAdditionalDetails]=source.[CommsMgrEngagementAdditionalDetails]
+					,[IncidentType]=source.[IncidentType]
+					,[ChildCount]=source.[ChildCount]
+					,[RelatedLinksCount]=source.[RelatedLinksCount]
+					,[ExternalLinksCount]=source.[ExternalLinksCount]
+					,[HowFixed]=source.[HowFixed]
+					,[IncidentSubType]=source.[IncidentSubType]
+					,[TsgOutput]=source.[TsgOutput]
+					,[MonitorId]=source.[MonitorId]
+					,[ResponsibleTenantName]=source.[ResponsibleTenantName]
+					,[SupportTicketId]=source.[SupportTicketId]
+					,[SubscriptionId]=source.[SubscriptionId]
+					,[WarehouseModifiedDate]=source.[WarehouseModifiedDate]
+					,[PublicPirId]=source.[PublicPirId]
+					,[OriginatingTenantName]=source.[OriginatingTenantName]
+
+	-- NOT MATCHED
+	WHEN NOT MATCHED THEN
+    INSERT ([IncidentId]
+			,[SourceName]
+			,[SourceType]
+			,[SourceIncidentId]
+			,[SourceCreateDate]
+			,[SourceOrigin]
+			,[SourceCreatedBy]
+			,[SourceModifiedDate]
+			,[CreateDate]
+			,[ModifiedDate]
+			,[RoutingId]
+			,[CorrelationId]
+			,[OccurringEnvironment]
+			,[OccurringDatacenter]
+			,[OccurringDeviceGroup]
+			,[OccurringDeviceName]
+			,[OccurringServiceInstanceId]
+			,[RaisingEnvironment]
+			,[RaisingDatacenter]
+			,[RaisingDeviceGroup]
+			,[RaisingDeviceName]
+			,[RaisingServiceInstanceId]
+			,[OwningTenantName]
+			,[OwningTeamName]
+			,[OwningContactAlias]
+			,[ParentIncidentId]
+			,[Severity]
+			,[Status]
+			,[IsNoise]
+			,[IsSecurityRisk]
+			,[IsCustomerImpacting]
+			,[Component]
+			,[Revision]
+			,[TsgId]
+			,[Title]
+			,[ReproSteps]
+			,[CustomerName]
+			,[CommitDate]
+			,[ResolveDate]
+			,[ResolvedBy]
+			,[RootCauseId]
+			,[RootCauseLinkDate]
+			,[Mitigation]
+			,[KBArticleId]
+			,[PIRReportId]
+			,[PIRLinkDate]
+			,[ImpactedScenarios]
+			,[HitCount]
+			,[LastCorrelationDate]
+			,[Keywords]
+			,[MitigateDate]
+			,[ImpactStartDate]
+			,[MitigatedBy]
+			,[CommsMgrEngagementMode]
+			,[CommsMgrEngagementAdditionalDetails]
+			,[IncidentType]
+			,[ChildCount]
+			,[RelatedLinksCount]
+			,[ExternalLinksCount]
+			,[HowFixed]
+			,[IncidentSubType]
+			,[TsgOutput]
+			,[MonitorId]
+			,[ResponsibleTenantName]
+			,[SupportTicketId]
+			,[SubscriptionId]
+			,[WarehouseModifiedDate]
+			,[PublicPirId]
+			,[OriginatingTenantName])
+    VALUES (source.[IncidentId]
+			,source.[SourceName]
+			,source.[SourceType]
+			,source.[SourceIncidentId]
+			,source.[SourceCreateDate]
+			,source.[SourceOrigin]
+			,source.[SourceCreatedBy]
+			,source.[SourceModifiedDate]
+			,source.[CreateDate]
+			,source.[ModifiedDate]
+			,source.[RoutingId]
+			,source.[CorrelationId]
+			,source.[OccurringEnvironment]
+			,source.[OccurringDatacenter]
+			,source.[OccurringDeviceGroup]
+			,source.[OccurringDeviceName]
+			,source.[OccurringServiceInstanceId]
+			,source.[RaisingEnvironment]
+			,source.[RaisingDatacenter]
+			,source.[RaisingDeviceGroup]
+			,source.[RaisingDeviceName]
+			,source.[RaisingServiceInstanceId]
+			,source.[OwningTenantName]
+			,source.[OwningTeamName]
+			,source.[OwningContactAlias]
+			,source.[ParentIncidentId]
+			,source.[Severity]
+			,source.[Status]
+			,source.[IsNoise]
+			,source.[IsSecurityRisk]
+			,source.[IsCustomerImpacting]
+			,source.[Component]
+			,source.[Revision]
+			,source.[TsgId]
+			,source.[Title]
+			,source.[ReproSteps]
+			,source.[CustomerName]
+			,source.[CommitDate]
+			,source.[ResolveDate]
+			,source.[ResolvedBy]
+			,source.[RootCauseId]
+			,source.[RootCauseLinkDate]
+			,source.[Mitigation]
+			,source.[KBArticleId]
+			,source.[PIRReportId]
+			,source.[PIRLinkDate]
+			,source.[ImpactedScenarios]
+			,source.[HitCount]
+			,source.[LastCorrelationDate]
+			,source.[Keywords]
+			,source.[MitigateDate]
+			,source.[ImpactStartDate]
+			,source.[MitigatedBy]
+			,source.[CommsMgrEngagementMode]
+			,source.[CommsMgrEngagementAdditionalDetails]
+			,source.[IncidentType]
+			,source.[ChildCount]
+			,source.[RelatedLinksCount]
+			,source.[ExternalLinksCount]
+			,source.[HowFixed]
+			,source.[IncidentSubType]
+			,source.[TsgOutput]
+			,source.[MonitorId]
+			,source.[ResponsibleTenantName]
+			,source.[SupportTicketId]
+			,source.[SubscriptionId]
+			,source.[WarehouseModifiedDate]
+			,source.[PublicPirId]
+			,source.[OriginatingTenantName])
+
+	--OUTPUT Parameters
+    OUTPUT $action, inserted.[IncidentId] INTO #MyTempTable;
+
+	DECLARE	@InsertedRows INT
+	DECLARE @UpdatedRows INT
+	SELECT @InsertedRows = COUNT(*) FROM #MyTempTable WHERE [ActionTaken] = 'INSERT'
+	SELECT @UpdatedRows = COUNT(*) FROM #MyTempTable WHERE [ActionTaken] = 'UPDATE'
+	
+	-- Update Log
+	UPDATE ETL_Log
+		SET [InsertedRows] = @InsertedRows,
+			[UpdatedRows] = @UpdatedRows
+		WHERE [id] = @ETLId
+
+ 	DROP TABLE #MyTempTable
+
+RETURN 0]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[int]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[int]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents_Temp]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[IncidentId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[SourceName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[SourceType]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[SourceIncidentId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[SourceCreateDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[SourceOrigin]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[SourceCreatedBy]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[SourceModifiedDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[CreateDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[ModifiedDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[RoutingId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[CorrelationId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[OccurringEnvironment]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[OccurringDatacenter]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[OccurringDeviceGroup]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[OccurringDeviceName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[OccurringServiceInstanceId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[RaisingEnvironment]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[RaisingDatacenter]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[RaisingDeviceGroup]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[RaisingDeviceName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[RaisingServiceInstanceId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[OwningTenantName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[OwningTeamName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[OwningContactAlias]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[ParentIncidentId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[Severity]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[Status]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[IsNoise]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[IsSecurityRisk]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[IsCustomerImpacting]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[Component]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[Revision]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[TsgId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[Title]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[ReproSteps]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[CustomerName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[CommitDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[ResolveDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[ResolvedBy]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[RootCauseId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[RootCauseLinkDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[Mitigation]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[KBArticleId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[PIRReportId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[PIRLinkDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[ImpactedScenarios]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[HitCount]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[LastCorrelationDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[Keywords]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[MitigateDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[ImpactStartDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[MitigatedBy]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[CommsMgrEngagementMode]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[CommsMgrEngagementAdditionalDetails]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[IncidentType]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[ChildCount]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[RelatedLinksCount]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[ExternalLinksCount]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[HowFixed]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[IncidentSubType]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[TsgOutput]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[MonitorId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[ResponsibleTenantName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[SupportTicketId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[SubscriptionId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[WarehouseModifiedDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[PublicPirId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[OriginatingTenantName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[IncidentId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ETL_sp_WareHouseIncidents_MergeFromTemp].[#MyTempTable]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ETL_sp_WareHouseIncidents_MergeFromTemp].[#MyTempTable].[ActionTaken]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ETL_Log]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ETL_Log].[InsertedRows]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ETL_Log].[UpdatedRows]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ETL_Log].[id]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ETL_sp_WareHouseIncidents_MergeFromTemp].[@ETLId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DynamicObjects">
+				<Entry>
+					<Element Type="SqlDynamicColumnSource" Name="[dbo].[ETL_sp_WareHouseIncidents_MergeFromTemp].[#MyTempTable]">
+						<Relationship Name="Columns">
+							<Entry>
+								<Element Type="SqlSimpleColumn" Name="[dbo].[ETL_sp_WareHouseIncidents_MergeFromTemp].[#MyTempTable].[ActionTaken]">
+									<Relationship Name="TypeSpecifier">
+										<Entry>
+											<Element Type="SqlTypeSpecifier">
+												<Property Name="Length" Value="10" />
+												<Relationship Name="Type">
+													<Entry>
+														<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+													</Entry>
+												</Relationship>
+											</Element>
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+							<Entry>
+								<Element Type="SqlSimpleColumn" Name="[dbo].[ETL_sp_WareHouseIncidents_MergeFromTemp].[#MyTempTable].[IncidentId]">
+									<Relationship Name="TypeSpecifier">
+										<Entry>
+											<Element Type="SqlTypeSpecifier">
+												<Relationship Name="Type">
+													<Entry>
+														<References ExternalSource="BuiltIns" Name="[bigint]" />
+													</Entry>
+												</Relationship>
+											</Element>
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[ETL_sp_WareHouseIncidents_MergeFromTemp].[@ETLId]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="9467" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[ETL_sp_WareHouseIncidents_MergeFromTemp]&#xD;&#xA;&#x9;@ETLId INT&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="SqlProcedure" Name="[dbo].[ETL_Update_Log]">
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+
+	UPDATE [dbo].[ETL_Log]
+		SET [Status] = @Status,
+			[EndTime] = GETDATE()
+	WHERE [Id]  = @id
+
+RETURN 0]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[ETL_Log]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ETL_Log].[Status]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ETL_Update_Log].[@Status]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ETL_Log].[EndTime]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ETL_Log].[id]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ETL_Update_Log].[@id]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[ETL_Update_Log].[@id]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[ETL_Update_Log].[@Status]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="190" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[ETL_Update_Log]&#xD;&#xA;&#x9;@id int,&#xD;&#xA;&#x9;@Status NVARCHAR (50)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="SqlTable" Name="[dbo].[IridiasLSI]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="Columns">
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[IridiasLSI].[IncidentId]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+						<AttachedAnnotation Disambiguator="3" />
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[IridiasLSI].[EmailSubject]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="255" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="SqlPrimaryKeyConstraint" Name="[dbo].[PK_ETL_Log]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[ETL_Log].[id]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[ETL_Log]" />
+				</Entry>
+			</Relationship>
+			<AttachedAnnotation Disambiguator="5" />
+		</Element>
+		<Element Type="SqlPrimaryKeyConstraint" Name="[dbo].[PK_WarehouseIncidents]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[IncidentId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="6" />
+		</Element>
+		<Element Type="SqlPrimaryKeyConstraint" Name="[dbo].[PK_WarehouseIncidents_Temp]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents_Temp].[IncidentId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents_Temp]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="7" />
+		</Element>
+		<Element Type="SqlView" Name="[dbo].[v_CustomerImpactIncident]">
+			<Property Name="QueryScript">
+				<Value><![CDATA[ SELECT	CASE WHEN i.IncidentId is NOT NULL THEN 'IridiasLSI' ELSE 'Normal' END AS CustomerImpact,
+				LEFT(CONVERT(varchar(50),l.[CreateDate],102),7) AS CreateMonth,
+				CASE l.[IncidentType] WHEN 'CustomerReported' THEN 'CRI' WHEN 'LiveSite' THEN 'LSI' ELSE 'UNKNOWN' END AS [TYPE],
+				SUBSTRING([OwningTeamName],CharIndex('\',[OwningTeamName],0)+1 ,LEN([OwningTeamName])- CharIndex('\',[OwningTeamName],0)) AS OwningTeam,
+				DATEDIFF(minute, [CreateDate],[ResolveDate]) AS TTR,
+				LEFT ([Title], 60) as ShortTitle,
+				l.*
+		FROM [dbo].[v_LSICRI] l LEFT JOIN [dbo].[IridiasLSI] i on i.IncidentId=l.IncidentId]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="Columns">
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[CustomerImpact]" />
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[CreateMonth]" />
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[TYPE]" />
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[OwningTeam]" />
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[TTR]" />
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[ShortTitle]" />
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[IncidentId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[IncidentId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[SourceName]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[SourceName]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[SourceType]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[SourceType]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[SourceIncidentId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[SourceIncidentId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[SourceCreateDate]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[SourceCreateDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[SourceOrigin]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[SourceOrigin]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[SourceCreatedBy]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[SourceCreatedBy]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[SourceModifiedDate]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[SourceModifiedDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[CreateDate]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[CreateDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[ModifiedDate]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[ModifiedDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[RoutingId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[RoutingId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[CorrelationId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[CorrelationId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[OccurringEnvironment]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[OccurringEnvironment]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[OccurringDatacenter]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[OccurringDatacenter]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[OccurringDeviceGroup]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[OccurringDeviceGroup]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[OccurringDeviceName]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[OccurringDeviceName]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[OccurringServiceInstanceId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[OccurringServiceInstanceId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[RaisingEnvironment]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[RaisingEnvironment]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[RaisingDatacenter]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[RaisingDatacenter]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[RaisingDeviceGroup]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[RaisingDeviceGroup]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[RaisingDeviceName]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[RaisingDeviceName]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[RaisingServiceInstanceId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[RaisingServiceInstanceId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[OwningTenantName]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[OwningTenantName]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[OwningTeamName]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[OwningTeamName]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[OwningContactAlias]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[OwningContactAlias]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[ParentIncidentId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[ParentIncidentId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[Severity]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[Severity]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[Status]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[Status]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[IsNoise]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[IsNoise]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[IsSecurityRisk]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[IsSecurityRisk]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[IsCustomerImpacting]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[IsCustomerImpacting]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[Component]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[Component]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[Revision]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[Revision]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[TsgId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[TsgId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[Title]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[Title]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[ReproSteps]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[ReproSteps]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[CustomerName]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[CustomerName]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[CommitDate]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[CommitDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[ResolveDate]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[ResolveDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[ResolvedBy]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[ResolvedBy]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[RootCauseId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[RootCauseId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[RootCauseLinkDate]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[RootCauseLinkDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[Mitigation]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[Mitigation]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[KBArticleId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[KBArticleId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[PIRReportId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[PIRReportId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[PIRLinkDate]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[PIRLinkDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[ImpactedScenarios]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[ImpactedScenarios]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[HitCount]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[HitCount]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[LastCorrelationDate]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[LastCorrelationDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[Keywords]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[Keywords]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[MitigateDate]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[MitigateDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[ImpactStartDate]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[ImpactStartDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[MitigatedBy]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[MitigatedBy]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[CommsMgrEngagementMode]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[CommsMgrEngagementMode]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[CommsMgrEngagementAdditionalDetails]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[CommsMgrEngagementAdditionalDetails]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[IncidentType]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[IncidentType]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[ChildCount]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[ChildCount]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[RelatedLinksCount]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[RelatedLinksCount]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[ExternalLinksCount]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[ExternalLinksCount]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[HowFixed]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[HowFixed]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[IncidentSubType]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[IncidentSubType]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[TsgOutput]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[TsgOutput]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[MonitorId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[MonitorId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[ResponsibleTenantName]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[ResponsibleTenantName]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[SupportTicketId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[SupportTicketId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[SubscriptionId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[SubscriptionId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[WarehouseModifiedDate]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[WarehouseModifiedDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[PublicPirId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[PublicPirId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_CustomerImpactIncident].[OriginatingTenantName]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[v_LSICRI].[OriginatingTenantName]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="QueryDependencies">
+				<Entry>
+					<References Name="[dbo].[v_LSICRI]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[IridiasLSI]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[IridiasLSI].[IncidentId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[v_LSICRI].[IncidentId]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[varchar]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[v_LSICRI].[CreateDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[v_LSICRI].[IncidentType]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[v_LSICRI].[OwningTeamName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[v_LSICRI].[CreateDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[v_LSICRI].[ResolveDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[v_LSICRI].[Title]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="669" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE VIEW [dbo].[v_CustomerImpactIncident]&#xD;&#xA;&#x9;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="SqlView" Name="[dbo].[v_LSICRI]">
+			<Property Name="QueryScript">
+				<Value><![CDATA[ SELECT * FROM [WarehouseIncidents]
+		  WHERE  (Incidenttype ='LiveSite' or Incidenttype='CustomerReported') and (OccurringEnvironment ='PROD' ) 
+  --All WASU incidents except the "Duplicate" incidents and Subtype="Root Cause" incidents are considered for TTM]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="Columns">
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[IncidentId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[IncidentId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[SourceName]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[SourceName]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[SourceType]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[SourceType]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[SourceIncidentId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[SourceIncidentId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[SourceCreateDate]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[SourceCreateDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[SourceOrigin]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[SourceOrigin]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[SourceCreatedBy]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[SourceCreatedBy]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[SourceModifiedDate]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[SourceModifiedDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[CreateDate]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[CreateDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[ModifiedDate]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[ModifiedDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[RoutingId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[RoutingId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[CorrelationId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[CorrelationId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[OccurringEnvironment]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[OccurringEnvironment]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[OccurringDatacenter]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[OccurringDatacenter]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[OccurringDeviceGroup]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[OccurringDeviceGroup]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[OccurringDeviceName]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[OccurringDeviceName]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[OccurringServiceInstanceId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[OccurringServiceInstanceId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[RaisingEnvironment]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[RaisingEnvironment]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[RaisingDatacenter]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[RaisingDatacenter]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[RaisingDeviceGroup]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[RaisingDeviceGroup]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[RaisingDeviceName]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[RaisingDeviceName]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[RaisingServiceInstanceId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[RaisingServiceInstanceId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[OwningTenantName]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[OwningTenantName]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[OwningTeamName]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[OwningTeamName]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[OwningContactAlias]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[OwningContactAlias]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[ParentIncidentId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[ParentIncidentId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[Severity]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[Severity]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[Status]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[Status]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[IsNoise]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[IsNoise]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[IsSecurityRisk]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[IsSecurityRisk]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[IsCustomerImpacting]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[IsCustomerImpacting]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[Component]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[Component]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[Revision]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[Revision]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[TsgId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[TsgId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[Title]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[Title]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[ReproSteps]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[ReproSteps]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[CustomerName]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[CustomerName]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[CommitDate]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[CommitDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[ResolveDate]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[ResolveDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[ResolvedBy]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[ResolvedBy]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[RootCauseId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[RootCauseId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[RootCauseLinkDate]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[RootCauseLinkDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[Mitigation]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[Mitigation]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[KBArticleId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[KBArticleId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[PIRReportId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[PIRReportId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[PIRLinkDate]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[PIRLinkDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[ImpactedScenarios]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[ImpactedScenarios]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[HitCount]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[HitCount]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[LastCorrelationDate]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[LastCorrelationDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[Keywords]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[Keywords]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[MitigateDate]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[MitigateDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[ImpactStartDate]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[ImpactStartDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[MitigatedBy]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[MitigatedBy]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[CommsMgrEngagementMode]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[CommsMgrEngagementMode]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[CommsMgrEngagementAdditionalDetails]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[CommsMgrEngagementAdditionalDetails]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[IncidentType]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[IncidentType]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[ChildCount]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[ChildCount]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[RelatedLinksCount]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[RelatedLinksCount]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[ExternalLinksCount]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[ExternalLinksCount]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[HowFixed]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[HowFixed]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[IncidentSubType]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[IncidentSubType]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[TsgOutput]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[TsgOutput]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[MonitorId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[MonitorId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[ResponsibleTenantName]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[ResponsibleTenantName]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[SupportTicketId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[SupportTicketId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[SubscriptionId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[SubscriptionId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[WarehouseModifiedDate]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[WarehouseModifiedDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[PublicPirId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[PublicPirId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_LSICRI].[OriginatingTenantName]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[OriginatingTenantName]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="QueryDependencies">
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[IncidentType]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[OccurringEnvironment]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="294" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE VIEW [dbo].[v_LSICRI]&#xD;&#xA;&#x9;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="SqlView" Name="[dbo].[v_SupportTicketRelated]">
+			<Property Name="QueryScript">
+				<Value><![CDATA[ 
+	SELECT icm.[IncidentId]	AS	[icm_IncidentId]
+		,icm.[SourceName]	AS	[icm_SourceName]
+		,icm.[SourceType]	AS	[icm_SourceType]
+		,icm.[SourceIncidentId]	AS	[icm_SourceIncidentId]
+		,icm.[SourceCreateDate]	AS	[icm_SourceCreateDate]
+		,icm.[SourceOrigin]	AS	[icm_SourceOrigin]
+		,icm.[SourceCreatedBy]	AS	[icm_SourceCreatedBy]
+		,icm.[SourceModifiedDate]	AS	[icm_SourceModifiedDate]
+		,icm.[CreateDate]	AS	[icm_CreateDate]
+		,icm.[ModifiedDate]	AS	[icm_ModifiedDate]
+		,icm.[RoutingId]	AS	[icm_RoutingId]
+		,icm.[CorrelationId]	AS	[icm_CorrelationId]
+		,icm.[OccurringEnvironment]	AS	[icm_OccurringEnvironment]
+		,icm.[OccurringDatacenter]	AS	[icm_OccurringDatacenter]
+		,icm.[OccurringDeviceGroup]	AS	[icm_OccurringDeviceGroup]
+		,icm.[OccurringDeviceName]	AS	[icm_OccurringDeviceName]
+		,icm.[OccurringServiceInstanceId]	AS	[icm_OccurringServiceInstanceId]
+		,icm.[RaisingEnvironment]	AS	[icm_RaisingEnvironment]
+		,icm.[RaisingDatacenter]	AS	[icm_RaisingDatacenter]
+		,icm.[RaisingDeviceGroup]	AS	[icm_RaisingDeviceGroup]
+		,icm.[RaisingDeviceName]	AS	[icm_RaisingDeviceName]
+		,icm.[RaisingServiceInstanceId]	AS	[icm_RaisingServiceInstanceId]
+		,icm.[OwningTenantName]	AS	[icm_OwningTenantName]
+		,icm.[OwningTeamName]	AS	[icm_OwningTeamName]
+		,icm.[OwningContactAlias]	AS	[icm_OwningContactAlias]
+		,icm.[ParentIncidentId]	AS	[icm_ParentIncidentId]
+		,icm.[Severity]	AS	[icm_Severity]
+		,icm.[Status]	AS	[icm_Status]
+		,icm.[IsNoise]	AS	[icm_IsNoise]
+		,icm.[IsSecurityRisk]	AS	[icm_IsSecurityRisk]
+		,icm.[IsCustomerImpacting]	AS	[icm_IsCustomerImpacting]
+		,icm.[Component]	AS	[icm_Component]
+		,icm.[Revision]	AS	[icm_Revision]
+		,icm.[TsgId]	AS	[icm_TsgId]
+		,icm.[Title]	AS	[icm_Title]
+		,icm.[ReproSteps]	AS	[icm_ReproSteps]
+		,icm.[CustomerName]	AS	[icm_CustomerName]
+		,icm.[CommitDate]	AS	[icm_CommitDate]
+		,icm.[ResolveDate]	AS	[icm_ResolveDate]
+		,icm.[ResolvedBy]	AS	[icm_ResolvedBy]
+		,icm.[RootCauseId]	AS	[icm_RootCauseId]
+		,icm.[RootCauseLinkDate]	AS	[icm_RootCauseLinkDate]
+		,icm.[Mitigation]	AS	[icm_Mitigation]
+		,icm.[KBArticleId]	AS	[icm_KBArticleId]
+		,icm.[PIRReportId]	AS	[icm_PIRReportId]
+		,icm.[PIRLinkDate]	AS	[icm_PIRLinkDate]
+		,icm.[ImpactedScenarios]	AS	[icm_ImpactedScenarios]
+		,icm.[HitCount]	AS	[icm_HitCount]
+		,icm.[LastCorrelationDate]	AS	[icm_LastCorrelationDate]
+		,icm.[Keywords]	AS	[icm_Keywords]
+		,icm.[MitigateDate]	AS	[icm_MitigateDate]
+		,icm.[ImpactStartDate]	AS	[icm_ImpactStartDate]
+		,icm.[MitigatedBy]	AS	[icm_MitigatedBy]
+		,icm.[CommsMgrEngagementMode]	AS	[icm_CommsMgrEngagementMode]
+		,icm.[CommsMgrEngagementAdditionalDetails]	AS	[icm_CommsMgrEngagementAdditionalDetails]
+		,icm.[IncidentType]	AS	[icm_IncidentType]
+		,icm.[ChildCount]	AS	[icm_ChildCount]
+		,icm.[RelatedLinksCount]	AS	[icm_RelatedLinksCount]
+		,icm.[ExternalLinksCount]	AS	[icm_ExternalLinksCount]
+		,icm.[HowFixed]	AS	[icm_HowFixed]
+		,icm.[IncidentSubType]	AS	[icm_IncidentSubType]
+		,icm.[TsgOutput]	AS	[icm_TsgOutput]
+		,icm.[MonitorId]	AS	[icm_MonitorId]
+		,icm.[ResponsibleTenantName]	AS	[icm_ResponsibleTenantName]
+		,icm.[SupportTicketId]	AS	[icm_SupportTicketId]
+		,icm.[SubscriptionId]	AS	[icm_SubscriptionId]
+		,icm.[WarehouseModifiedDate]	AS	[icm_WarehouseModifiedDate]
+		,icm.[PublicPirId]	AS	[icm_PublicPirId]
+		,icm.[OriginatingTenantName]	AS	[icm_OriginatingTenantName]
+  FROM [dbo].[WarehouseIncidents] icm
+  WHERE icm.[SupportTicketId] IS NOT NULL OR icm.[SubscriptionId] IS NOT NULL OR icm.IsCustomerImpacting = 1]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="Columns">
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_IncidentId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[IncidentId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_SourceName]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[SourceName]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_SourceType]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[SourceType]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_SourceIncidentId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[SourceIncidentId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_SourceCreateDate]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[SourceCreateDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_SourceOrigin]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[SourceOrigin]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_SourceCreatedBy]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[SourceCreatedBy]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_SourceModifiedDate]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[SourceModifiedDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_CreateDate]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[CreateDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_ModifiedDate]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[ModifiedDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_RoutingId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[RoutingId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_CorrelationId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[CorrelationId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_OccurringEnvironment]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[OccurringEnvironment]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_OccurringDatacenter]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[OccurringDatacenter]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_OccurringDeviceGroup]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[OccurringDeviceGroup]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_OccurringDeviceName]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[OccurringDeviceName]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_OccurringServiceInstanceId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[OccurringServiceInstanceId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_RaisingEnvironment]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[RaisingEnvironment]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_RaisingDatacenter]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[RaisingDatacenter]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_RaisingDeviceGroup]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[RaisingDeviceGroup]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_RaisingDeviceName]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[RaisingDeviceName]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_RaisingServiceInstanceId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[RaisingServiceInstanceId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_OwningTenantName]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[OwningTenantName]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_OwningTeamName]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[OwningTeamName]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_OwningContactAlias]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[OwningContactAlias]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_ParentIncidentId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[ParentIncidentId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_Severity]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[Severity]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_Status]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[Status]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_IsNoise]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[IsNoise]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_IsSecurityRisk]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[IsSecurityRisk]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_IsCustomerImpacting]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[IsCustomerImpacting]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_Component]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[Component]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_Revision]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[Revision]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_TsgId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[TsgId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_Title]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[Title]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_ReproSteps]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[ReproSteps]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_CustomerName]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[CustomerName]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_CommitDate]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[CommitDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_ResolveDate]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[ResolveDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_ResolvedBy]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[ResolvedBy]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_RootCauseId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[RootCauseId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_RootCauseLinkDate]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[RootCauseLinkDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_Mitigation]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[Mitigation]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_KBArticleId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[KBArticleId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_PIRReportId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[PIRReportId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_PIRLinkDate]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[PIRLinkDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_ImpactedScenarios]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[ImpactedScenarios]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_HitCount]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[HitCount]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_LastCorrelationDate]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[LastCorrelationDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_Keywords]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[Keywords]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_MitigateDate]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[MitigateDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_ImpactStartDate]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[ImpactStartDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_MitigatedBy]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[MitigatedBy]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_CommsMgrEngagementMode]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[CommsMgrEngagementMode]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_CommsMgrEngagementAdditionalDetails]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[CommsMgrEngagementAdditionalDetails]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_IncidentType]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[IncidentType]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_ChildCount]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[ChildCount]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_RelatedLinksCount]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[RelatedLinksCount]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_ExternalLinksCount]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[ExternalLinksCount]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_HowFixed]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[HowFixed]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_IncidentSubType]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[IncidentSubType]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_TsgOutput]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[TsgOutput]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_MonitorId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[MonitorId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_ResponsibleTenantName]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[ResponsibleTenantName]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_SupportTicketId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[SupportTicketId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_SubscriptionId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[SubscriptionId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_WarehouseModifiedDate]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[WarehouseModifiedDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_PublicPirId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[PublicPirId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[v_SupportTicketRelated].[icm_OriginatingTenantName]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[OriginatingTenantName]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="QueryDependencies">
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[IncidentId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[SourceName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[SourceType]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[SourceIncidentId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[SourceCreateDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[SourceOrigin]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[SourceCreatedBy]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[SourceModifiedDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[CreateDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[ModifiedDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[RoutingId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[CorrelationId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[OccurringEnvironment]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[OccurringDatacenter]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[OccurringDeviceGroup]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[OccurringDeviceName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[OccurringServiceInstanceId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[RaisingEnvironment]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[RaisingDatacenter]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[RaisingDeviceGroup]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[RaisingDeviceName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[RaisingServiceInstanceId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[OwningTenantName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[OwningTeamName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[OwningContactAlias]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[ParentIncidentId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[Severity]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[Status]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[IsNoise]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[IsSecurityRisk]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[IsCustomerImpacting]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[Component]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[Revision]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[TsgId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[Title]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[ReproSteps]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[CustomerName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[CommitDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[ResolveDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[ResolvedBy]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[RootCauseId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[RootCauseLinkDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[Mitigation]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[KBArticleId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[PIRReportId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[PIRLinkDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[ImpactedScenarios]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[HitCount]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[LastCorrelationDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[Keywords]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[MitigateDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[ImpactStartDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[MitigatedBy]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[CommsMgrEngagementMode]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[CommsMgrEngagementAdditionalDetails]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[IncidentType]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[ChildCount]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[RelatedLinksCount]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[ExternalLinksCount]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[HowFixed]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[IncidentSubType]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[TsgOutput]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[MonitorId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[ResponsibleTenantName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[SupportTicketId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[SubscriptionId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[WarehouseModifiedDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[PublicPirId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[OriginatingTenantName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[SupportTicketId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[SubscriptionId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents].[IsCustomerImpacting]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="3583" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE VIEW [dbo].[v_SupportTicketRelated]&#xD;&#xA;&#x9;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="SqlTable" Name="[dbo].[WarehouseIncidents]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="Columns">
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[IncidentId]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bigint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[SourceName]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="128" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[SourceType]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="128" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[SourceIncidentId]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="128" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[SourceCreateDate]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[datetime]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[SourceOrigin]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="128" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[SourceCreatedBy]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="128" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[SourceModifiedDate]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[datetime]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[CreateDate]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[datetime]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[ModifiedDate]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[datetime]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[RoutingId]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="200" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[CorrelationId]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="200" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[OccurringEnvironment]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="32" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[OccurringDatacenter]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="32" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[OccurringDeviceGroup]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="64" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[OccurringDeviceName]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="128" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[OccurringServiceInstanceId]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="64" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[RaisingEnvironment]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="32" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[RaisingDatacenter]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="32" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[RaisingDeviceGroup]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="64" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[RaisingDeviceName]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="128" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[RaisingServiceInstanceId]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="64" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[OwningTenantName]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="64" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[OwningTeamName]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="128" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[OwningContactAlias]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="32" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[ParentIncidentId]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bigint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[Severity]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[Status]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="16" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[IsNoise]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bit]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[IsSecurityRisk]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bit]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[IsCustomerImpacting]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bit]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[Component]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="512" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[Revision]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[TsgId]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="64" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[Title]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="IsMax" Value="True" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[ReproSteps]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="IsMax" Value="True" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[CustomerName]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="IsMax" Value="True" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[CommitDate]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[datetime]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[ResolveDate]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[datetime]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[ResolvedBy]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="128" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[RootCauseId]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bigint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[RootCauseLinkDate]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[datetime]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[Mitigation]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="IsMax" Value="True" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[KBArticleId]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bigint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[PIRReportId]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bigint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[PIRLinkDate]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[datetime]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[ImpactedScenarios]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="IsMax" Value="True" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[HitCount]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bigint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[LastCorrelationDate]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[datetime]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[Keywords]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="64" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[MitigateDate]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[datetime]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[ImpactStartDate]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[datetime]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[MitigatedBy]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="128" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[CommsMgrEngagementMode]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="64" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[CommsMgrEngagementAdditionalDetails]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="IsMax" Value="True" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[IncidentType]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="256" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[ChildCount]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bigint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[RelatedLinksCount]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bigint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[ExternalLinksCount]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bigint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[HowFixed]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="32" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[IncidentSubType]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="32" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[TsgOutput]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="IsMax" Value="True" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[MonitorId]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="64" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[ResponsibleTenantName]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="64" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[SupportTicketId]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="64" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[SubscriptionId]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="128" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[WarehouseModifiedDate]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[datetime]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[PublicPirId]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bigint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents].[OriginatingTenantName]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="64" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<AttachedAnnotation Disambiguator="6" />
+		</Element>
+		<Element Type="SqlIndex" Name="[dbo].[WarehouseIncidents].[IX_WarehouseIncidents_CreateDate]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[CreateDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="IndexedObject">
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="SqlIndex" Name="[dbo].[WarehouseIncidents].[IX_WarehouseIncidents_ResolveDate]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[ResolveDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="IndexedObject">
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="SqlIndex" Name="[dbo].[WarehouseIncidents].[IX_WarehouseIncidents_SubscriptionId]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[SubscriptionId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="IndexedObject">
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="SqlIndex" Name="[dbo].[WarehouseIncidents].[IX_WarehouseIncidents_SupportTicketId]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[WarehouseIncidents].[SupportTicketId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="IndexedObject">
+				<Entry>
+					<References Name="[dbo].[WarehouseIncidents]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="SqlTable" Name="[dbo].[WarehouseIncidents_Temp]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="Columns">
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[IncidentId]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bigint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[SourceName]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="128" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[SourceType]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="128" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[SourceIncidentId]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="128" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[SourceCreateDate]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[datetime]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[SourceOrigin]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="128" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[SourceCreatedBy]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="128" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[SourceModifiedDate]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[datetime]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[CreateDate]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[datetime]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[ModifiedDate]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[datetime]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[RoutingId]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="200" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[CorrelationId]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="200" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[OccurringEnvironment]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="32" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[OccurringDatacenter]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="32" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[OccurringDeviceGroup]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="64" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[OccurringDeviceName]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="128" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[OccurringServiceInstanceId]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="64" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[RaisingEnvironment]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="32" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[RaisingDatacenter]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="32" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[RaisingDeviceGroup]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="64" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[RaisingDeviceName]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="128" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[RaisingServiceInstanceId]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="64" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[OwningTenantName]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="64" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[OwningTeamName]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="128" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[OwningContactAlias]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="32" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[ParentIncidentId]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bigint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[Severity]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[Status]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="16" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[IsNoise]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bit]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[IsSecurityRisk]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bit]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[IsCustomerImpacting]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bit]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[Component]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="512" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[Revision]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[TsgId]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="64" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[Title]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="IsMax" Value="True" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[ReproSteps]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="IsMax" Value="True" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[CustomerName]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="IsMax" Value="True" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[CommitDate]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[datetime]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[ResolveDate]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[datetime]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[ResolvedBy]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="128" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[RootCauseId]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bigint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[RootCauseLinkDate]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[datetime]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[Mitigation]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="IsMax" Value="True" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[KBArticleId]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bigint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[PIRReportId]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bigint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[PIRLinkDate]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[datetime]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[ImpactedScenarios]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="IsMax" Value="True" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[HitCount]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bigint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[LastCorrelationDate]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[datetime]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[Keywords]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="64" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[MitigateDate]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[datetime]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[ImpactStartDate]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[datetime]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[MitigatedBy]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="128" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[CommsMgrEngagementMode]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="64" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[CommsMgrEngagementAdditionalDetails]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="IsMax" Value="True" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[IncidentType]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="256" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[ChildCount]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bigint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[RelatedLinksCount]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bigint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[ExternalLinksCount]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bigint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[HowFixed]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="32" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[IncidentSubType]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="32" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[TsgOutput]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="IsMax" Value="True" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[MonitorId]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="64" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[ResponsibleTenantName]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="64" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[SupportTicketId]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="64" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[SubscriptionId]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="128" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[WarehouseModifiedDate]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[datetime]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[PublicPirId]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bigint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[WarehouseIncidents_Temp].[OriginatingTenantName]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="64" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<AttachedAnnotation Disambiguator="7" />
+		</Element>
+	</Model>
+</DataSchemaModel>

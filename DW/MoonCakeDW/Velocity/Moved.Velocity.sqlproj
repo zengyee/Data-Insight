@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>Moved.Velocity</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{d7203226-cc77-41bd-ada1-1aa731e11e59}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql120DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>Velocity</RootNamespace>
+    <AssemblyName>Velocity</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Tables" />
+    <Folder Include="Programmability" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Velocity_Users.sql" />
+    <Build Include="Tables\Velocity_Accounts.sql" />
+    <Build Include="Tables\Velocity_Accounts_temp.sql" />
+    <Build Include="Tables\Velocity_AccountsSubscriptions.sql" />
+    <Build Include="Tables\Velocity_AccountsSubscriptions_temp.sql" />
+    <Build Include="Tables\Velocity_agreementParticipants.sql" />
+    <Build Include="Tables\Velocity_agreementParticipants_temp.sql" />
+    <Build Include="Tables\Velocity_BillableItemPrice.sql" />
+    <Build Include="Tables\Velocity_BillableItemPrice_temp.sql" />
+    <Build Include="Tables\Velocity_BillableItems.sql" />
+    <Build Include="Tables\Velocity_BillableItems_temp.sql" />
+    <Build Include="Tables\Velocity_BillableItemService.sql" />
+    <Build Include="Tables\Velocity_BillableItemService_temp.sql" />
+    <Build Include="Tables\Velocity_ContactInformation.sql" />
+    <Build Include="Tables\Velocity_ContactInformation_temp.sql" />
+    <Build Include="Tables\Velocity_Countries.sql" />
+    <Build Include="Tables\Velocity_Countries_temp.sql" />
+    <Build Include="Tables\Velocity_Currencies.sql" />
+    <Build Include="Tables\Velocity_Currencies_temp.sql" />
+    <Build Include="Tables\Velocity_departmentAccounts.sql" />
+    <Build Include="Tables\Velocity_DepartmentAccounts_temp.sql" />
+    <Build Include="Tables\Velocity_Departments.sql" />
+    <Build Include="Tables\Velocity_Departments_temp.sql" />
+    <Build Include="Tables\Velocity_EaCommerceAccounts.sql" />
+    <Build Include="Tables\Velocity_EaCommerceAccounts_temp.sql" />
+    <Build Include="Tables\Velocity_EnrollmentAttributes.sql" />
+    <Build Include="Tables\Velocity_EnrollmentAttributes_temp.sql" />
+    <Build Include="Tables\Velocity_EnrollmentCommitmentTerms.sql" />
+    <Build Include="Tables\Velocity_EnrollmentCommitmentTerms_temp.sql" />
+    <Build Include="Tables\Velocity_EnrollmentDepartments.sql" />
+    <Build Include="Tables\Velocity_EnrollmentDepartments_temp.sql" />
+    <Build Include="Tables\Velocity_EnrollmentParticipants.sql" />
+    <Build Include="Tables\Velocity_EnrollmentParticipants_temp.sql" />
+    <Build Include="Tables\Velocity_Enrollments.sql" />
+    <Build Include="Tables\Velocity_Enrollments_temp.sql" />
+    <Build Include="Tables\Velocity_EnrollmentsAccounts.sql" />
+    <Build Include="Tables\Velocity_EnrollmentsAccounts_temp.sql" />
+    <Build Include="Tables\Velocity_Entitlements.sql" />
+    <Build Include="Tables\Velocity_Entitlements_temp.sql" />
+    <Build Include="Tables\Velocity_EntitlementSubscribers.sql" />
+    <Build Include="Tables\Velocity_EntitlementSubscribers_temp.sql" />
+    <Build Include="Tables\Velocity_ExternalAccounts.sql" />
+    <Build Include="Tables\Velocity_ExternalAccounts_temp.sql" />
+    <Build Include="Tables\Velocity_Invoices.sql" />
+    <Build Include="Tables\Velocity_Invoices_temp.sql" />
+    <Build Include="Tables\Velocity_MonetaryAdjustmentTypes.sql" />
+    <Build Include="Tables\Velocity_MonetaryAdjustmentTypes_temp.sql" />
+    <Build Include="Tables\Velocity_MonthlyCommitmentPurchases.sql" />
+    <Build Include="Tables\Velocity_MonthlyCommitmentPurchases_temp.sql" />
+    <Build Include="Tables\Velocity_MonthlyItemCharges.sql" />
+    <Build Include="Tables\Velocity_MonthlyItemCharges_temp.sql" />
+    <Build Include="Tables\Velocity_Organizations.sql" />
+    <Build Include="Tables\Velocity_Organizations_temp.sql" />
+    <Build Include="Tables\Velocity_PriceAdjustment.sql" />
+    <Build Include="Tables\Velocity_PriceAdjustment_temp.sql" />
+    <Build Include="Tables\Velocity_PurchaseOrderLineItems.sql" />
+    <Build Include="Tables\Velocity_PurchaseOrderLineItems_temp.sql" />
+    <Build Include="Tables\Velocity_PurchaseOrders.sql" />
+    <Build Include="Tables\Velocity_PurchaseOrders_temp.sql" />
+    <Build Include="Tables\Velocity_QuarterlyUsageSummary.sql" />
+    <Build Include="Tables\Velocity_QuarterlyUsageSummary_temp.sql" />
+    <Build Include="Tables\Velocity_ServiceRegions.sql" />
+    <Build Include="Tables\Velocity_ServiceRegions_temp.sql" />
+    <Build Include="Tables\Velocity_ServiceResources.sql" />
+    <Build Include="Tables\Velocity_ServiceResources_temp.sql" />
+    <Build Include="Tables\Velocity_Services.sql" />
+    <Build Include="Tables\Velocity_Services_temp.sql" />
+    <Build Include="Tables\Velocity_ServiceTypes.sql" />
+    <Build Include="Tables\Velocity_ServiceTypes_temp.sql" />
+    <Build Include="Tables\Velocity_Status.sql" />
+    <Build Include="Tables\Velocity_Status_temp.sql" />
+    <Build Include="Tables\Velocity_Subscription.sql" />
+    <Build Include="Tables\Velocity_Subscription_temp.sql" />
+    <Build Include="Tables\Velocity_UserRoles.sql" />
+    <Build Include="Tables\Velocity_UserRoles_temp.sql" />
+    <Build Include="Tables\Velocity_Users_temp.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmability\FromVelocity.sql" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+  please refer to following document for configuring customer environments:
+  https://microsoft.sharepoint.com/teams/CoreDataPlatform/SitePages/Customer%20environments.aspx
+-->
+<CustomerEnvironment  xmlns="http://schemas.microsoft.com/bing/spatialdata/activity"
+                      Name="JeffDevEnv"
+                      Description="This is a Test Environment"
+                      AliasFile="Alias.xml"
+                      JobDirectoryPath="Jobs"
+                      FeedEntryFilePath="Feeds.xml"
+                      AlertsFilePath="Alerts.xml"
+                      ScheduleFilePath="Schedule.xml"
+                      EventDefinitionFile="Events.xml" >
+  <VCInfo VCName="vc://cosmos08/SDP.Sandbox" BaseDirectory="/local/" ScopePriority="1100" MaxScopePriority="250" VCPercentAllocation="25" MaxVCPercentAllocation="50" MinVCPercentAllocation="10" />
+  <AccessAccounts>
+  	<AccessAccount Name="REDMOND\sdppart" Value="Admin" />
+  </AccessAccounts>
+</CustomerEnvironment>

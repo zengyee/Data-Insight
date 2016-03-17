@@ -1,0 +1,68 @@
+ImageRuntimeVersion: v4.0.30319
+Assembly Microsoft.Cis.Monitoring.Tables, Version=0.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35: 
+	hash=SHA1, flags=PublicKey
+Assembly mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly Microsoft.VisualC, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a: 
+	hash=None, flags=None
+Class Microsoft.Cis.Monitoring.Tables.Writer: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.String, System.ValueType): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    System.IDisposable
+  Methods:
+    CreateTable(String, String, TableDisposition, TablePriority, Int64, Int64, IntPtr&(Out)): PrivateScope, Public, HideBySig
+    CreateTable(String, String, TableDisposition, IntPtr&(Out)): PrivateScope, Public, HideBySig
+    CloseTable(IntPtr&): PrivateScope, Public, HideBySig
+    AddTableSchema(IntPtr, String[], TableFieldType[], UInt32&(Out)): PrivateScope, Public, HideBySig
+    SetRecordSchema(IntPtr, String[], TableFieldType[]): PrivateScope, Public, HideBySig
+    WriteRecordToTable(IntPtr, Object[], ValueType DateTime IsBoxed): PrivateScope, Public, HideBySig
+    WriteRecordToTable(IntPtr, UInt32, Object[], ValueType DateTime IsBoxed): PrivateScope, Public, HideBySig
+    WriteMetaData(IntPtr, String): PrivateScope, Public, HideBySig
+    Dispose(): PrivateScope, Public, Final, Virtual, HideBySig
+Struct Microsoft.Cis.Monitoring.Tables.TableFieldType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    Microsoft.Cis.Monitoring.Tables.TableFieldType Unsupported_Vector = 0 : Public, Static, Literal, HasDefault
+    Microsoft.Cis.Monitoring.Tables.TableFieldType TableTypeInt8 = 1 : Public, Static, Literal, HasDefault
+    Microsoft.Cis.Monitoring.Tables.TableFieldType TableTypeInt16 = 2 : Public, Static, Literal, HasDefault
+    Microsoft.Cis.Monitoring.Tables.TableFieldType TableTypeInt32 = 3 : Public, Static, Literal, HasDefault
+    Microsoft.Cis.Monitoring.Tables.TableFieldType TableTypeInt64 = 4 : Public, Static, Literal, HasDefault
+    Microsoft.Cis.Monitoring.Tables.TableFieldType TableTypeUInt8 = 5 : Public, Static, Literal, HasDefault
+    Microsoft.Cis.Monitoring.Tables.TableFieldType TableTypeUInt16 = 6 : Public, Static, Literal, HasDefault
+    Microsoft.Cis.Monitoring.Tables.TableFieldType TableTypeUInt32 = 7 : Public, Static, Literal, HasDefault
+    Microsoft.Cis.Monitoring.Tables.TableFieldType TableTypeUInt64 = 8 : Public, Static, Literal, HasDefault
+    Microsoft.Cis.Monitoring.Tables.TableFieldType TableTypeBool = 9 : Public, Static, Literal, HasDefault
+    Microsoft.Cis.Monitoring.Tables.TableFieldType Unsupported_Char = 10 : Public, Static, Literal, HasDefault
+    Microsoft.Cis.Monitoring.Tables.TableFieldType TableTypeWChar = 11 : Public, Static, Literal, HasDefault
+    Microsoft.Cis.Monitoring.Tables.TableFieldType TableTypeFloat32 = 12 : Public, Static, Literal, HasDefault
+    Microsoft.Cis.Monitoring.Tables.TableFieldType TableTypeFloat64 = 13 : Public, Static, Literal, HasDefault
+    Microsoft.Cis.Monitoring.Tables.TableFieldType TableTypeUTC = 14 : Public, Static, Literal, HasDefault
+    Microsoft.Cis.Monitoring.Tables.TableFieldType Unsupported_CStr = 15 : Public, Static, Literal, HasDefault
+    Microsoft.Cis.Monitoring.Tables.TableFieldType TableTypeWStr = 16 : Public, Static, Literal, HasDefault
+    Microsoft.Cis.Monitoring.Tables.TableFieldType Unsupported_FilePtr = 17 : Public, Static, Literal, HasDefault
+    Microsoft.Cis.Monitoring.Tables.TableFieldType TableTypeUpBound = 18 : Public, Static, Literal, HasDefault
+Struct Microsoft.Cis.Monitoring.Tables.TableDisposition: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    Microsoft.Cis.Monitoring.Tables.TableDisposition TD_CreateOpen = 0 : Public, Static, Literal, HasDefault
+    Microsoft.Cis.Monitoring.Tables.TableDisposition TD_CreateAlways = 1 : Public, Static, Literal, HasDefault
+    Microsoft.Cis.Monitoring.Tables.TableDisposition TD_CreateNew = 2 : Public, Static, Literal, HasDefault
+    Microsoft.Cis.Monitoring.Tables.TableDisposition TD_OpenAlways = 3 : Public, Static, Literal, HasDefault
+    Microsoft.Cis.Monitoring.Tables.TableDisposition TD_OpenExisting = 4 : Public, Static, Literal, HasDefault
+Struct Microsoft.Cis.Monitoring.Tables.TablePriority: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    Microsoft.Cis.Monitoring.Tables.TablePriority PriUndefined = 0 : Public, Static, Literal, HasDefault
+    Microsoft.Cis.Monitoring.Tables.TablePriority PriLow = 1 : Public, Static, Literal, HasDefault
+    Microsoft.Cis.Monitoring.Tables.TablePriority PriNormal = 2 : Public, Static, Literal, HasDefault
+    Microsoft.Cis.Monitoring.Tables.TablePriority PriHigh = 3 : Public, Static, Literal, HasDefault

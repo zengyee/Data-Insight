@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>Velocity</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{cb98db86-f31a-49e9-afaa-197530901a20}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql120DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>Velocity</RootNamespace>
+    <AssemblyName>Velocity</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Tables" />
+    <Folder Include="ETL" />
+    <Folder Include="Views" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\Accounts.sql" />
+    <Build Include="Tables\Accounts_temp.sql" />
+    <Build Include="Tables\AccountsSubscriptions.sql" />
+    <Build Include="Tables\AccountsSubscriptions_temp.sql" />
+    <Build Include="Tables\agreementParticipants.sql" />
+    <Build Include="Tables\agreementParticipants_temp.sql" />
+    <Build Include="Tables\BillableItemPrice.sql" />
+    <Build Include="Tables\BillableItemPrice_temp.sql" />
+    <Build Include="Tables\BillableItems.sql" />
+    <Build Include="Tables\BillableItems_temp.sql" />
+    <Build Include="Tables\BillableItemService.sql" />
+    <Build Include="Tables\BillableItemService_temp.sql" />
+    <Build Include="Tables\ContactInformation.sql" />
+    <Build Include="Tables\ContactInformation_temp.sql" />
+    <Build Include="Tables\Countries.sql" />
+    <Build Include="Tables\Countries_temp.sql" />
+    <Build Include="Tables\Currencies.sql" />
+    <Build Include="Tables\Currencies_temp.sql" />
+    <Build Include="Tables\DepartmentAccounts.sql" />
+    <Build Include="Tables\DepartmentAccounts_temp.sql" />
+    <Build Include="Tables\Departments.sql" />
+    <Build Include="Tables\Departments_temp.sql" />
+    <Build Include="Tables\EaCommerceAccounts.sql" />
+    <Build Include="Tables\EaCommerceAccounts_temp.sql" />
+    <Build Include="Tables\EnrollmentAttributes.sql" />
+    <Build Include="Tables\EnrollmentAttributes_temp.sql" />
+    <Build Include="Tables\EnrollmentCommitmentTerms.sql" />
+    <Build Include="Tables\EnrollmentCommitmentTerms_temp.sql" />
+    <Build Include="Tables\EnrollmentDepartments.sql" />
+    <Build Include="Tables\EnrollmentDepartments_temp.sql" />
+    <Build Include="Tables\EnrollmentParticipants.sql" />
+    <Build Include="Tables\EnrollmentParticipants_temp.sql" />
+    <Build Include="Tables\Enrollments.sql" />
+    <Build Include="Tables\Enrollments_temp.sql" />
+    <Build Include="Tables\EnrollmentsAccounts.sql" />
+    <Build Include="Tables\EnrollmentsAccounts_temp.sql" />
+    <Build Include="Tables\Entitlements.sql" />
+    <Build Include="Tables\Entitlements_temp.sql" />
+    <Build Include="Tables\EntitlementSubscribers.sql" />
+    <Build Include="Tables\EntitlementSubscribers_temp.sql" />
+    <Build Include="Tables\ExternalAccounts.sql" />
+    <Build Include="Tables\ExternalAccounts_temp.sql" />
+    <Build Include="Tables\Invoices.sql" />
+    <Build Include="Tables\Invoices_temp.sql" />
+    <Build Include="Tables\MonetaryAdjustmentTypes.sql" />
+    <Build Include="Tables\MonetaryAdjustmentTypes_temp.sql" />
+    <Build Include="Tables\MonthlyCommitmentPurchases.sql" />
+    <Build Include="Tables\MonthlyCommitmentPurchases_temp.sql" />
+    <Build Include="Tables\MonthlyItemCharges.sql" />
+    <Build Include="Tables\MonthlyItemCharges_temp.sql" />
+    <Build Include="Tables\Organizations.sql" />
+    <Build Include="Tables\Organizations_temp.sql" />
+    <Build Include="Tables\PriceAdjustment.sql" />
+    <Build Include="Tables\PriceAdjustment_temp.sql" />
+    <Build Include="Tables\PurchaseOrderLineItems.sql" />
+    <Build Include="Tables\PurchaseOrderLineItems_temp.sql" />
+    <Build Include="Tables\PurchaseOrders.sql" />
+    <Build Include="Tables\PurchaseOrders_temp.sql" />
+    <Build Include="Tables\QuarterlyUsageSummary.sql" />
+    <Build Include="Tables\QuarterlyUsageSummary_temp.sql" />
+    <Build Include="Tables\ServiceRegions.sql" />
+    <Build Include="Tables\ServiceRegions_temp.sql" />
+    <Build Include="Tables\ServiceResources.sql" />
+    <Build Include="Tables\ServiceResources_temp.sql" />
+    <Build Include="Tables\Services.sql" />
+    <Build Include="Tables\Services_temp.sql" />
+    <Build Include="Tables\ServiceTypes.sql" />
+    <Build Include="Tables\ServiceTypes_temp.sql" />
+    <Build Include="Tables\Status.sql" />
+    <Build Include="Tables\Status_temp.sql" />
+    <Build Include="Tables\Subscription.sql" />
+    <Build Include="Tables\Subscription_temp.sql" />
+    <Build Include="Tables\UserRoles.sql" />
+    <Build Include="Tables\UserRoles_temp.sql" />
+    <Build Include="Tables\Users_temp.sql" />
+    <Build Include="Tables\Users.sql" />
+    <Build Include="ETL\ETL_Initial_Log.sql" />
+    <Build Include="ETL\ETL_Log.sql" />
+    <Build Include="ETL\ETL_MergeTemp_TopTables.sql" />
+    <Build Include="ETL\ETL_Update_Log.sql" />
+    <Build Include="ETL\ETL_Velocity_OnDSLClient.sql" />
+    <Build Include="ETL\ETL_MergeTemp_All.sql" />
+    <Build Include="ETL\ETL_MergeTemp_RestAll.sql" />
+    <Build Include="Views\DimSubAccountEnrollment.sql" />
+    <Build Include="ETL\ETL_MergeTemp_BigTables.sql" />
+    <Build Include="Views\v_RawConsumptionCommitment.sql" />
+    <Build Include="Views\v_RawconsumptionCommitment_Rank_BurndownConsumption.sql" />
+    <Build Include="Views\v_Customer_Top20.sql" />
+    <Build Include="Views\v_QuarterlyUsageSummary_RowNumber.sql" />
+    <Build Include="Views\v_QuarterlyUsageSummary_Latest.sql" />
+    <Build Include="Views\v_DimSubscriptionLatest.sql" />
+    <Build Include="Views\v_EnrollmentsAccountsLatest.sql" />
+    <Build Include="Views\v_AccountsSubscriptionsLatest.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Velocity.publish.xml" />
+    <None Include="ETL\Script_Verify_DSLGet.sql" />
+    <None Include="ETL\Script_Verify_DSLGet_Volume.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AI\AI.sqlproj">
+      <Name>AI</Name>
+      <Project>{407a3da4-c542-4b08-962a-b55f32e7f643}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>AI</DatabaseSqlCmdVariable>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <SqlCmdVariable Include="AI">
+      <DefaultValue>AI_Mooncake</DefaultValue>
+      <Value>$(SqlCmdVar__1)</Value>
+    </SqlCmdVariable>
+  </ItemGroup>
+</Project>

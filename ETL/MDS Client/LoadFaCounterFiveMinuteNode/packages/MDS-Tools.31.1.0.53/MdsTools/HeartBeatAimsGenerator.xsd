@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="HeartBeatAimsGeneratorSchema"
+    targetNamespace="http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration"
+    elementFormDefault="qualified"
+    xmlns="http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration"
+    xmlns:wad="http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration"
+    xmlns:mstns="http://tempuri.org/XMLSchema.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:annotation>
+    <xs:documentation>
+      SrcTableType
+        name: name of the source table. It can be either
+          1. a full table name, in which case nbVersion must not be specified.
+          2. a prefix or a regular expression, in which case nbVersion must be specified
+        
+		nbVersion: How many previous version we will look at.
+          For example 
+            If name="mdstable" and nbVersion="2" and assuming the latest version
+            is 8, we will look into:
+              - mdstableVer8v0
+              - mdstableVer7V0
+            If name="mdstable.*" and nbVersion="2". We will look into EVERY table that starts with 
+            mdstable, we will look at the last 2 tables. So it could return something like:
+              - mdstableVer8v0, mdstableVer7v0
+              - mdstableFooVer0v0
+              - mdstableBarVer9v0, mdstableBarVer8v0
+              Here we assume there is only one version of mdstableFoo.
+         query: A where clause to apply when downloading data. This can limit the amount of data to download.
+         For example if you are using a counter table which probably contains more than one counter,
+         you will be interrested in only one such counter.
+          For example
+            query="where DataCenter == "BL2" and CounterName=="\Process(MonAgent)\MA Bytes Received/sec""
+         
+		 timestamp: Name of the time stamp column for your table. By default it is TIMESTAMP.
+         queryInterval: How often to run the rule. Every queryInterval minutes, we will dowload data 
+         that match the query since the last evaluation. From the resulting set, we keep the identity 
+         and the timestamp and we fill a table with this information. This needs to be greater than the duration
+         specified in your MA config file for the corresponding table.
+		 
+		 queryInterval: This is the AIMS WindowHopSize
+		 
+		 namespace: namespace of the statemap associated with this table. Will use the default namespace if not specified
+		 
+		 moniker: moniker of the statemap associated with this table. Will use the default moniker if not specified
+		 
+		 aimsid: Used to name the table and the output file.
+    </xs:documentation>
+  </xs:annotation>
+	<xs:complexType name="SrcTableType">
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="nbVersion" type="xs:unsignedByte" use="optional"/>
+    <xs:attribute name="query" type="xs:string" use="optional"/>
+    <xs:attribute name="timeStamp" type="xs:string" use="optional" default="TIMESTAMP"/>
+    <xs:attribute name="queryInterval" type="xs:positiveInteger" use="optional"/>
+	<xs:attribute name="namespace" type="xs:string" use="optional"/>
+	<xs:attribute name="moniker" type="xs:string" use="optional"/>
+	<xs:attribute name="aimsid" type="xs:string" use="optional"/>
+	</xs:complexType>
+
+  <xs:annotation>
+    <xs:documentation>
+      InputType
+        defaultNamespace: Name of your MDS namspace (like the one in your MA config file).
+					This will be used for aggregate rule and the sources tables rules that don't have a namespace.
+        defaultMoniker: Name of your MDS moniker (like the one in your MA config file).
+						This will be used for aggregate rule and the sources tables rules that don't have a moniker.
+        identity: coma separated list of column name defining your table identity. 
+						 default is "tenant,role,roleinstance"
+    </xs:documentation>
+  </xs:annotation>      
+  <xs:complexType name="InputType">
+	  <xs:sequence>
+		  <xs:element name="SrcTable" type="SrcTableType" minOccurs="1" maxOccurs="unbounded" />
+	  </xs:sequence>
+    <xs:attribute name="defaultNamespace" type="xs:string" use="required"/>
+    <xs:attribute name="defaultMoniker" type="xs:string" use="required"/>
+    <xs:attribute name="identity" type="xs:string" use="optional"/>
+  </xs:complexType>	
+  
+  <xs:annotation>
+    <xs:documentation>
+      email: semicolon separated list of the email addresses where to send the alert.
+      EvaluateInterval: How often to evaluate the alert rule. This is in minute. It is best to 
+                        set that to a value smaller than StartAlerting.
+      StartAlerting: lower time limit where we consider that a MA is considered not responding.
+                     Must be greater than the duration specified in the MA config for the table.
+      StopAlerting: Used if you want to stop receiving alert for a MA that is not responding. 
+                    If a MA is not sending event for more than StopAlerting minutes, 
+                    we will stop notifying for this MA.
+    </xs:documentation>
+  </xs:annotation>
+  <xs:complexType name="AlertType">
+    <xs:all>
+      <xs:element name="email" minOccurs="1" maxOccurs="1" type="xs:string" />
+    </xs:all>
+    <xs:attribute name="EvaluateInterval" type="xs:positiveInteger" use="optional" default="30"/>
+    <xs:attribute name="StartAlerting" type="xs:positiveInteger" use="optional" default="60"/>
+    <xs:attribute name="StopAlerting" type="xs:positiveInteger" use="optional"/>
+  </xs:complexType>
+    
+  <xs:element name="Config">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="Input" minOccurs="1" maxOccurs="1" type="InputType"/>
+        <xs:element name="Alert" minOccurs="1" maxOccurs="1" type="AlertType"/>
+		    <xs:element name="OutputFile" minOccurs="1" maxOccurs="1" type="xs:string"/>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

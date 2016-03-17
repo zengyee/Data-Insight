@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FeedEntries xmlns="http://schemas.microsoft.com/bing/spatialdata/activity">
+
+  <!-- 
+    here is document for how to use managed feed: https://microsoft.sharepoint.com/teams/CoreDataPlatform/_layouts/15/start.aspx#/SitePages/Feeds.aspx
+    
+    following is an example feed defintion with an associated data quality constraint 
+  -->
+  
+  <FeedEntry name="SampleOutputFeed" baseDirectory="/Feeds/Dev/Workflows" isActive="true" requireStats="true">
+    <Description>a sample file to demo counters</Description>
+    <ValidationConstraints>
+      <!--
+        propertyPath specifies the starting point for evaluating the expression
+        constraintName need to match one of the CounterTests/CounterTest/TestPropertyConstraints/TestPropertyConstraint
+      -->
+      <PropertyConstraint propertyPath="/FeedRun" constraintName="EightyPercentCheck">
+        <Expression value="../LastGoodInstance is null or ((../LastGoodInstance/FeedCounter[name=='SampleCounter1']/value * 8) &lt;= (./FeedCounter[name=='SampleCounter1']/value * 10))" />
+      </PropertyConstraint>
+    </ValidationConstraints>
+  </FeedEntry>
+
+  <FeedEntry name="ResultsFeed" baseDirectory="/Feeds/Dev/Results" isActive="true" requireStats="false">
+    <Description>a sample feed for the filter scope script result</Description>
+    <ValidationConstraints>
+      <!--
+        propertyPath specifies the starting point for evaluating the expression
+        constraintName need to match one of the CounterTests/CounterTest/TestPropertyConstraints/TestPropertyConstraint
+      -->
+    </ValidationConstraints>
+  </FeedEntry>
+
+  <!--
+  This is an exmple of sending an alert email, based on user defined counters.
+  <b:FeedEntry name="albumsXif" id="001" baseDirectory="/mydata/sangam" isActive="true" requireStats="true">
+    <ValidationConstraints>
+      <b:PropertyConstraint propertyPath="/FeedRun" action="SendEmail">
+        <b:Expression value="./FeedCounter[name=='TitleExists_fail']/value &lt; 15"/>
+      </b:PropertyConstraint>
+    </ValidationConstraints>
+  </b:FeedEntry>
+  
+  These are some exmples of alerts, based on system and user defined counters.
+  <b:FeedEntry name="albumsXif" id="001" baseDirectory="/mydata/tharaka" isActive="true" requireStats="true">
+    <ValidationConstraints>
+    
+      Fail job if the documents processed is greater than 25:
+      <PropertyConstraint propertyPath="/FeedRun/totalProcessed">
+        <MaxInclusive value="25" />
+      </PropertyConstraint>
+      
+      Fail job if user defined counter, SampleCounter1, has a value greater than or equal to 15:
+      <b:PropertyConstraint propertyPath="/FeedRun">
+        <b:Expression value="./FeedCounter[name=='SampleCounter1']/value &lt; 15"/>
+      </b:PropertyConstraint>
+      
+      Send email if user defined counter, SampleCounter1, has a value greater than or equal to 15:
+      <b:PropertyConstraint propertyPath="/FeedRun" action="SendEmail">
+        <b:Expression value="./FeedCounter[name=='SampleCounter1']/value &lt; 15"/>
+      </b:PropertyConstraint>
+      
+      Fail job if SampleCounter1's current value is less than 80% of its previous value:
+      <b:PropertyConstraint propertyPath="/FeedRun">
+        <b:Expression value="../LastGoodInstance is null or ((../LastGoodInstance/FeedCounter[name=='SampleCounter1']/value * 0.8) &lt;= (./FeedCounter[name=='SampleCounter1']/value))" />
+      </b:PropertyConstraint>
+      
+    </ValidationConstraints>
+  </b:FeedEntry>
+  
+  -->
+
+
+</FeedEntries>

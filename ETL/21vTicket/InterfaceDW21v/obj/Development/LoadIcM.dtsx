@@ -1,0 +1,2939 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/18/2016 11:21:10 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="JEFFREY9010"
+  DTS:CreatorName="FAREAST\yizeng"
+  DTS:DTSID="{F2F52771-A272-4FDA-8EB3-1D5896F2D786}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.700.219"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="LoadIcM"
+  DTS:PackageType="5"
+  DTS:VersionBuild="11"
+  DTS:VersionGUID="{1C7AE658-4EBB-4858-83E7-D8EBFA46E0F1}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[mcdi01.IcMChina]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{D8EEFEC3-0F7B-458B-8960-BE4DA8F95951}"
+      DTS:ObjectName="mcdi01.IcMChina">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=mcdi01;Initial Catalog=IcMChina;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[suodk6gsjy.database.windows.net.Azure-China-DataWarehouse.ChinaIcMDWUser@suodk6gsjy]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{0A886D2A-DC5E-4321-ACA8-BB7613648360}"
+      DTS:ObjectName="suodk6gsjy.database.windows.net.Azure-China-DataWarehouse.ChinaIcMDWUser@suodk6gsjy">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=suodk6gsjy.database.windows.net;User ID=ChinaIcMDWUser@suodk6gsjy;Initial Catalog=Azure-China-DataWarehouse;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{39D11B3E-CA8C-4C7E-83B2-E212962A8482}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="EndModifiedDate">
+      <DTS:VariableValue
+        DTS:DataType="7">1/1/2010</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F830F19B-1446-4EE4-858B-4B630E764B81}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ETLId">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4AAF7D3C-7488-43BC-97B3-571B6C9644BF}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="StartModifiedDate">
+      <DTS:VariableValue
+        DTS:DataType="7">1/1/2010</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{1C88550A-164E-4D2B-9AEF-A5ED9D0236A5}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\IcMChina Temp Table"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="IcMChina Temp Table"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[WarehouseIncidents_Temp]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\IcMChina Temp Table.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[mcdi01.IcMChina]"
+                  connectionManagerRefId="Package.ConnectionManagers[mcdi01.IcMChina]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[IncidentId]"
+                      cachedDataType="i8"
+                      cachedName="IncidentId"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[IncidentId]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[IncidentId]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[SourceName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="128"
+                      cachedName="SourceName"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[SourceName]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[SourceName]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[SourceType]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="128"
+                      cachedName="SourceType"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[SourceType]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[SourceType]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[SourceIncidentId]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="128"
+                      cachedName="SourceIncidentId"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[SourceIncidentId]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[SourceIncidentId]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[SourceCreateDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="SourceCreateDate"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[SourceCreateDate]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[SourceCreateDate]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[SourceOrigin]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="128"
+                      cachedName="SourceOrigin"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[SourceOrigin]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[SourceOrigin]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[SourceCreatedBy]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="128"
+                      cachedName="SourceCreatedBy"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[SourceCreatedBy]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[SourceCreatedBy]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[SourceModifiedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="SourceModifiedDate"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[SourceModifiedDate]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[SourceModifiedDate]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[CreateDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="CreateDate"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[CreateDate]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[CreateDate]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[ModifiedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ModifiedDate"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[ModifiedDate]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[RoutingId]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="200"
+                      cachedName="RoutingId"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[RoutingId]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[RoutingId]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[CorrelationId]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="200"
+                      cachedName="CorrelationId"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[CorrelationId]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[CorrelationId]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[OccurringEnvironment]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="32"
+                      cachedName="OccurringEnvironment"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[OccurringEnvironment]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[OccurringEnvironment]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[OccurringDatacenter]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="32"
+                      cachedName="OccurringDatacenter"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[OccurringDatacenter]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[OccurringDatacenter]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[OccurringDeviceGroup]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="64"
+                      cachedName="OccurringDeviceGroup"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[OccurringDeviceGroup]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[OccurringDeviceGroup]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[OccurringDeviceName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="128"
+                      cachedName="OccurringDeviceName"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[OccurringDeviceName]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[OccurringDeviceName]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[OccurringServiceInstanceId]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="64"
+                      cachedName="OccurringServiceInstanceId"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[OccurringServiceInstanceId]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[OccurringServiceInstanceId]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[RaisingEnvironment]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="32"
+                      cachedName="RaisingEnvironment"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[RaisingEnvironment]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[RaisingEnvironment]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[RaisingDatacenter]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="32"
+                      cachedName="RaisingDatacenter"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[RaisingDatacenter]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[RaisingDatacenter]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[RaisingDeviceGroup]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="64"
+                      cachedName="RaisingDeviceGroup"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[RaisingDeviceGroup]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[RaisingDeviceGroup]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[RaisingDeviceName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="128"
+                      cachedName="RaisingDeviceName"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[RaisingDeviceName]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[RaisingDeviceName]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[RaisingServiceInstanceId]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="64"
+                      cachedName="RaisingServiceInstanceId"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[RaisingServiceInstanceId]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[RaisingServiceInstanceId]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[OwningTenantName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="64"
+                      cachedName="OwningTenantName"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[OwningTenantName]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[OwningTenantName]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[OwningTeamName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="128"
+                      cachedName="OwningTeamName"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[OwningTeamName]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[OwningTeamName]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[OwningContactAlias]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="32"
+                      cachedName="OwningContactAlias"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[OwningContactAlias]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[OwningContactAlias]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[ParentIncidentId]"
+                      cachedDataType="i8"
+                      cachedName="ParentIncidentId"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[ParentIncidentId]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[ParentIncidentId]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[Severity]"
+                      cachedDataType="i4"
+                      cachedName="Severity"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[Severity]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[Severity]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[Status]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="16"
+                      cachedName="Status"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[Status]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[Status]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[IsNoise]"
+                      cachedDataType="bool"
+                      cachedName="IsNoise"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[IsNoise]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[IsNoise]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[IsSecurityRisk]"
+                      cachedDataType="bool"
+                      cachedName="IsSecurityRisk"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[IsSecurityRisk]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[IsSecurityRisk]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[IsCustomerImpacting]"
+                      cachedDataType="bool"
+                      cachedName="IsCustomerImpacting"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[IsCustomerImpacting]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[IsCustomerImpacting]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[Component]"
+                      cachedDataType="wstr"
+                      cachedLength="512"
+                      cachedName="Component"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[Component]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[Component]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[Revision]"
+                      cachedDataType="i4"
+                      cachedName="Revision"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[Revision]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[Revision]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[TsgId]"
+                      cachedDataType="wstr"
+                      cachedLength="64"
+                      cachedName="TsgId"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[TsgId]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[TsgId]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[Title]"
+                      cachedDataType="nText"
+                      cachedName="Title"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[Title]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[Title]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[ReproSteps]"
+                      cachedDataType="nText"
+                      cachedName="ReproSteps"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[ReproSteps]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[ReproSteps]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[CustomerName]"
+                      cachedDataType="nText"
+                      cachedName="CustomerName"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[CustomerName]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[CustomerName]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[CommitDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="CommitDate"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[CommitDate]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[CommitDate]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[ResolveDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ResolveDate"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[ResolveDate]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[ResolveDate]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[ResolvedBy]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="128"
+                      cachedName="ResolvedBy"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[ResolvedBy]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[ResolvedBy]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[RootCauseId]"
+                      cachedDataType="i8"
+                      cachedName="RootCauseId"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[RootCauseId]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[RootCauseId]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[RootCauseLinkDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="RootCauseLinkDate"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[RootCauseLinkDate]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[RootCauseLinkDate]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[Mitigation]"
+                      cachedDataType="nText"
+                      cachedName="Mitigation"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[Mitigation]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[Mitigation]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[KBArticleId]"
+                      cachedDataType="i8"
+                      cachedName="KBArticleId"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[KBArticleId]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[KBArticleId]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[PIRReportId]"
+                      cachedDataType="i8"
+                      cachedName="PIRReportId"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[PIRReportId]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[PIRReportId]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[PIRLinkDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="PIRLinkDate"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[PIRLinkDate]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[PIRLinkDate]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[ImpactedScenarios]"
+                      cachedDataType="nText"
+                      cachedName="ImpactedScenarios"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[ImpactedScenarios]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[ImpactedScenarios]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[HitCount]"
+                      cachedDataType="i8"
+                      cachedName="HitCount"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[HitCount]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[HitCount]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[LastCorrelationDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="LastCorrelationDate"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[LastCorrelationDate]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[LastCorrelationDate]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[Keywords]"
+                      cachedDataType="wstr"
+                      cachedLength="64"
+                      cachedName="Keywords"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[Keywords]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[Keywords]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[MitigateDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="MitigateDate"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[MitigateDate]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[MitigateDate]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[ImpactStartDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ImpactStartDate"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[ImpactStartDate]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[ImpactStartDate]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[MitigatedBy]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="128"
+                      cachedName="MitigatedBy"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[MitigatedBy]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[MitigatedBy]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[CommsMgrEngagementMode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="64"
+                      cachedName="CommsMgrEngagementMode"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[CommsMgrEngagementMode]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[CommsMgrEngagementMode]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[CommsMgrEngagementAdditionalDetails]"
+                      cachedDataType="nText"
+                      cachedName="CommsMgrEngagementAdditionalDetails"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[CommsMgrEngagementAdditionalDetails]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[CommsMgrEngagementAdditionalDetails]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[IncidentType]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="256"
+                      cachedName="IncidentType"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[IncidentType]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[IncidentType]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[ChildCount]"
+                      cachedDataType="i8"
+                      cachedName="ChildCount"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[ChildCount]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[ChildCount]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[RelatedLinksCount]"
+                      cachedDataType="i8"
+                      cachedName="RelatedLinksCount"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[RelatedLinksCount]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[RelatedLinksCount]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[ExternalLinksCount]"
+                      cachedDataType="i8"
+                      cachedName="ExternalLinksCount"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[ExternalLinksCount]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[ExternalLinksCount]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[HowFixed]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="32"
+                      cachedName="HowFixed"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[HowFixed]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[HowFixed]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[IncidentSubType]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="32"
+                      cachedName="IncidentSubType"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[IncidentSubType]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[IncidentSubType]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[TsgOutput]"
+                      cachedDataType="nText"
+                      cachedName="TsgOutput"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[TsgOutput]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[TsgOutput]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[MonitorId]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="64"
+                      cachedName="MonitorId"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[MonitorId]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[MonitorId]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[ResponsibleTenantName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="64"
+                      cachedName="ResponsibleTenantName"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[ResponsibleTenantName]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[ResponsibleTenantName]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[SupportTicketId]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="64"
+                      cachedName="SupportTicketId"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[SupportTicketId]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[SupportTicketId]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[SubscriptionId]"
+                      cachedDataType="wstr"
+                      cachedLength="128"
+                      cachedName="SubscriptionId"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[SubscriptionId]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[SubscriptionId]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[WarehouseModifiedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="WarehouseModifiedDate"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[WarehouseModifiedDate]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[WarehouseModifiedDate]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[PublicPirId]"
+                      cachedDataType="i8"
+                      cachedName="PublicPirId"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[PublicPirId]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[PublicPirId]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].Columns[OriginatingTenantName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="64"
+                      cachedName="OriginatingTenantName"
+                      externalMetadataColumnId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[OriginatingTenantName]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[OriginatingTenantName]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[IncidentId]"
+                      dataType="i8"
+                      name="IncidentId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[SourceName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      name="SourceName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[SourceType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      name="SourceType" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[SourceIncidentId]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      name="SourceIncidentId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[SourceCreateDate]"
+                      dataType="dbTimeStamp"
+                      name="SourceCreateDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[SourceOrigin]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      name="SourceOrigin" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[SourceCreatedBy]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      name="SourceCreatedBy" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[SourceModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="SourceModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[CreateDate]"
+                      dataType="dbTimeStamp"
+                      name="CreateDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[RoutingId]"
+                      codePage="1252"
+                      dataType="str"
+                      length="200"
+                      name="RoutingId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[CorrelationId]"
+                      codePage="1252"
+                      dataType="str"
+                      length="200"
+                      name="CorrelationId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[OccurringEnvironment]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      name="OccurringEnvironment" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[OccurringDatacenter]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      name="OccurringDatacenter" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[OccurringDeviceGroup]"
+                      codePage="1252"
+                      dataType="str"
+                      length="64"
+                      name="OccurringDeviceGroup" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[OccurringDeviceName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      name="OccurringDeviceName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[OccurringServiceInstanceId]"
+                      codePage="1252"
+                      dataType="str"
+                      length="64"
+                      name="OccurringServiceInstanceId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[RaisingEnvironment]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      name="RaisingEnvironment" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[RaisingDatacenter]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      name="RaisingDatacenter" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[RaisingDeviceGroup]"
+                      codePage="1252"
+                      dataType="str"
+                      length="64"
+                      name="RaisingDeviceGroup" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[RaisingDeviceName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      name="RaisingDeviceName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[RaisingServiceInstanceId]"
+                      codePage="1252"
+                      dataType="str"
+                      length="64"
+                      name="RaisingServiceInstanceId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[OwningTenantName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="64"
+                      name="OwningTenantName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[OwningTeamName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      name="OwningTeamName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[OwningContactAlias]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      name="OwningContactAlias" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[ParentIncidentId]"
+                      dataType="i8"
+                      name="ParentIncidentId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[Severity]"
+                      dataType="i4"
+                      name="Severity" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="16"
+                      name="Status" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[IsNoise]"
+                      dataType="bool"
+                      name="IsNoise" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[IsSecurityRisk]"
+                      dataType="bool"
+                      name="IsSecurityRisk" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[IsCustomerImpacting]"
+                      dataType="bool"
+                      name="IsCustomerImpacting" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[Component]"
+                      dataType="wstr"
+                      length="512"
+                      name="Component" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[Revision]"
+                      dataType="i4"
+                      name="Revision" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[TsgId]"
+                      dataType="wstr"
+                      length="64"
+                      name="TsgId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[Title]"
+                      dataType="nText"
+                      name="Title" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[ReproSteps]"
+                      dataType="nText"
+                      name="ReproSteps" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[CustomerName]"
+                      dataType="nText"
+                      name="CustomerName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[CommitDate]"
+                      dataType="dbTimeStamp"
+                      name="CommitDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[ResolveDate]"
+                      dataType="dbTimeStamp"
+                      name="ResolveDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[ResolvedBy]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      name="ResolvedBy" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[RootCauseId]"
+                      dataType="i8"
+                      name="RootCauseId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[RootCauseLinkDate]"
+                      dataType="dbTimeStamp"
+                      name="RootCauseLinkDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[Mitigation]"
+                      dataType="nText"
+                      name="Mitigation" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[KBArticleId]"
+                      dataType="i8"
+                      name="KBArticleId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[PIRReportId]"
+                      dataType="i8"
+                      name="PIRReportId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[PIRLinkDate]"
+                      dataType="dbTimeStamp"
+                      name="PIRLinkDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[ImpactedScenarios]"
+                      dataType="nText"
+                      name="ImpactedScenarios" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[HitCount]"
+                      dataType="i8"
+                      name="HitCount" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[LastCorrelationDate]"
+                      dataType="dbTimeStamp"
+                      name="LastCorrelationDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[Keywords]"
+                      dataType="wstr"
+                      length="64"
+                      name="Keywords" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[MitigateDate]"
+                      dataType="dbTimeStamp"
+                      name="MitigateDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[ImpactStartDate]"
+                      dataType="dbTimeStamp"
+                      name="ImpactStartDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[MitigatedBy]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      name="MitigatedBy" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[CommsMgrEngagementMode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="64"
+                      name="CommsMgrEngagementMode" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[CommsMgrEngagementAdditionalDetails]"
+                      dataType="nText"
+                      name="CommsMgrEngagementAdditionalDetails" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[IncidentType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="256"
+                      name="IncidentType" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[ChildCount]"
+                      dataType="i8"
+                      name="ChildCount" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[RelatedLinksCount]"
+                      dataType="i8"
+                      name="RelatedLinksCount" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[ExternalLinksCount]"
+                      dataType="i8"
+                      name="ExternalLinksCount" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[HowFixed]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      name="HowFixed" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[IncidentSubType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      name="IncidentSubType" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[TsgOutput]"
+                      dataType="nText"
+                      name="TsgOutput" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[MonitorId]"
+                      codePage="1252"
+                      dataType="str"
+                      length="64"
+                      name="MonitorId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[ResponsibleTenantName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="64"
+                      name="ResponsibleTenantName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[SupportTicketId]"
+                      codePage="1252"
+                      dataType="str"
+                      length="64"
+                      name="SupportTicketId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[SubscriptionId]"
+                      dataType="wstr"
+                      length="128"
+                      name="SubscriptionId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[WarehouseModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="WarehouseModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[PublicPirId]"
+                      dataType="i8"
+                      name="PublicPirId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input].ExternalColumns[OriginatingTenantName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="64"
+                      name="OriginatingTenantName" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\IcMChina Temp Table.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\IcMChina Temp Table.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\IcMChina Temp Table.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\IcMChina Temp Table.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Load from IcM"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Load from IcM"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT        IncidentId, SourceName, SourceType, SourceIncidentId, SourceCreateDate, SourceOrigin, SourceCreatedBy, SourceModifiedDate, CreateDate, ModifiedDate, RoutingId, CorrelationId, OccurringEnvironment, 
+                         OccurringDatacenter, OccurringDeviceGroup, OccurringDeviceName, OccurringServiceInstanceId, RaisingEnvironment, RaisingDatacenter, RaisingDeviceGroup, RaisingDeviceName, RaisingServiceInstanceId, 
+                         OwningTenantName, OwningTeamName, OwningContactAlias, ParentIncidentId, Severity, Status, IsNoise, IsSecurityRisk, IsCustomerImpacting, Component, Revision, TsgId, Title, ReproSteps, CustomerName, 
+                         CommitDate, ResolveDate, ResolvedBy, RootCauseId, RootCauseLinkDate, Mitigation, KBArticleId, PIRReportId, PIRLinkDate, ImpactedScenarios, HitCount, LastCorrelationDate, Keywords, MitigateDate, 
+                         ImpactStartDate, MitigatedBy, CommsMgrEngagementMode, CommsMgrEngagementAdditionalDetails, IncidentType, ChildCount, RelatedLinksCount, ExternalLinksCount, HowFixed, IncidentSubType, TsgOutput, 
+                         MonitorId, ResponsibleTenantName, SupportTicketId, SubscriptionId, WarehouseModifiedDate, PublicPirId, OriginatingTenantName
+FROM            WarehouseIncidents
+WHERE        (ModifiedDate &gt;= ?) AND (ModifiedDate &lt;= ?)</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping">"0:Input",{4AAF7D3C-7488-43BC-97B3-571B6C9644BF};"1:Input",{39D11B3E-CA8C-4C7E-83B2-E212962A8482};</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Load from IcM.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[suodk6gsjy.database.windows.net.Azure-China-DataWarehouse.ChinaIcMDWUser@suodk6gsjy]"
+                  connectionManagerRefId="Package.ConnectionManagers[suodk6gsjy.database.windows.net.Azure-China-DataWarehouse.ChinaIcMDWUser@suodk6gsjy]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[IncidentId]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[IncidentId]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[IncidentId]"
+                      name="IncidentId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[SourceName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[SourceName]"
+                      length="128"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[SourceName]"
+                      name="SourceName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[SourceType]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[SourceType]"
+                      length="128"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[SourceType]"
+                      name="SourceType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[SourceIncidentId]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[SourceIncidentId]"
+                      length="128"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[SourceIncidentId]"
+                      name="SourceIncidentId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[SourceCreateDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[SourceCreateDate]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[SourceCreateDate]"
+                      name="SourceCreateDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[SourceOrigin]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[SourceOrigin]"
+                      length="128"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[SourceOrigin]"
+                      name="SourceOrigin"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[SourceCreatedBy]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[SourceCreatedBy]"
+                      length="128"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[SourceCreatedBy]"
+                      name="SourceCreatedBy"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[SourceModifiedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[SourceModifiedDate]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[SourceModifiedDate]"
+                      name="SourceModifiedDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[CreateDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[CreateDate]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[CreateDate]"
+                      name="CreateDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[ModifiedDate]"
+                      name="ModifiedDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[RoutingId]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[RoutingId]"
+                      length="200"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[RoutingId]"
+                      name="RoutingId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[CorrelationId]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[CorrelationId]"
+                      length="200"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[CorrelationId]"
+                      name="CorrelationId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[OccurringEnvironment]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[OccurringEnvironment]"
+                      length="32"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[OccurringEnvironment]"
+                      name="OccurringEnvironment"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[OccurringDatacenter]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[OccurringDatacenter]"
+                      length="32"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[OccurringDatacenter]"
+                      name="OccurringDatacenter"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[OccurringDeviceGroup]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[OccurringDeviceGroup]"
+                      length="64"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[OccurringDeviceGroup]"
+                      name="OccurringDeviceGroup"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[OccurringDeviceName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[OccurringDeviceName]"
+                      length="128"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[OccurringDeviceName]"
+                      name="OccurringDeviceName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[OccurringServiceInstanceId]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[OccurringServiceInstanceId]"
+                      length="64"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[OccurringServiceInstanceId]"
+                      name="OccurringServiceInstanceId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[RaisingEnvironment]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[RaisingEnvironment]"
+                      length="32"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[RaisingEnvironment]"
+                      name="RaisingEnvironment"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[RaisingDatacenter]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[RaisingDatacenter]"
+                      length="32"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[RaisingDatacenter]"
+                      name="RaisingDatacenter"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[RaisingDeviceGroup]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[RaisingDeviceGroup]"
+                      length="64"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[RaisingDeviceGroup]"
+                      name="RaisingDeviceGroup"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[RaisingDeviceName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[RaisingDeviceName]"
+                      length="128"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[RaisingDeviceName]"
+                      name="RaisingDeviceName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[RaisingServiceInstanceId]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[RaisingServiceInstanceId]"
+                      length="64"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[RaisingServiceInstanceId]"
+                      name="RaisingServiceInstanceId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[OwningTenantName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[OwningTenantName]"
+                      length="64"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[OwningTenantName]"
+                      name="OwningTenantName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[OwningTeamName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[OwningTeamName]"
+                      length="128"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[OwningTeamName]"
+                      name="OwningTeamName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[OwningContactAlias]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[OwningContactAlias]"
+                      length="32"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[OwningContactAlias]"
+                      name="OwningContactAlias"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[ParentIncidentId]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[ParentIncidentId]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[ParentIncidentId]"
+                      name="ParentIncidentId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[Severity]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[Severity]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[Severity]"
+                      name="Severity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[Status]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[Status]"
+                      length="16"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[Status]"
+                      name="Status"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[IsNoise]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[IsNoise]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[IsNoise]"
+                      name="IsNoise"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[IsSecurityRisk]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[IsSecurityRisk]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[IsSecurityRisk]"
+                      name="IsSecurityRisk"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[IsCustomerImpacting]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[IsCustomerImpacting]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[IsCustomerImpacting]"
+                      name="IsCustomerImpacting"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[Component]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[Component]"
+                      length="512"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[Component]"
+                      name="Component"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[Revision]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[Revision]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[Revision]"
+                      name="Revision"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[TsgId]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[TsgId]"
+                      length="64"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[TsgId]"
+                      name="TsgId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[Title]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[Title]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[Title]"
+                      name="Title"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[ReproSteps]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[ReproSteps]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[ReproSteps]"
+                      name="ReproSteps"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[CustomerName]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[CustomerName]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[CustomerName]"
+                      name="CustomerName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[CommitDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[CommitDate]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[CommitDate]"
+                      name="CommitDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[ResolveDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[ResolveDate]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[ResolveDate]"
+                      name="ResolveDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[ResolvedBy]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[ResolvedBy]"
+                      length="128"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[ResolvedBy]"
+                      name="ResolvedBy"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[RootCauseId]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[RootCauseId]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[RootCauseId]"
+                      name="RootCauseId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[RootCauseLinkDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[RootCauseLinkDate]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[RootCauseLinkDate]"
+                      name="RootCauseLinkDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[Mitigation]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[Mitigation]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[Mitigation]"
+                      name="Mitigation"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[KBArticleId]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[KBArticleId]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[KBArticleId]"
+                      name="KBArticleId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[PIRReportId]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[PIRReportId]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[PIRReportId]"
+                      name="PIRReportId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[PIRLinkDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[PIRLinkDate]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[PIRLinkDate]"
+                      name="PIRLinkDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[ImpactedScenarios]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[ImpactedScenarios]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[ImpactedScenarios]"
+                      name="ImpactedScenarios"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[HitCount]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[HitCount]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[HitCount]"
+                      name="HitCount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[LastCorrelationDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[LastCorrelationDate]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[LastCorrelationDate]"
+                      name="LastCorrelationDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[Keywords]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[Keywords]"
+                      length="64"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[Keywords]"
+                      name="Keywords"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[MitigateDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[MitigateDate]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[MitigateDate]"
+                      name="MitigateDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[ImpactStartDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[ImpactStartDate]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[ImpactStartDate]"
+                      name="ImpactStartDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[MitigatedBy]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[MitigatedBy]"
+                      length="128"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[MitigatedBy]"
+                      name="MitigatedBy"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[CommsMgrEngagementMode]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[CommsMgrEngagementMode]"
+                      length="64"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[CommsMgrEngagementMode]"
+                      name="CommsMgrEngagementMode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[CommsMgrEngagementAdditionalDetails]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[CommsMgrEngagementAdditionalDetails]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[CommsMgrEngagementAdditionalDetails]"
+                      name="CommsMgrEngagementAdditionalDetails"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[IncidentType]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[IncidentType]"
+                      length="256"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[IncidentType]"
+                      name="IncidentType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[ChildCount]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[ChildCount]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[ChildCount]"
+                      name="ChildCount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[RelatedLinksCount]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[RelatedLinksCount]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[RelatedLinksCount]"
+                      name="RelatedLinksCount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[ExternalLinksCount]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[ExternalLinksCount]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[ExternalLinksCount]"
+                      name="ExternalLinksCount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[HowFixed]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[HowFixed]"
+                      length="32"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[HowFixed]"
+                      name="HowFixed"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[IncidentSubType]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[IncidentSubType]"
+                      length="32"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[IncidentSubType]"
+                      name="IncidentSubType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[TsgOutput]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[TsgOutput]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[TsgOutput]"
+                      name="TsgOutput"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[MonitorId]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[MonitorId]"
+                      length="64"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[MonitorId]"
+                      name="MonitorId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[ResponsibleTenantName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[ResponsibleTenantName]"
+                      length="64"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[ResponsibleTenantName]"
+                      name="ResponsibleTenantName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[SupportTicketId]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[SupportTicketId]"
+                      length="64"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[SupportTicketId]"
+                      name="SupportTicketId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[SubscriptionId]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[SubscriptionId]"
+                      length="128"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[SubscriptionId]"
+                      name="SubscriptionId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[WarehouseModifiedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[WarehouseModifiedDate]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[WarehouseModifiedDate]"
+                      name="WarehouseModifiedDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[PublicPirId]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[PublicPirId]"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[PublicPirId]"
+                      name="PublicPirId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[OriginatingTenantName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[OriginatingTenantName]"
+                      length="64"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].Columns[OriginatingTenantName]"
+                      name="OriginatingTenantName"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[IncidentId]"
+                      dataType="i8"
+                      name="IncidentId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[SourceName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      name="SourceName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[SourceType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      name="SourceType" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[SourceIncidentId]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      name="SourceIncidentId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[SourceCreateDate]"
+                      dataType="dbTimeStamp"
+                      name="SourceCreateDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[SourceOrigin]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      name="SourceOrigin" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[SourceCreatedBy]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      name="SourceCreatedBy" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[SourceModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="SourceModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[CreateDate]"
+                      dataType="dbTimeStamp"
+                      name="CreateDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[RoutingId]"
+                      codePage="1252"
+                      dataType="str"
+                      length="200"
+                      name="RoutingId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[CorrelationId]"
+                      codePage="1252"
+                      dataType="str"
+                      length="200"
+                      name="CorrelationId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[OccurringEnvironment]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      name="OccurringEnvironment" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[OccurringDatacenter]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      name="OccurringDatacenter" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[OccurringDeviceGroup]"
+                      codePage="1252"
+                      dataType="str"
+                      length="64"
+                      name="OccurringDeviceGroup" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[OccurringDeviceName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      name="OccurringDeviceName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[OccurringServiceInstanceId]"
+                      codePage="1252"
+                      dataType="str"
+                      length="64"
+                      name="OccurringServiceInstanceId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[RaisingEnvironment]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      name="RaisingEnvironment" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[RaisingDatacenter]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      name="RaisingDatacenter" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[RaisingDeviceGroup]"
+                      codePage="1252"
+                      dataType="str"
+                      length="64"
+                      name="RaisingDeviceGroup" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[RaisingDeviceName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      name="RaisingDeviceName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[RaisingServiceInstanceId]"
+                      codePage="1252"
+                      dataType="str"
+                      length="64"
+                      name="RaisingServiceInstanceId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[OwningTenantName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="64"
+                      name="OwningTenantName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[OwningTeamName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      name="OwningTeamName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[OwningContactAlias]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      name="OwningContactAlias" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[ParentIncidentId]"
+                      dataType="i8"
+                      name="ParentIncidentId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[Severity]"
+                      dataType="i4"
+                      name="Severity" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="16"
+                      name="Status" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[IsNoise]"
+                      dataType="bool"
+                      name="IsNoise" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[IsSecurityRisk]"
+                      dataType="bool"
+                      name="IsSecurityRisk" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[IsCustomerImpacting]"
+                      dataType="bool"
+                      name="IsCustomerImpacting" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[Component]"
+                      dataType="wstr"
+                      length="512"
+                      name="Component" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[Revision]"
+                      dataType="i4"
+                      name="Revision" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[TsgId]"
+                      dataType="wstr"
+                      length="64"
+                      name="TsgId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[Title]"
+                      dataType="nText"
+                      name="Title" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[ReproSteps]"
+                      dataType="nText"
+                      name="ReproSteps" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[CustomerName]"
+                      dataType="nText"
+                      name="CustomerName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[CommitDate]"
+                      dataType="dbTimeStamp"
+                      name="CommitDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[ResolveDate]"
+                      dataType="dbTimeStamp"
+                      name="ResolveDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[ResolvedBy]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      name="ResolvedBy" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[RootCauseId]"
+                      dataType="i8"
+                      name="RootCauseId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[RootCauseLinkDate]"
+                      dataType="dbTimeStamp"
+                      name="RootCauseLinkDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[Mitigation]"
+                      dataType="nText"
+                      name="Mitigation" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[KBArticleId]"
+                      dataType="i8"
+                      name="KBArticleId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[PIRReportId]"
+                      dataType="i8"
+                      name="PIRReportId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[PIRLinkDate]"
+                      dataType="dbTimeStamp"
+                      name="PIRLinkDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[ImpactedScenarios]"
+                      dataType="nText"
+                      name="ImpactedScenarios" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[HitCount]"
+                      dataType="i8"
+                      name="HitCount" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[LastCorrelationDate]"
+                      dataType="dbTimeStamp"
+                      name="LastCorrelationDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[Keywords]"
+                      dataType="wstr"
+                      length="64"
+                      name="Keywords" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[MitigateDate]"
+                      dataType="dbTimeStamp"
+                      name="MitigateDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[ImpactStartDate]"
+                      dataType="dbTimeStamp"
+                      name="ImpactStartDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[MitigatedBy]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      name="MitigatedBy" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[CommsMgrEngagementMode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="64"
+                      name="CommsMgrEngagementMode" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[CommsMgrEngagementAdditionalDetails]"
+                      dataType="nText"
+                      name="CommsMgrEngagementAdditionalDetails" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[IncidentType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="256"
+                      name="IncidentType" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[ChildCount]"
+                      dataType="i8"
+                      name="ChildCount" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[RelatedLinksCount]"
+                      dataType="i8"
+                      name="RelatedLinksCount" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[ExternalLinksCount]"
+                      dataType="i8"
+                      name="ExternalLinksCount" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[HowFixed]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      name="HowFixed" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[IncidentSubType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      name="IncidentSubType" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[TsgOutput]"
+                      dataType="nText"
+                      name="TsgOutput" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[MonitorId]"
+                      codePage="1252"
+                      dataType="str"
+                      length="64"
+                      name="MonitorId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[ResponsibleTenantName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="64"
+                      name="ResponsibleTenantName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[SupportTicketId]"
+                      codePage="1252"
+                      dataType="str"
+                      length="64"
+                      name="SupportTicketId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[SubscriptionId]"
+                      dataType="wstr"
+                      length="128"
+                      name="SubscriptionId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[WarehouseModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="WarehouseModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[PublicPirId]"
+                      dataType="i8"
+                      name="PublicPirId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output].ExternalColumns[OriginatingTenantName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="64"
+                      name="OriginatingTenantName" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[IncidentId]"
+                      dataType="i8"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[IncidentId]"
+                      name="IncidentId" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[SourceName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[SourceName]"
+                      name="SourceName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[SourceType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[SourceType]"
+                      name="SourceType" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[SourceIncidentId]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[SourceIncidentId]"
+                      name="SourceIncidentId" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[SourceCreateDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[SourceCreateDate]"
+                      name="SourceCreateDate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[SourceOrigin]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[SourceOrigin]"
+                      name="SourceOrigin" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[SourceCreatedBy]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[SourceCreatedBy]"
+                      name="SourceCreatedBy" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[SourceModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[SourceModifiedDate]"
+                      name="SourceModifiedDate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[CreateDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[CreateDate]"
+                      name="CreateDate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[ModifiedDate]"
+                      name="ModifiedDate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[RoutingId]"
+                      codePage="1252"
+                      dataType="str"
+                      length="200"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[RoutingId]"
+                      name="RoutingId" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[CorrelationId]"
+                      codePage="1252"
+                      dataType="str"
+                      length="200"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[CorrelationId]"
+                      name="CorrelationId" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[OccurringEnvironment]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[OccurringEnvironment]"
+                      name="OccurringEnvironment" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[OccurringDatacenter]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[OccurringDatacenter]"
+                      name="OccurringDatacenter" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[OccurringDeviceGroup]"
+                      codePage="1252"
+                      dataType="str"
+                      length="64"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[OccurringDeviceGroup]"
+                      name="OccurringDeviceGroup" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[OccurringDeviceName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[OccurringDeviceName]"
+                      name="OccurringDeviceName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[OccurringServiceInstanceId]"
+                      codePage="1252"
+                      dataType="str"
+                      length="64"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[OccurringServiceInstanceId]"
+                      name="OccurringServiceInstanceId" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[RaisingEnvironment]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[RaisingEnvironment]"
+                      name="RaisingEnvironment" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[RaisingDatacenter]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[RaisingDatacenter]"
+                      name="RaisingDatacenter" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[RaisingDeviceGroup]"
+                      codePage="1252"
+                      dataType="str"
+                      length="64"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[RaisingDeviceGroup]"
+                      name="RaisingDeviceGroup" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[RaisingDeviceName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[RaisingDeviceName]"
+                      name="RaisingDeviceName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[RaisingServiceInstanceId]"
+                      codePage="1252"
+                      dataType="str"
+                      length="64"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[RaisingServiceInstanceId]"
+                      name="RaisingServiceInstanceId" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[OwningTenantName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="64"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[OwningTenantName]"
+                      name="OwningTenantName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[OwningTeamName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[OwningTeamName]"
+                      name="OwningTeamName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[OwningContactAlias]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[OwningContactAlias]"
+                      name="OwningContactAlias" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[ParentIncidentId]"
+                      dataType="i8"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[ParentIncidentId]"
+                      name="ParentIncidentId" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[Severity]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[Severity]"
+                      name="Severity" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="16"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[Status]"
+                      name="Status" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[IsNoise]"
+                      dataType="bool"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[IsNoise]"
+                      name="IsNoise" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[IsSecurityRisk]"
+                      dataType="bool"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[IsSecurityRisk]"
+                      name="IsSecurityRisk" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[IsCustomerImpacting]"
+                      dataType="bool"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[IsCustomerImpacting]"
+                      name="IsCustomerImpacting" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[Component]"
+                      dataType="wstr"
+                      length="512"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[Component]"
+                      name="Component" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[Revision]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[Revision]"
+                      name="Revision" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[TsgId]"
+                      dataType="wstr"
+                      length="64"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[TsgId]"
+                      name="TsgId" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[Title]"
+                      dataType="nText"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[Title]"
+                      name="Title" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[ReproSteps]"
+                      dataType="nText"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[ReproSteps]"
+                      name="ReproSteps" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[CustomerName]"
+                      dataType="nText"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[CustomerName]"
+                      name="CustomerName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[CommitDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[CommitDate]"
+                      name="CommitDate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[ResolveDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[ResolveDate]"
+                      name="ResolveDate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[ResolvedBy]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[ResolvedBy]"
+                      name="ResolvedBy" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[RootCauseId]"
+                      dataType="i8"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[RootCauseId]"
+                      name="RootCauseId" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[RootCauseLinkDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[RootCauseLinkDate]"
+                      name="RootCauseLinkDate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[Mitigation]"
+                      dataType="nText"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[Mitigation]"
+                      name="Mitigation" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[KBArticleId]"
+                      dataType="i8"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[KBArticleId]"
+                      name="KBArticleId" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[PIRReportId]"
+                      dataType="i8"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[PIRReportId]"
+                      name="PIRReportId" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[PIRLinkDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[PIRLinkDate]"
+                      name="PIRLinkDate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[ImpactedScenarios]"
+                      dataType="nText"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[ImpactedScenarios]"
+                      name="ImpactedScenarios" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[HitCount]"
+                      dataType="i8"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[HitCount]"
+                      name="HitCount" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[LastCorrelationDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[LastCorrelationDate]"
+                      name="LastCorrelationDate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[Keywords]"
+                      dataType="wstr"
+                      length="64"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[Keywords]"
+                      name="Keywords" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[MitigateDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[MitigateDate]"
+                      name="MitigateDate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[ImpactStartDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[ImpactStartDate]"
+                      name="ImpactStartDate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[MitigatedBy]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[MitigatedBy]"
+                      name="MitigatedBy" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[CommsMgrEngagementMode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="64"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[CommsMgrEngagementMode]"
+                      name="CommsMgrEngagementMode" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[CommsMgrEngagementAdditionalDetails]"
+                      dataType="nText"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[CommsMgrEngagementAdditionalDetails]"
+                      name="CommsMgrEngagementAdditionalDetails" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[IncidentType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="256"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[IncidentType]"
+                      name="IncidentType" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[ChildCount]"
+                      dataType="i8"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[ChildCount]"
+                      name="ChildCount" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[RelatedLinksCount]"
+                      dataType="i8"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[RelatedLinksCount]"
+                      name="RelatedLinksCount" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[ExternalLinksCount]"
+                      dataType="i8"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[ExternalLinksCount]"
+                      name="ExternalLinksCount" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[HowFixed]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[HowFixed]"
+                      name="HowFixed" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[IncidentSubType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[IncidentSubType]"
+                      name="IncidentSubType" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[TsgOutput]"
+                      dataType="nText"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[TsgOutput]"
+                      name="TsgOutput" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[MonitorId]"
+                      codePage="1252"
+                      dataType="str"
+                      length="64"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[MonitorId]"
+                      name="MonitorId" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[ResponsibleTenantName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="64"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[ResponsibleTenantName]"
+                      name="ResponsibleTenantName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[SupportTicketId]"
+                      codePage="1252"
+                      dataType="str"
+                      length="64"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[SupportTicketId]"
+                      name="SupportTicketId" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[SubscriptionId]"
+                      dataType="wstr"
+                      length="128"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[SubscriptionId]"
+                      name="SubscriptionId" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[WarehouseModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[WarehouseModifiedDate]"
+                      name="WarehouseModifiedDate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[PublicPirId]"
+                      dataType="i8"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[PublicPirId]"
+                      name="PublicPirId" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[OriginatingTenantName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="64"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[OriginatingTenantName]"
+                      name="OriginatingTenantName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[OLE DB Source Output]"
+              endId="Package\Data Flow Task\IcMChina Temp Table.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Data Flow Task\Load from IcM.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Done"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{1EF0A07C-0CC9-4743-84D1-5D7CDC76E709}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Done"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016 CTP3.2; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{D8EEFEC3-0F7B-458B-8960-BE4DA8F95951}"
+          SQLTask:SqlStatementSource="EXEC [ETL_Update_Log] ?, 'Completed'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::ETLId"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\GetEndPoint"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{afe88894-30a6-40c6-9b9c-60287bcd3b01}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="GetEndPoint"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{0A886D2A-DC5E-4321-ACA8-BB7613648360}"
+          SQLTask:SqlStatementSource="SELECT MAX([ModifiedDate])FROM [dbo].[WarehouseIncidents]"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::EndModifiedDate" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Initial ETL Log"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{b5dcb7c6-9fcb-47c3-a228-8e555bfccd01}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Initial ETL Log"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{D8EEFEC3-0F7B-458B-8960-BE4DA8F95951}"
+          SQLTask:SqlStatementSource="EXEC [dbo].[ETL_Initial_Log] ?"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::ETLId" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="1"
+            SQLTask:DtsVariableName="User::StartModifiedDate" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::EndModifiedDate"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="7"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Merge"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{2A0384A5-AC2D-482B-8FF3-5CE092F21D0E}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Merge"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016 CTP3.2; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{D8EEFEC3-0F7B-458B-8960-BE4DA8F95951}"
+          SQLTask:SqlStatementSource="EXEC [ETL_sp_WareHouseIncidents_MergeFromTemp] ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::ETLId"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate Temp"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{BC13D3EE-C321-4A75-BC2D-481E5EDB7655}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate Temp"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016 CTP3.2; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{D8EEFEC3-0F7B-458B-8960-BE4DA8F95951}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE [dbo].[WarehouseIncidents_Temp]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{6080E4E8-0B92-4BB6-855C-E7398588A0CE}"
+      DTS:From="Package\Initial ETL Log"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Truncate Temp" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{807A1F5B-95CE-45C3-9D8A-9C5960654661}"
+      DTS:From="Package\Truncate Temp"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Data Flow Task" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{9003F607-B06A-49C0-8F3B-4964159056DE}"
+      DTS:From="Package\Data Flow Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Merge" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{e3e5f2f7-ba9d-4af7-a173-71a53f8419f6}"
+      DTS:From="Package\GetEndPoint"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Initial ETL Log" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{CC3E259B-96EC-4514-A11F-FD536F8EA5DA}"
+      DTS:From="Package\Merge"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Done" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Data Flow Task"
+          TopLeft="5.50000000000004,310.5" />
+        <NodeLayout
+          Size="136,41"
+          Id="Package\GetEndPoint"
+          TopLeft="13,5.5" />
+        <NodeLayout
+          Size="147,42"
+          Id="Package\Initial ETL Log"
+          TopLeft="7.50000000000001,106.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="81,46.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Truncate Temp"
+          TopLeft="5.50000000000003,208.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="81,148.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="81,250.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="108,42"
+          Id="Package\Merge"
+          TopLeft="27.0000000000001,412.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="81.0000000000001,352.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="104,42"
+          Id="Package\Done"
+          TopLeft="29.0000000000001,514.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="81.0000000000001,454.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="147,42"
+          Id="Package\Data Flow Task\Load from IcM"
+          TopLeft="292,76" />
+        <NodeLayout
+          Size="182,42"
+          Id="Package\Data Flow Task\IcMChina Temp Table"
+          TopLeft="217,230" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="365.5,118">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-57.5,112"
+              Start="0,0"
+              End="-57.5,104.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,52"
+                    Point2="0,56"
+                    Point3="-4,56" />
+                  <mssgle:LineSegment
+                    End="-53.5,56" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-53.5,56"
+                    Point2="-57.5,56"
+                    Point3="-57.5,60" />
+                  <mssgle:LineSegment
+                    End="-57.5,104.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\IcMChina Temp Table">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\Load from IcM">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<!--
+  please refer to following document for how to set up alerts in a job: 
+  https://microsoft.sharepoint.com/teams/CoreDataPlatform/_layouts/15/start.aspx#/SitePages/Alerts.aspx
+-->
+
+<Alerts xmlns="http://schemas.microsoft.com/bing/spatialdata/activity">
+  <Alert AlertName="JobTooLong" XsltFile="Alerts\SimpleJobAlertFormat.xslt">
+    <Recipients xmlns="">test1@microsoft.com</Recipients>
+  </Alert>
+  <Alert AlertName="JobFailure" XsltFile="Alerts\DefaultJobAlertFormat.xslt">
+    <Recipients xmlns="">test2@microsoft.com</Recipients>
+  </Alert>
+  <Alert AlertName="JobSuccess" XsltFile="Alerts\DefaultJobAlertFormat.xslt">
+    <Recipients xmlns="">test3@microsoft.com</Recipients>
+  </Alert>
+</Alerts>

@@ -1,0 +1,23 @@
+﻿USING Microsoft.Bing.Sangam.ScopeHelper REFERENCE @"Microsoft.Bing.Sangam.ScopeHelper.dll";
+RESOURCE @"bing_news.xslt";
+
+FLATTENED_OUTPUT =
+EXTRACT source, title, link 
+FROM    @@INPUT_STREAM@@
+USING   XmlFlatteningExtractor("-recordSeparator", "news:NewsResult", "-flatteningFile", "bing_news.xslt", "");
+ 
+OUTPUT  FLATTENED_OUTPUT
+TO      @@OUTPUT_STREAM@@
+USING   DefaultTextOutputter;
+
+// Output stats file
+StatsStream = 
+SELECT "Data" AS KeyColumn, COUNT(*) AS ValueColumn FROM FLATTENED_OUTPUT 
+UNION
+SELECT "Error" AS KeyColumn, 124l AS ValueColumn FROM FLATTENED_OUTPUT 
+UNION
+SELECT "SampleCounter1" AS KeyColumn, 5678l AS ValueColumn FROM FLATTENED_OUTPUT;
+
+OUTPUT  StatsStream
+TO      @@STATS_STREAM@@
+USING   DefaultTextOutputter;

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+      test counters file is used as input data to validate the property contraints of feed definition. 
+      please refer to following document for more details:
+      https://microsoft.sharepoint.com/teams/CoreDataPlatform/_layouts/15/start.aspx#/SitePages/Gating.aspx
+-->
+
+<a:CounterTests xmlns:a="http://schemas.microsoft.com/bing/spatialdata/activity">
+  <a:CounterTest name="Counter changes within acceptable range" expectedToPass="true">
+    <TestPropertyConstraints>
+      <!-- this constraint name need to match one of the properties set on FeedEntry/ValidationConstraints/PropertyConstraint/@constraintName -->
+      <TestPropertyConstraint>EightyPercentCheck</TestPropertyConstraint>
+    </TestPropertyConstraints>
+    <TestFeedEntries>
+      <a:TestFeedEntry name="SampleOutputFeed">
+        <CurrentInstanceCounters>
+          <a:FeedCounter name="SampleCounter1" kind="Sum" value="90"/>
+        </CurrentInstanceCounters>
+        <LKGInstanceCounters>
+          <a:FeedCounter name="SampleCounter1" kind="Sum" value="100"/>
+        </LKGInstanceCounters>
+      </a:TestFeedEntry>
+    </TestFeedEntries>
+  </a:CounterTest>
+  <a:CounterTest name="Counter changes more than acceptable range" expectedToPass="false">
+    <TestPropertyConstraints>
+      <TestPropertyConstraint>EightyPercentCheck</TestPropertyConstraint>
+    </TestPropertyConstraints>
+    <TestFeedEntries>
+      <a:TestFeedEntry name="SampleOutputFeed">
+        <CurrentInstanceCounters>
+          <a:FeedCounter name="SampleCounter1" kind="Sum" value="90"/>
+        </CurrentInstanceCounters>
+        <LKGInstanceCounters>
+          <a:FeedCounter name="SampleCounter1" kind="Sum" value="200"/>
+        </LKGInstanceCounters>
+      </a:TestFeedEntry>
+    </TestFeedEntries>
+  </a:CounterTest>
+</a:CounterTests>
