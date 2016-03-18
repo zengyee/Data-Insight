@@ -21,7 +21,7 @@
       ,[ExternalStatus]
       ,[Stage]
       ,[ProductType]
-      ,'Azure Mooncake' AS [ProductName]
+      ,[ProductName]
       ,'' AS [OrgID] -- Remove Confidential data
       ,[CreatedBy]
       ,[SubscriptionID]
