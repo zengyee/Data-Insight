@@ -1,13 +1,13 @@
 ﻿CREATE VIEW [dbo].[v_Mooncake_Support_Plan]
 	AS SELECT '1' AS [PlanId]
-			,'Manual' AS [SourceName]
+			,'Mooncake Manual' AS [SourceName]
 			,'2015-12-08 12:25' AS [InsertDate]
-			,'2015-12-08 12:25' AS [LastUpdatedTime] 
+			,'2016-03-18 10:00' AS [LastUpdatedTime] 
 			,NULL AS [SubscriptionId] 
-			,NULL AS [StartDate]
+			,'2014-3-26' AS [StartDate]
 			,NULL AS [EndDate] 
 			,'Active' AS [Status] 
-			,'Free' AS [Type]
+			,'Mooncake Standard' AS [Type]
 			,0 AS [IsPaid]
 
 
